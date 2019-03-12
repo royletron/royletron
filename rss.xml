@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Royletron.dev]]></title><description><![CDATA[All my knowledge, in a tiny blog.]]></description><link>http://royletron.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 12 Mar 2019 20:50:43 GMT</lastBuildDate><item><title><![CDATA[Lesson 1 - What even is a webpage?]]></title><description><![CDATA[Obviously the simple answer is the very thing you are looking at, but
+importantly what do we consider a ‘web page’? Well there is quite a…]]></description><link>http://royletron.github.io//lesson-1/</link><guid isPermaLink="false">http://royletron.github.io//lesson-1/</guid><pubDate>Tue, 12 Mar 2019 20:10:37 GMT</pubDate><content:encoded>&lt;p&gt;Obviously the simple answer is the very thing you are looking at, but
+importantly what do we consider a ‘web page’? Well there is quite a lot of
+history to that, and I really suggest reading up on the birth of the web and all
+the great stuff Mr Berners-Lee has given the world - in fact today marks 30
+years since the first HTTP communication happened. So let’s jump straight
+into…&lt;/p&gt;
+&lt;h2&gt;HTML&lt;/h2&gt;
+&lt;p&gt;This is the fundamental building blocks of a webpage, it is the ‘extension’ of
+the web if you like. Like a JPG is to images HTML is to websites. At it’s core
+it contains ‘tags’ which describe the structure and content of a webpage.
+Without HTML there is no webpage. When you load a page your browser will actually
+go off to where you have directed it (the url e.g. &lt;a href=&quot;http://www.bbc.co.uk&quot;&gt;http://www.bbc.co.uk&lt;/a&gt;) and ask
+the computer at the other end to give back HTML. Your browser then downloads
+that HTML to your computer and ‘renders’ it by ‘parsing’ the text it finds. The
+text in HTML is written in a ‘tags’ or ‘markup’ and these ‘tags’ represent
+different things, like an &lt;code class=&quot;language-text&quot;&gt;img&lt;/code&gt; represents an image or a &lt;code class=&quot;language-text&quot;&gt;h2&lt;/code&gt; represents a
+second order heading (i.e. not the biggest, that would be &lt;code class=&quot;language-text&quot;&gt;h1&lt;/code&gt;). This is going
+to be covered in much more detail going forward. The other thing your browser
+will do with the HTML is find ‘assets’ and these can range from files that you
+consume, like images, vides or sound, or things that ‘enrich’ the webpage which
+are ‘CSS’ and ‘Javascript’ - which your browser also knows what to do with.&lt;/p&gt;
+&lt;h2&gt;CSS&lt;/h2&gt;
+&lt;p&gt;So if HTML is the structure CSS is the painting and decorating. It decides how
+things look, that &lt;code class=&quot;language-text&quot;&gt;img&lt;/code&gt; is going to be this big or that &lt;code class=&quot;language-text&quot;&gt;h2&lt;/code&gt; is going to be this
+type of font. CSS can do so many different things, from deciding which fonts are
+used where all the way to drawing the
+&lt;a href=&quot;https://pattle.github.io/simpsons-in-css/&quot;&gt;Simpsons&lt;/a&gt;. Again much more detail
+will follow in coming posts.&lt;/p&gt;
+&lt;h2&gt;Javascript&lt;/h2&gt;
+&lt;p&gt;So we have the structure in HTML and the styles in CSS, what Javascript gives us
+is interactivity! It can make simple things come alive, it can make your webpage
+change as it goes and fetches data from other places, it can even make games!
+Javascript as a whole has come a really long way in recent years, and is a fully
+fledged software language in it’s own right. It originally started as a
+scripting language purely to make things work on webpages that didn’t fit inside
+the standard ‘HTML’ or ‘CSS’ models but has subsequently become a very fast and
+exciting language.&lt;/p&gt;
+&lt;h2&gt;So what now?&lt;/h2&gt;
+&lt;p&gt;Well the first thing to learn is the fundamentals. So Lesson 2 will focus on
+HTML and elements.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[Ok so I want to share as many secrets as I can about how to become a web
+developer as quickly as possible. This will be written up in a…]]></description><link>http://royletron.github.io//hello-world/</link><guid isPermaLink="false">http://royletron.github.io//hello-world/</guid><pubDate>Tue, 12 Mar 2019 20:02:03 GMT</pubDate><content:encoded>&lt;p&gt;Ok so I want to share as many secrets as I can about how to become a web
+developer as quickly as possible. This will be written up in a series of posts,
+and the order will be important. I am going to start from absolute first
+principles - you only need to know you own a computer and have visited a website
+previously. All the way to doing client UI completely in Javascript (basic
+front-end developer job work) and writing backend services in NodeJS (basic
+back-end developer job work). At the point those two things diverge I will work
+out some clever numbering.&lt;/p&gt;
+&lt;h2&gt;Why?&lt;/h2&gt;
+&lt;p&gt;That is a completely reasonable question. I guess the answer is because I know a
+lot of people are put off and they really shouldn’t be. Being a developer is a
+doddle, and is really rewarding both as a career and as a hobby. I think
+everyone should have access to the resources and tools to do it - so this is my
+small part to bring that home.&lt;/p&gt;
+&lt;h2&gt;Who even are you?&lt;/h2&gt;
+&lt;p&gt;I am a web developer who has worked on a number of huge projects, both backend,
+frontend and combined. At the moment I work for a company running their SaaS
+Team (software as a service) and have been doing it for almost 15 years
+(development, not this particular job). I love what I do and I happen to think I
+am quite good at telling others why it is so special.&lt;/p&gt;
+&lt;h2&gt;OK I am in, where do I start.&lt;/h2&gt;
+&lt;p&gt;Well, with the first post…&lt;/p&gt;</content:encoded></item></channel></rss>
