@@ -11,6 +11,7 @@ Wordpress2016.overrideThemeStyles = () => {
 
 delete Wordpress2016.googleFonts;
 Wordpress2016.bodyFontFamily[0] = "Sniglet"
+Wordpress2016.headerFontFamily[0] = "Montserrat"
 
 const typography = new Typography(Wordpress2016)
 

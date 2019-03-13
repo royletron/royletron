@@ -62,7 +62,7 @@ module.exports = {
         short_name: `Royletron`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#ff5d9e`,
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,
       },

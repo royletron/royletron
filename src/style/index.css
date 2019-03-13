@@ -1,0 +1,13 @@
+p {
+  margin-bottom: 20px;
+}
+
+.gatsby-highlight {
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.gatsby-highlight pre[class*="language-"] {
+  padding-left: 5px;
+}
