@@ -1,4 +1,436 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Royletron.dev]]></title><description><![CDATA[All my knowledge, in a tiny blog.]]></description><link>http://royletron.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Wed, 13 Mar 2019 09:41:18 GMT</lastBuildDate><item><title><![CDATA[Lesson 2 - HTML FTW]]></title><description><![CDATA[So we know that HTML is represents the content and ‘structure’ of our webpage
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Royletron.dev]]></title><description><![CDATA[All my knowledge, in a tiny blog.]]></description><link>http://royletron.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Sat, 16 Mar 2019 12:27:42 GMT</lastBuildDate><item><title><![CDATA[Lesson 4 - The Box Model]]></title><link>http://royletron.github.io//lesson-5/</link><guid isPermaLink="false">http://royletron.github.io//lesson-5/</guid><pubDate>Sat, 16 Mar 2019 11:09:37 GMT</pubDate><content:encoded>&lt;iframe width=&quot;100%&quot; height=&quot;400&quot; src=&quot;//jsfiddle.net/royletron/q5rutpch/6/embedded/result/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</content:encoded></item><item><title><![CDATA[Lesson 4 - CSS!]]></title><description><![CDATA[If you have followed most of these lessons carefully chances are you should be
+able to knock up some reasonable looking HTML that looks a…]]></description><link>http://royletron.github.io//lesson-4/</link><guid isPermaLink="false">http://royletron.github.io//lesson-4/</guid><pubDate>Sat, 16 Mar 2019 11:09:37 GMT</pubDate><content:encoded>&lt;p&gt;If you have followed most of these lessons carefully chances are you should be
+able to knock up some reasonable looking HTML that looks a bit like this:&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;510&quot; src=&quot;//jsfiddle.net/royletron/y5cpv8o6/2/embedded/result/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;If so you are right on track! What we want to do next is elevate this plain
+looking content into something amazing, and to do that we need CSS.&lt;/p&gt;
+&lt;h2&gt;Syntaxing CSS&lt;/h2&gt;
+&lt;p&gt;CSS is a technology built into most modern browsers that allows web developers
+to style the content that they have sent to users. Your browser will take the
+HTML and the CSS - which is usally a file called a ‘stylesheet’ - and then
+process the CSS on top of the HTML to render what it is the developer wanted it
+to look like. This means that the CSS directly references the HTML that it was
+built for, and contains code that defines the ‘style’. So let’s take a look at
+some&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; orange&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; blue&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A CSS style as shown above (this is a single style - you can write as many as
+you want) has two parts, the first bit is the ‘selector’ - in the above case
+&lt;code class=&quot;language-text&quot;&gt;body&lt;/code&gt; - and this tells the browser what elements it should apply this style
+too. The second part is the bit inside &lt;code class=&quot;language-text&quot;&gt;{ }&lt;/code&gt; which is the ‘declaration block’ and
+lists all of the CSS ‘properties’ this style wants to change and their value -
+this always follows the pattern &lt;code class=&quot;language-text&quot;&gt;property: value;&lt;/code&gt; ensuring the &lt;code class=&quot;language-text&quot;&gt;;&lt;/code&gt; at the end of each individual
+declaration. In the above example we are selecting the &lt;code class=&quot;language-text&quot;&gt;body&lt;/code&gt; tag and we are
+setting the &lt;code class=&quot;language-text&quot;&gt;background&lt;/code&gt; property to be value &lt;code class=&quot;language-text&quot;&gt;orange&lt;/code&gt; and then &lt;code class=&quot;language-text&quot;&gt;color&lt;/code&gt; property
+to be value &lt;code class=&quot;language-text&quot;&gt;blue&lt;/code&gt;. More on those later.&lt;/p&gt;
+&lt;h2&gt;Cascading Down&lt;/h2&gt;
+&lt;p&gt;An important feature of CSS is that it ‘cascades’ down from parent to child
+element in the HTML you have defined - in fact CSS stands for ‘cascading style
+sheets’. What this means in reality is that any style applied to an element is
+also applied to it’s children. For example consider the following HTML and CSS:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Hello&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; World
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; bold&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; blue&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This would result in:&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;110&quot; src=&quot;//jsfiddle.net/royletron/g0anersp/embedded/result/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;With all of the elements inside of the &lt;code class=&quot;language-text&quot;&gt;body&lt;/code&gt; being made &lt;code class=&quot;language-text&quot;&gt;bold&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;red&lt;/code&gt;, and
+any &lt;code class=&quot;language-text&quot;&gt;span&lt;/code&gt; element being &lt;code class=&quot;language-text&quot;&gt;blue&lt;/code&gt;. The &lt;code class=&quot;language-text&quot;&gt;p&lt;/code&gt; tag never has a style applied but as it
+is a child of &lt;code class=&quot;language-text&quot;&gt;body&lt;/code&gt; it gets all of the style defined there.&lt;/p&gt;
+&lt;h2&gt;Selecting&lt;/h2&gt;
+&lt;p&gt;There are so many ways of selecting elments based on some criteria, the one we
+used above is based on the type of the element we want to select, but you can
+also be incredibly specific. Here are all of the possible ways to select
+elements using CSS. Trust me, you don’t need to spend time memorizing it! But
+it’s useful as a reference (&lt;em&gt;totally stolen from Wikipedia&lt;/em&gt;). At the bottom I
+will sumarize the important ones to get started.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Pattern&lt;/th&gt;
+&lt;th&gt;Matches&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;E&lt;/td&gt;
+&lt;td&gt;an element of type E&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:link&lt;/td&gt;
+&lt;td&gt;an E element is the source anchor of a hyperlink of which the target is not yet visited (:link) or already visited (:visited)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:active&lt;/td&gt;
+&lt;td&gt;an E element during certain user actions&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E::first-line&lt;/td&gt;
+&lt;td&gt;the first formatted line of an E element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E::first-letter&lt;/td&gt;
+&lt;td&gt;the first formatted letter of an E element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.c&lt;/td&gt;
+&lt;td&gt;all elements with class=“c”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;#myid&lt;/td&gt;
+&lt;td&gt;the element with id=“myid”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E.warning&lt;/td&gt;
+&lt;td&gt;an E element whose class is “warning” (the document language specifies how class is determined)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E#myid&lt;/td&gt;
+&lt;td&gt;an E element with ID equal to “myid”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E F&lt;/td&gt;
+&lt;td&gt;an F element descendant of an E element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;*&lt;/td&gt;
+&lt;td&gt;any element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo]&lt;/td&gt;
+&lt;td&gt;an E element with a “foo” attribute&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo=“bar”]&lt;/td&gt;
+&lt;td&gt;an E element whose “foo” attribute value is exactly equal to “bar”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo~=“bar”]&lt;/td&gt;
+&lt;td&gt;an E element whose “foo” attribute value is a list of whitespace-separated values, one of which is exactly equal to “bar”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo&lt;/td&gt;
+&lt;td&gt;=“en”]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:first-child&lt;/td&gt;
+&lt;td&gt;an E element, first child of its parent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:lang(fr)&lt;/td&gt;
+&lt;td&gt;an element of type E in language “fr” (the document language specifies how language is determined)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E::before&lt;/td&gt;
+&lt;td&gt;generated content before an E element’s content&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E::after&lt;/td&gt;
+&lt;td&gt;generated content after an E element’s content&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E &gt; F&lt;/td&gt;
+&lt;td&gt;an F element child of an E element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E + F&lt;/td&gt;
+&lt;td&gt;an F element immediately preceded by an E element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo^=“bar”]&lt;/td&gt;
+&lt;td&gt;an E element whose “foo” attribute value begins exactly with the string “bar”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo$=“bar”]&lt;/td&gt;
+&lt;td&gt;an E element whose “foo” attribute value ends exactly with the string “bar”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E[foo*=“bar”]&lt;/td&gt;
+&lt;td&gt;an E element whose “foo” attribute value contains the substring “bar”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:root&lt;/td&gt;
+&lt;td&gt;an E element, root of the document&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:nth-child(n)&lt;/td&gt;
+&lt;td&gt;an E element, the n-th child of its parent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:nth-last-child(n)&lt;/td&gt;
+&lt;td&gt;an E element, the n-th child of its parent, counting from the last one&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:nth-of-type(n)&lt;/td&gt;
+&lt;td&gt;an E element, the n-th sibling of its type&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:nth-last-of-type(n)&lt;/td&gt;
+&lt;td&gt;an E element, the n-th sibling of its type, counting from the last one&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:last-child&lt;/td&gt;
+&lt;td&gt;an E element, last child of its parent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:first-of-type&lt;/td&gt;
+&lt;td&gt;an E element, first sibling of its type&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:last-of-type&lt;/td&gt;
+&lt;td&gt;an E element, last sibling of its type&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:only-child&lt;/td&gt;
+&lt;td&gt;an E element, only child of its parent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:only-of-type&lt;/td&gt;
+&lt;td&gt;an E element, only sibling of its type&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:empty&lt;/td&gt;
+&lt;td&gt;an E element that has no children (including text nodes)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:target&lt;/td&gt;
+&lt;td&gt;an E element being the target of the referring URI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:enabled&lt;/td&gt;
+&lt;td&gt;a user interface element E that is enabled&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:disabled&lt;/td&gt;
+&lt;td&gt;a user interface element E that is disabled&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:checked&lt;/td&gt;
+&lt;td&gt;a user interface element E that is checked (for instance a radio-button or checkbox)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E:not(s)&lt;/td&gt;
+&lt;td&gt;an E element that does not match simple selector s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E ~ F&lt;/td&gt;
+&lt;td&gt;an F element preceded by an E element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Important Selectors&lt;/h3&gt;
+&lt;h4&gt;No.1 The tag name&lt;/h4&gt;
+&lt;p&gt;By far the easiest is the tag name, this will apply the style to all tags that
+have this as their tag type.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;No.2 The class name&lt;/h4&gt;
+&lt;p&gt;Any html element can have an attribute called ‘id’ associated to it:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;h1&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;main&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;My Magic Blog&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;h1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Some amazing articles&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which can then be selected in CSS like so:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;#main&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;#content&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the format &lt;code class=&quot;language-text&quot;&gt;#name_of_class&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;No.3 The class name&lt;/h4&gt;
+&lt;p&gt;Any html element can also have an attribute called ‘class’ associated to it:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;h1&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;subtitle&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Welcome here&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;h1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;body&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;So nice to have you&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which can then be selected in CSS like so:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.subtitle&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* style */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the format &lt;code class=&quot;language-text&quot;&gt;.name_of_class&lt;/code&gt;. The difference between a &lt;code class=&quot;language-text&quot;&gt;class&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;id&lt;/code&gt; is
+actually minimal, but most developers will tell you to only ever have one single
+tag with a given &lt;code class=&quot;language-text&quot;&gt;id&lt;/code&gt; but you can have as many as you want with a given &lt;code class=&quot;language-text&quot;&gt;class&lt;/code&gt;.
+So bad would be:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Hey this is some content&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Hey this even more content&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But good:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Hey this is some content&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Hey this even more content&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Attributes &amp;#x26; Values&lt;/h2&gt;
+&lt;p&gt;There are so many different CSS attributes that you can modify and each one has
+a different set of values that you can apply to it. There is a &lt;a href=&quot;https://www.w3schools.com/cssref/&quot;&gt;full
+list&lt;/a&gt; but that is quite scary, here are some
+key ones.&lt;/p&gt;
+&lt;h4&gt;color&lt;/h4&gt;
+&lt;p&gt;This is the color of the text inside the element. All colors in CSS can be
+defined in one of several ways, either as a shorthand ‘word’ - things like
+&lt;code class=&quot;language-text&quot;&gt;red&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;blue&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;yellow&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;white&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;green&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;black&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;PeachPuff&lt;/code&gt;… &lt;a href=&quot;https://www.w3schools.com/colors/colors_names.asp&quot;&gt;see the
+full list&lt;/a&gt;. Colors can also
+be defined as a ‘hexidecimal’ value which always start with a &lt;code class=&quot;language-text&quot;&gt;#&lt;/code&gt; like &lt;code class=&quot;language-text&quot;&gt;#ffffff&lt;/code&gt;
+which is white. They can also be defined as ‘rgb’ or ‘rgba’ values - which
+define how much ‘red’, ‘green’ and ‘blue’ (between 0 and 255) go into them with
+an optional ‘alpha’ which is transparent the color will be. Here are some examples:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.red&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.black&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; #000000&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.blue&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;0, 0, 255&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.gray&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* this is actually transparent black, but will look gray on white */&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;rgba&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;0, 0, 0, 0.3&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which looks like this&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;150&quot; src=&quot;//jsfiddle.net/royletron/myera3k2/1/embedded/result/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;h4&gt;background-color&lt;/h4&gt;
+&lt;p&gt;Hopefully self explanatory, this is the background color of the element, again
+defined in one the four different ways of defining colors:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.red&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.black&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; #000000&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.blue&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;0, 0, 255&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.gray&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* this is actually transparent black, but will look gray on white */&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;rgba&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;0, 0, 0, 0.3&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Will come out like so:&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;150&quot; src=&quot;//jsfiddle.net/royletron/myera3k2/2/embedded/result/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;h4&gt;Font-Family, Weight, Size&lt;/h4&gt;
+&lt;p&gt;Changing fonts is one of the most common uses of CSS and there are lots of
+different ways you can tweak the way content looks.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;font-family: Arial, Helvetica, sans-serif;&lt;/code&gt; will set the font that you want to
+see. These are always provided with fallbacks just in case the computer that is
+displaying your site doesn’t have that font installed. So first it will try
+&lt;code class=&quot;language-text&quot;&gt;Arial&lt;/code&gt; and then &lt;code class=&quot;language-text&quot;&gt;Helvetica&lt;/code&gt; and failing that will pick any &lt;code class=&quot;language-text&quot;&gt;sans-serif&lt;/code&gt; font it
+can find on the computer.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;font-size: 20px;&lt;/code&gt; this is how big the font is, it can either be an absolute
+value in &lt;code class=&quot;language-text&quot;&gt;px&lt;/code&gt; ‘pixels’ or as an amount of &lt;code class=&quot;language-text&quot;&gt;em&lt;/code&gt; which is as a ratio of the font
+that applies from the parent. A common practice is to set the font-size on the
+body in pixels and then everything else is a multiplied ratio of this. This can
+help keep font-sizes more consistent.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;font-weight: bold;&lt;/code&gt; this is how much weight - bold to thin, you want to apply.
+It can either be a keyword like &lt;code class=&quot;language-text&quot;&gt;bold&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;thin&lt;/code&gt;, or &lt;code class=&quot;language-text&quot;&gt;normal&lt;/code&gt; or it can be a value
+usually in increments of hundreds like &lt;code class=&quot;language-text&quot;&gt;100&lt;/code&gt; which is quite thin, or &lt;code class=&quot;language-text&quot;&gt;500&lt;/code&gt; which
+is quite bold.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Arial, Helvetica, sans-serif&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.bold&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; bold&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.thin&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; thin&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;.massive&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 5em&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Results in&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;240&quot; src=&quot;//jsfiddle.net/royletron/myera3k2/4/embedded/result/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</content:encoded></item><item><title><![CDATA[Lesson 3 - Document Object Model (DOM)]]></title><description><![CDATA[It’s time to get into some gritty technical details about what is going on with
+your HTML and specifically how does your browser interpret…]]></description><link>http://royletron.github.io//lesson-3/</link><guid isPermaLink="false">http://royletron.github.io//lesson-3/</guid><pubDate>Thu, 14 Mar 2019 12:53:37 GMT</pubDate><content:encoded>&lt;p&gt;It’s time to get into some gritty technical details about what is going on with
+your HTML and specifically how does your browser interpret what it sees when it
+reads the code that makes up your HTML.&lt;/p&gt;
+&lt;h2&gt;Enter the Document!&lt;/h2&gt;
+&lt;p&gt;So when your browser downloads your HTML it converts the text into what we call
+the ‘Document’. Basically this is the ‘live’ version of your running website,
+and this follows a standard pattern we call the ‘Document Object Model’ or DOM
+for short. The DOM is ‘computer legible’ - i.e. something a computer can
+understand - representation of the webpage, and defines how your CSS and
+Javascript will work alongside it. The DOM is in effect a big tree, with
+elements spanning out as branches and leaves of the tree. Consider the following
+HTML:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+      Hello &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;World&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;span&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;footer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+      My amazing footer
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;footer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You should already know from the second lesson that HTML ‘tags’ can live inside
+of other ‘parent’ tags, and here we have a &lt;code class=&quot;language-text&quot;&gt;div&lt;/code&gt; and a &lt;code class=&quot;language-text&quot;&gt;footer&lt;/code&gt; inside of the
+&lt;code class=&quot;language-text&quot;&gt;body&lt;/code&gt; tag, and inside each of those is a &lt;code class=&quot;language-text&quot;&gt;p&lt;/code&gt; tag. You will also notice I have
+formatted the text so that each thing that is in a parent is indented by two
+blank spaces - this is very intentional and super good habit to get into. This
+structure of parents and children would look like this:&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/92b6923f2a1043700384320686ee4e0f/9e663/fig1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 75.29644268774703%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACYklEQVQ4y2PQ0dEVV5WSUJLnZhNmoAbQ0tSQcMooNPUoqVPRsHPmF+ThkjSNSmZSs7Rj5IKqERUVJc3Q0vf/1ev+/9d2KG0yFOTmNAcK8cDkWIFYTEwMbCjMYLwWpB27y559+Y0siN31/z9LyYv/8n3///Oq2ziqC3CyC4LEmUhxXe7Nz+xALA/jZ154KVT46K+Oe+sUMxCfk4GBWVZdkwnqMhZpaWn8LgQaxgbEciB2xtlniGB49V+5/P1/VdvcSkkhPl5HcQlJM6BBQjAv4w0CkAtzb31mAbNvfGIE0dlX3qoWPfmv4DdlqSgfC5MGMBy1FfWMOCEGiDCKSUjgDk+QgXm3v3KA2G6NE8BiyYducJa/+6/o1TVTE2iYnbSisgxQmAVZH9AwVqyG5t36Ip91+Q0brmABulSk9u9/xbK3/6UlpKVNgAZoAS2xANIi2L18/aNi/f//PEahcfz8bCwioIiQ19bjVbd1Yge79vAt5vTTjyWBKUBGQkZWSlRERF5MTBxojigjVgOzL78VLH763yBs2U5dYAQ4Ab1nBkyIBjyMDFyEUglyxIDZwMhAUZB86KZQ4cM/Kkv//+dUs3ZQFRYUEITJOVd1MEpISTMBXcgI9DITkqGMKK4suP+TIWbzcTC75td/ZmB4SoJiWMfDXxmmho+NhQOL65iAmBnFtcAYhisIX7YLRUP19/8S+fd+SgPTo7K0krK5iLCQGTDslIAaVaFYHYg1gFgPiOWBmBM56cDpnOsfwOyUw7dYgelRqOjpfxEVUyteoPdFxMTFRYAaeaAGgtj8QCwJokF5HgCNN7Uei3Kq2QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Figure 1: DOM Tree&quot;
+        title=&quot;Figure 1: DOM Tree&quot;
+        src=&quot;/static/92b6923f2a1043700384320686ee4e0f/6255c/fig1.png&quot;
+        srcset=&quot;/static/92b6923f2a1043700384320686ee4e0f/375dc/fig1.png 148w,
+/static/92b6923f2a1043700384320686ee4e0f/6b157/fig1.png 295w,
+/static/92b6923f2a1043700384320686ee4e0f/6255c/fig1.png 590w,
+/static/92b6923f2a1043700384320686ee4e0f/dcf9c/fig1.png 885w,
+/static/92b6923f2a1043700384320686ee4e0f/43c8a/fig1.png 1180w,
+/static/92b6923f2a1043700384320686ee4e0f/9e663/fig1.png 1518w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;Here you can see the &lt;code class=&quot;language-text&quot;&gt;p&lt;/code&gt; inside the &lt;code class=&quot;language-text&quot;&gt;div&lt;/code&gt; and it’s two children ‘Hello’ (which
+is just text content) and a &lt;code class=&quot;language-text&quot;&gt;span&lt;/code&gt; which has it’s own text content ‘World’.&lt;/p&gt;
+&lt;h2&gt;Why Do I Care About It?&lt;/h2&gt;
+&lt;p&gt;Generally speaking the structure of your HTML should give some sense as to it’s
+meaning, so in the above example we have our &lt;code class=&quot;language-text&quot;&gt;footer&lt;/code&gt; tag would make sense to be
+the footer section of our website. You might also want to group posts in a blog
+in their own &lt;code class=&quot;language-text&quot;&gt;div&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;article&lt;/code&gt; tags with the various tags that then make up
+that content inside of it like &lt;code class=&quot;language-text&quot;&gt;p&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;h1&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;p&gt;Ultimately the most important reason to this structure is it helps you target
+specific things in your HTML in order to manipulate them. This is particularly
+relevant when you want to target specific tags with CSS styles, or you want
+JavaScript to interact with them in some way. This structure becomes very
+useful! But more on that next, when we introduce CSS!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Lesson 2 - HTML FTW]]></title><description><![CDATA[So we know that HTML is represents the content and ‘structure’ of our webpage
 now it’s time to look into how we make it. This is an instance…]]></description><link>http://royletron.github.io//lesson-2/</link><guid isPermaLink="false">http://royletron.github.io//lesson-2/</guid><pubDate>Wed, 13 Mar 2019 08:13:37 GMT</pubDate><content:encoded>&lt;p&gt;So we know that HTML is represents the content and ‘structure’ of our webpage
 now it’s time to look into how we make it.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;p&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;welcome&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Hello World&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;p&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
