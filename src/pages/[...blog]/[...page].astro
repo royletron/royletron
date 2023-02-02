@@ -1,0 +1,31 @@
+---
+import Layout from "~/layouts/PageLayout.astro";
+import BlogList from "~/components/blog/List.astro";
+import Headline from "~/components/blog/Headline.astro";
+import Pagination from "~/components/blog/Pagination.astro";
+import { fetchPosts } from "~/utils/blog";
+import { BLOG_BASE } from "~/utils/permalinks";
+
+export async function getStaticPaths({ paginate }) {
+  return paginate(await fetchPosts(), {
+    pageSize: 10,
+    params: { blog: BLOG_BASE || undefined },
+  });
+}
+const { page } = Astro.props;
+const currentPage = page.currentPage ?? 1;
+const meta = {
+  title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+  ogType: "blog",
+};
+---
+
+<Layout {meta} title={"Blog!"}>
+  <section
+    class="px-6 sm:px-6 py-4 sm:py-6 lg:py-10 mx-auto max-w-4xl text-base-content"
+  >
+    <Headline>Latest Posts</Headline>
+    <BlogList posts={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
+</Layout>

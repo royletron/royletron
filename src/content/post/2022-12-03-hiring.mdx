@@ -1,0 +1,88 @@
+---
+publishDate: 2022-12-03T00:00:00Z
+featured: true
+title: How To Hire Engineers
+description: How to focus on trust.
+excerpt: Hiring engineers is horribly difficult, you either have to make a call on someone with a tiny window of visibility or create a lengthy process that puts people off. In this article I show you how to hit that sweet spot of teasing out whether a candidate has the desired skills and behaviors, without spending weeks getting there.
+image: ~/assets/images/hiring.png
+category: Managing
+tags:
+  - managing
+  - engineering
+canonical: https://royletron.dev/2022-12-03-hiring
+---
+
+import { Image } from "@astrojs/image/components";
+import hiringImage1 from "~/assets/images/hiring/1.png";
+import hiringImage2 from "~/assets/images/hiring/2.png";
+import hiringImage3 from "~/assets/images/hiring/3.png";
+import hiringImage4 from "~/assets/images/hiring/4.png";
+
+We have a simple rule when it comes to hiring - **focus on trust**. Developers come in so many different varieties and are typically rated based on their ability to code, or their understanding of the `process` of development. Our aim in interviewing is to focus on how _trustworthy_ the individual is: _can we trust that they will work autonomously and take charge of their development?_ This can sound quite bizarre, and maybe a little offputting at first, but in reality this just means that you want to hear more about the individual than you do their code. My approach to this, is an interview process that _focuses on how their team works day-to-day_, and benchmarking their technical expertise - which helps our understanding of the investment we would have to place in the candidate post hire.
+
+## Candidate scoring
+
+As well as answering the fundamental question around trust, we also have to score the candidate against how we feel they will perform in the role - this is particularly vital in interviews for heavily contested roles (a really nice problem to have). We rate candidates across the same core areas that we expect them to perform in their role:
+
+- 🏆 **Results** - the tangible business benefit of their effort. Will they deliver products, take ownership of their work, make positive decisions and create impact in their field?
+- ⭐ **Direction** - where the business is headed. Will they contribute to driving the business in the right direction, spot opportunities and pitfalls and help to steer the company?
+- 🌲 **Talent** - nurturing existing and contributing to find new hires. Will they push their own personal and professional development, help level up the team as a whole and contribute to hiring?
+- 🌈 **Culture** - maintaining our values and working environment. Will they collaborate with everyone fairly, communicate clearly and contribute to the heart of the company?
+- 🦉 **Craft** - technical ability. Do they have the skills currently (raw or experienced) that we are looking for?
+
+Our scoring is much like a _golf scoring card_, where we have a baseline for the role that is expected, we can then go two points above, or two points below that baseline. We expect that there could be some work required to get the individual to the required standard, but having this scoring allows us to compare candidates objectively.
+
+## The Engineer Interview
+
+### First Interview: Technical Screening
+
+Prior to the interview we will ask the candidate to do one of two prepared technical tasks, tailored to be achievable in under 90 minutes. A large part of me loathes the use of technical tasks, but the alternative is to put the candidate on the spot during a meeting - but we’re not assessing how well a candidate can reason through nervousness, so an at-home test is a fairer approach. The end product of the technical task isn’t code - and we never ask directly for code to be provided. Instead we ask the candidate to present us through what they put together (we may request to look at the code in the session or ask them how they did certain things - but really the code always has to be theirs).
+
+<Image src={hiringImage1} alt="Presenting their journey through the code" />
+
+This presentation is really important, and we instruct the candidate that we would like to see what choices they could’ve made as well as the choice they did make. As a fully remote team your ability to communicate effectively with peers on code, choices and architecture is actually more important than the code itself. Our aim is to find the candidates who can do this well, as we know they’re going to be much more effective when it comes to learning and developing.
+
+### First Interview: They Interview You
+
+During the first interview it is also vital that you give the candidate the opportunity to interview the company. This is so often overlooked, or candidates are asked to just `email` questions over because the interview is running late - this can’t be allowed to happen.
+
+<Image src={hiringImage2} alt="Give lots of space for their questions" />
+
+### Second Interview: Collaboration & Team Fit
+
+When progressing to a second interview we then take the development exercise one step further, inviting them to participate in a pair programming session with another of our developers - this requires no preparation prior to the session. Ideally this should be someone they have yet to meet - it’s important this person is seen less as an interviewer and more as a `future peer`. The paired task is always on the candidate's original submission project - again their code, their laptop, their session. The task is usually quite small and in code terms quite redundant, but represents a real day-to-day requirement of our team. They’ll be provided with a ticket and given the space to breathe - this needs to be conducted in something where work is happening, not an interview room.
+
+<Image src={hiringImage3} alt="Get straight to pairing!" />
+
+Once complete we will ask the candidate and their pair to present back their solution to the ticket. The pairing developer knows to focus less on code and more on ‘what they would code’, so the task doesn’t have to end with delivery. Once complete - or at least solved logically - we invite the candidate and their pair to discuss with the interviewing party what they have done. We get their pair on the same side of the table to best replicate what day to day team work would be like, and how they handle that. Once the ‘development’ aspect is complete we move on to a more traditional Q&A to try to score them on the other areas outside of day-to-day work.
+
+## What we are looking for
+
+This process attempts to emulate our working day as closely as possible - pairing is a really effective exercise for all our team members and is vital to our day to day. What we ask our pairing developers to do is to note the sorts of things that came up during the conversations:
+
+- Did they explain what exposure they have had to a particular technology?
+- Did they try to reason about the problem with a pseudo shorthand?
+- Did they ask questions about the ticket?
+- Did they look to break the ticket down into a number of different functions/classes etc?
+- Did they suggest looking up any documentation/other reference implementations (yes, I mean Stack Overflow)?
+
+It’s not to say that any of these is more important, or that there are any right answers, but the gist of what we want to see is they take the ticket seriously, focus on breaking down the issue, consider things before jumping in, and use the pair effectively.
+
+## Making a decision
+
+Our aim with all of the interviews is to get a number of score cards from the interviewers involved. _Not all of them can be complete_ - as developers will focus on the craft aspect and maybe miss some parts of culture or talent and vice versa with the management Q&A - but we end up with a complete picture. _In most cases_ we can simply average the scores across scorecards, but where bigger disparities exist this will be the trigger for a conversation about that particular area - our aim here is always to have a singular rated scorecard.
+
+<Image src={hiringImage4} alt="Score carding is essential" />
+
+With all the numbers in you may be able to see a clear objective winner, but sometimes a balancing act is required to judge whether having a higher `craft` is more or less desirable compared to `results`. Whatever happens, it’s important to _trust your scoring_ - if you don’t then you need to rethink how you are scoring. Once a scored decision is made it’s important to review that against a more subjective decision, including asking interviewing members to make their choice is important too. We tend to only allow the objective score to lead our decision, but if the subjective `winner` is different then it calls for a review.
+
+## Process post mortem
+
+We have a strong culture of retrospection, we are always looking at everything we do to see if it can be optimised or automated. From CEO through to coders, we empower people to put forward when something isn’t working for them, and work across the business to find solutions. Hiring is no exception, and when we get a new hire this represents _a really good opportunity_ to question whether the process worked from their perspective. We find this to be a less useful exercise on day one, but after several months - even as part of a probation review - we ask questions about the process of how they came into the job. The questions aren’t rigid, but you want to pick at their experience of the process as an outsider.
+
+- Did they find the pairing panic inducing?
+- Did our presentation of the role match the current reality?
+- Could we have done more to make them feel welcome?
+- Would they like to have seen more or less during the Q&A?
+
+Regardless of how mature you believe your hiring process is, it is **vital** that you constantly evaluate it. The world changes, people evolve and different things become important to them - if you don’t recognise that you will fail. Get hiring right, and a lot of things click into place.

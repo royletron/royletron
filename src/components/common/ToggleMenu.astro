@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon";
+export interface Props {
+  label?: string;
+  class?: string;
+  iconClass?: string;
+  iconName?: string;
+}
+const {
+  label = "Toggle between Dark and Light mode",
+  class: className = "inline-flex items-center btn btn-ghost",
+  iconClass = "w-6 h-6",
+  iconName = "tabler:menu",
+} = Astro.props;
+---
+
+<button type="button" class={className} aria-label={label} data-aw-toggle-menu>
+  <Icon name={iconName} class={iconClass} />
+</button>

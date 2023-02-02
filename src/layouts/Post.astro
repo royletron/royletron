@@ -1,0 +1,10 @@
+---
+import Layout from "./Layout.astro";
+
+// 1. The frontmatter prop gives access to frontmatter and other data
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <slot />
+</Layout>

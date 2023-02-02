@@ -1,0 +1,54 @@
+---
+publishDate: 2022-03-22T00:00:00Z
+featured: true
+title: Von Count
+description: I vant to count your lines!
+excerpt: We recently found need to count lines of our code, but with added context that things like `cloc` can't give us. Basically at a glance we wanted to see the use of certain features/components/libraries so that we could phase them out slowly over time and see progress 🧮.
+image: ~/assets/images/scm/vc.png
+category: Projects
+tags:
+  - libraries
+  - oss
+canonical: https://royletron.dev/2022-03-22-voncount
+---
+
+To that end [we produced _VonCount_](https://github.com/ventureharbour/voncount)
+
+**VonCount** produces tables of results for folders of source code, those results are determined by an optional configuration. The configuration can decide any number of `groups` which are named and are specified by patterns that match the start and end of a particular block of something. For example _documentation_ where you want to count lines between `/**` and `*/`:
+
+```json title="count.json"
+{
+  "groups": [
+    {
+      "name": "documentation",
+      "between": {
+        "start": "^\\/\\*\\*",
+        "end": "^ \\*/$"
+      }
+    }
+  ]
+}
+```
+
+These will then be matched and counted alongside the rest of the source, producing a table that shows total lines, number of lines in your groups and the representation as a % of those groups.
+
+```bash
+npm install -g voncount
+voncount run .
+┌────────────────┬───────┬─────────────────┬───────┐
+│ Path           │ Lines │ 'documentation' │     % │
+├────────────────┼───────┼─────────────────┼───────┤
+│ test           │   232 │              19 │  8.19 │
+│   components   │   207 │              19 │  9.18 │
+│     Header.js  │    18 │               4 │ 22.22 │
+│     Content.js │   179 │              15 │  8.38 │
+│     Footer.js  │    10 │               0 │     0 │
+│   pages        │    25 │               0 │     0 │
+│     index.js   │    25 │               0 │     0 │
+└────────────────┴───────┴─────────────────┴───────┘
+
+```
+
+And you get a neat breakdown of it all 🚀!
+
+_We are still pretty early_ with our build on this, but feel it's useful so will be investing more and more time into it. It's great for developer led metrics, and removing/adding certain facets to your code base [give it a try](https://www.npmjs.com/package/voncount).

@@ -1,0 +1,21 @@
+---
+import { getPermalink } from "~/utils/permalinks";
+import type { Post } from "~/types";
+export interface Props {
+  tags: Post["tags"];
+  class?: string;
+}
+const { tags } = Astro.props;
+---
+
+{
+  tags && Array.isArray(tags) && (
+    <ul class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <a href={getPermalink(tag, "tag")} class="badge">
+          {tag}
+        </a>
+      ))}
+    </ul>
+  )
+}

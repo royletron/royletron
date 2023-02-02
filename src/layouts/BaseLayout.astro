@@ -1,0 +1,37 @@
+---
+import "~/assets/styles/base.css";
+import "@fontsource/inter";
+import "@fontsource/alegreya-sans";
+import MetaTags from "~/components/common/MetaTags.astro";
+import BasicScripts from "~/components/common/BasicScripts.astro";
+import type { MetaSEO } from "~/types";
+export interface Props {
+  meta?: MetaSEO;
+  title?: string;
+}
+const { meta = {}, title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html class="2xl:text-[20px] h-full">
+  <head>
+    <MetaTags {...meta} />
+    <title>Royletron.dev ~ {title}</title>
+  </head>
+
+  <body class="antialiased text-page tracking-tight flex flex-col min-h-full">
+    <div class="zig">
+      <div class="zag"></div>
+    </div>
+    <div class="zig">
+      <div class="zag"></div>
+    </div>
+    <slot />
+    <BasicScripts />
+    <style is:global>
+      img {
+        content-visibility: auto;
+      }
+    </style>
+  </body>
+</html>

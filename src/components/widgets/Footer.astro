@@ -1,0 +1,60 @@
+---
+import GitHub from "../icons/GitHub.astro";
+
+const navigation = {
+  main: [
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Jobs", href: "#" },
+  ],
+};
+---
+
+<footer class="bg-base-300">
+  <div class="mx-auto max-w-7xl overflow-hidden py-10 px-6 sm:py-14 lg:px-8">
+    <!-- <nav
+      class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
+      aria-label="Footer"
+    >
+      {
+        navigation.main.map((item) => (
+          <div class="pb-6">
+            <a
+              href={item.href}
+              class="text-sm leading-6 text-base-content hover:text-primary-content"
+            >
+              {item.name}
+            </a>
+          </div>
+        ))
+      }
+    </nav> -->
+    <div class="mt-10 flex justify-center space-x-10">
+      <a
+        href="https://github.com/royletron"
+        class="text-base-content hover:text-primary-content"
+      >
+        <span class="sr-only">GitHub</span>
+        <GitHub className="h-6 w-6" />
+      </a>
+      <!-- {
+        navigation.social.map((item) => (
+          <a href={item.href} class="text-gray-400 hover:text-gray-500">
+            <span class="sr-only">{item.name}</span>
+            <item.icon class="h-6 w-6" aria-hidden="true" />
+          </a>
+        ))
+      } -->
+    </div>
+    <p class="mt-10 text-center">
+      &copy; 2023 Royletron, Inc. All rights reserved.
+    </p>
+    <p class="text-center font-black text-sm">
+      Commit: <a
+        class="link"
+        href={`https://github.com/royletron/home/commit/${process.env.SHORT_SHA}`}
+        >{process.env.SHORT_SHA || "?"}</a
+      >
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,77 @@
+---
+import PageLayout from "~/layouts/PageLayout.astro";
+import { Image } from "@astrojs/image/components";
+import img from "~/assets/images/me.jpg";
+---
+
+<PageLayout title="About">
+  <section
+    class="my-32 mx-auto container w-full max-w-4xl flex-1 px-4 flex flex-col sm:flex-row gap-4 items-center"
+  >
+    <div class="prose prose-xl text-center sm:text-left sm:flex-1">
+      <h1 class="mb-0">About</h1>
+      <h3 class="mt-0">Learn more about what I do</h3>
+    </div>
+    <div
+      class={"relative aspect-[1/1] w-44 flex-none overflow-hidden rounded-xl sm:w-72 sm:rounded-2xl rotate-2"}
+    >
+      <Image
+        src={img}
+        alt=""
+        sizes="(min-width: 640px) 18rem, 11rem"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </div>
+  </section>
+  <div class="bg-base-200 mt-16 py-32 polka">
+    <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+      <div class="prose prose-xl">
+        <h3>A quick bio.</h3>
+        <p>
+          I have been building things with computers for over 30 years, and
+          doing it as a job for almost 15! I love <em
+            >creating and shipping things</em
+          >
+          to users, bringing ideas to life - with just a laptop, coffee, loud music
+          and some time.
+        </p>
+        <p>
+          You can find out more about me professionally <a
+            class="link"
+            href="https://cv.royletron.dev"
+            target="_blank"
+          >
+            through my CV</a
+          > including contact information <em>should you need it</em>.
+        </p>
+        <p>
+          Some things I am <b>good at</b>:
+          <ul>
+            <li>
+              <b>Delivering software.</b> My entire reputation is built around bring
+              ideas to fruition, quickly and accurately. I have built up a lot of
+              tools and skills along the way to strike the right balance between
+              technical excellence and speed!
+            </li>
+            <li>
+              <b>Teasing out ideas.</b> If you want something building it helps to
+              know exactly what that thing is! Over my professional career I have
+              worked with lots of different groups of people, with all sorts of proficiencies
+              when it comes to technology. From childrens book publishers to Oxford
+              computer science professors - they all need help crystalising their
+              ideas into something real!
+            </li>
+            <li>
+              <b>Managing teams.</b> Second only to making software myself is helping
+              others make it alongside me. I've worked with teams big and small,
+              including working with established teams and creating a new one from
+              scratch. I like to think over that time I have gained the right insight
+              into the common problems and management skills to help even the most
+              diverse groups of people pull together.
+            </li>
+          </ul>
+        </p>
+      </div>
+    </section>
+  </div>
+</PageLayout>

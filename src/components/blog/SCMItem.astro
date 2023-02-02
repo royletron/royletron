@@ -1,0 +1,24 @@
+---
+import { findImage } from "~/utils/images";
+import { Picture } from "@astrojs/image/components";
+import { CollectionEntry } from "astro:content";
+export interface Props {
+  scm: CollectionEntry<"scm">;
+}
+const { scm } = Astro.props;
+const image = await findImage(scm.data.image);
+const { Content } = await scm.render();
+---
+
+<div class="prose my-6">
+  <div class="flex flex-row items-center gap-4">
+    <img class="h-24 w-24" />
+    <div>
+      <h1 class="mb-0">{scm.data.title}</h1>
+      <h3 class="mt-0">{scm.data.description}</h3>
+    </div>
+  </div>
+  <div class="prose">
+    <Content />
+  </div>
+</div>

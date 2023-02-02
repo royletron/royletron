@@ -1,0 +1,40 @@
+<svg
+  width="180"
+  height="180"
+  viewBox="0 0 180 180"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g clip-path="url(#clip0_9_10)">
+    <path d="M74.6349 11.2276L104.989 63.8022H44.281L74.6349 11.2276Z"></path>
+    <path d="M74.7077 11.2873L44.3538 63.8618L13.9999 11.2873L74.7077 11.2873Z"
+    ></path>
+    <path d="M135.197 11.2276L165.551 63.8022H104.843L135.197 11.2276Z"></path>
+    <path d="M135.197 116.257L104.843 63.6829L165.551 63.683L135.197 116.257Z"
+    ></path>
+    <path d="M74.4793 116.257L104.833 63.6829L135.187 116.257L74.4793 116.257Z"
+    ></path>
+    <path d="M104.677 168.713L74.3234 116.138L135.031 116.138L104.677 168.713Z"
+    ></path>
+    <path d="M104.522 168.713L134.876 116.138L165.23 168.713L104.522 168.713Z"
+    ></path>
+    <path d="M135.27 11.2873L104.916 63.8618L74.5619 11.2873L135.27 11.2873Z"
+    ></path>
+  </g>
+  <defs>
+    <clipPath id="clip0_9_10">
+      <rect width="180" height="180" fill="white"></rect>
+    </clipPath>
+  </defs>
+  <style>
+  path {
+    fill: #1f2937;
+    stroke: #e5e6e6;
+  }
+  @media (prefers-color-scheme:dark){
+    path {
+      fill: #a6adbb;
+      stroke: #20252e;
+    }
+  }
+  </style>
+</svg>

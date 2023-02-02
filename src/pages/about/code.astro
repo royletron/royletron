@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import SCMItem from "~/components/blog/SCMItem.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const projects = await getCollection("scm");
+---
+
+<PageLayout title="Code">
+  <section
+    class="my-32 mx-auto container w-full max-w-4xl flex-1 px-4 flex flex-col sm:flex-row gap-4 items-center"
+  >
+    <div class="prose prose-xl text-center sm:text-left sm:flex-1">
+      <h1 class="mb-0">🧙‍♀️ Code</h1>
+      <h3 class="mt-0">Get access to OSS projects</h3>
+    </div>
+  </section>
+  <div class="bg-base-200 mt-16 py-32">
+    <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+      {projects.map((p) => <SCMItem scm={p} />)}
+    </section>
+  </div>
+</PageLayout>

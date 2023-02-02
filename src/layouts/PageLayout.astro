@@ -1,0 +1,26 @@
+---
+import Layout from "~/layouts/BaseLayout.astro";
+import Header from "~/components/widgets/Header.astro";
+import type { MetaSEO } from "~/types";
+import { getHeaderData } from "~/data";
+import Footer from "~/components/widgets/Footer.astro";
+export interface Props {
+  meta?: MetaSEO;
+  title?: string;
+}
+const { meta, title } = Astro.props;
+const headerData = await getHeaderData();
+---
+
+<Layout {meta} title={title || "All things Royletron"}>
+  <slot name="header">
+    <Header {...headerData} isSticky showRssFeed showToggleTheme />
+  </slot>
+  <main class="flex-1">
+    <slot />
+  </main>
+  <slot name="footer">
+    <!-- <Footer {...footerData} /> -->
+    <Footer />
+  </slot>
+</Layout>

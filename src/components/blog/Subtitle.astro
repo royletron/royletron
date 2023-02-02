@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon";
+import { getPermalink } from "~/utils/permalinks";
+import { getFormattedDate } from "~/utils/utils";
+
+export interface Props {
+  publishDate: Date;
+  category?: string;
+}
+
+const { publishDate, category } = Astro.props;
+---
+
+<span class="text-sm">
+  <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5" />
+  <time datetime={String(publishDate)}>{getFormattedDate(publishDate)}</time>
+  {
+    category && (
+      <>
+        {" "}
+        ·
+        <a
+          class="capitalize hover:underline"
+          href={getPermalink(category, "category")}
+        >
+          {category.replaceAll("-", " ")}
+        </a>
+      </>
+    )
+  }
+</span>

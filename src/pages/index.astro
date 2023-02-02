@@ -1,0 +1,121 @@
+---
+import Photos from "~/components/common/Photos.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const data = [
+  {
+    head: "🗣 Talks!",
+    body: "I've done quite a few at various meetups & events in the UK",
+    cta: "Find out more",
+    url: "/about/talks",
+  },
+  {
+    head: "🧙‍♀️ Code",
+    body: "There are a few too many of my projects out there! Some good, some strange.",
+    cta: "Browse my repositories",
+    url: "/about/code",
+  },
+  {
+    head: "✍️ Blog",
+    body: "As well as this blog I have also written for other people and sites.",
+    cta: "See the blog",
+    url: "/blog",
+  },
+  {
+    head: "🎓 Training",
+    body: "There are lots of things I have done workshops and practical tutorials on. From modern devops to kids learning binary math!",
+    cta: "Find out more",
+    url: "/about/training",
+  },
+];
+import Sparkles from "~/components/Sparkles";
+import { getCollection } from "astro:content";
+import { findImage } from "~/utils/images";
+import { Picture } from "@astrojs/image/components";
+import Subtitle from "~/components/blog/Subtitle.astro";
+import { getPermalink } from "~/utils/permalinks";
+const allPosts = await getCollection("post");
+const featured = allPosts
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .filter((a) => a.data.featured)
+  .slice(0, 3);
+const images = await Promise.all(featured.map((a) => findImage(a.data.image)));
+---
+
+<PageLayout title="Welcome">
+  <section class="my-32 mx-auto container w-full max-w-4xl flex-1 px-4">
+    <div class="prose prose-xl">
+      <h1 class="mb-0">👋 Hi there</h1>
+      <h3 class="mt-0">I am Royletron, a software engineer</h3>
+    </div>
+  </section>
+  <Photos />
+  <div class="bg-base-300 mt-16 py-32 polka">
+    <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+      <div class="prose prose-xl">
+        <h1 class="mb-0">🤷‍♀️ Need some help?</h1>
+        <h3 class="mt-0">
+          <Sparkles client:load>Something's</Sparkles> I can help with...
+        </h3>
+      </div>
+    </section>
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-screen-2xl mx-auto gap-5 px-4"
+    >
+      {
+        data.map((d) => (
+          <div class="card card-compact w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{d.head}</h2>
+              <p>{d.body}</p>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary btn-sm">{d.cta}</button>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="my-24">
+    <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+      <div class="prose prose-xl">
+        <h1 class="mb-0">👀 From the Blog</h1>
+        <h3 class="mt-0">Most recent posts</h3>
+      </div>
+    </section>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-screen-2xl mx-auto gap-5 px-4"
+    >
+      {
+        featured.map((post, idx) => {
+          return (
+            <div class="card w-full bg-base-100 shadow-xl image-full">
+              <figure>
+                <Picture
+                  src={images[idx].src}
+                  class="absolute inset-0 object-cover w-full h-full rounded-2xl"
+                  widths={[400, 900]}
+                  sizes="(max-width: 900px) 400px, 900px"
+                  alt={post.data.title}
+                  aspectRatio="16:9"
+                />
+              </figure>
+              <div class="card-body">
+                <h2 class="card-title">{post.data.title}</h2>
+                <Subtitle
+                  publishDate={post.data.publishDate}
+                  category={post.data.category}
+                />
+                <p>{post.data.excerpt}</p>
+                <a class="link" href={getPermalink(post.slug)}>
+                  Read more
+                </a>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</PageLayout>
