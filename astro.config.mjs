@@ -10,11 +10,18 @@ import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind({
-    config: {
-      applyBaseStyles: false
-    }
-  }), image({
-    serviceEntryPoint: "@astrojs/image/sharp"
-  }), mdx(), preact()]
+  site: "https://royletron.dev",
+  base: "/",
+  integrations: [
+    tailwind({
+      config: {
+        applyBaseStyles: false,
+      },
+    }),
+    image({
+      serviceEntryPoint: "@astrojs/image/sharp",
+    }),
+    mdx(),
+    preact(),
+  ],
 });
