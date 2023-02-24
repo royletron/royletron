@@ -1,0 +1,22 @@
+---
+import Playground from "~/components/showcase/playground.astro";
+import Serene from "~/components/showcase/serene.astro";
+import Truenorth from "~/components/showcase/truenorth.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+---
+
+<PageLayout title="Showcase">
+  <section
+    class="my-16 mx-auto container w-full max-w-4xl flex-1 px-4 flex flex-col sm:flex-row gap-4 items-center"
+  >
+    <div class="prose prose-xl text-center sm:text-left sm:flex-1">
+      <h1 class="mb-0">✨ Showcase</h1>
+      <h3 class="mt-0">See some of my work!</h3>
+    </div>
+  </section>
+  <div class="bg-base-200 mt-16 py-16 flex flex-col space-y-16">
+    <Truenorth />
+    <Serene />
+    <Playground />
+  </div>
+</PageLayout>

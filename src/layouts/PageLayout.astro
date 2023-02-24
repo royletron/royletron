@@ -12,7 +12,7 @@ const { meta, title } = Astro.props;
 const headerData = await getHeaderData();
 ---
 
-<Layout {meta} title={title || "All things Royletron"}>
+<Layout {...meta} title={title || "All things Royletron"}>
   <slot name="header">
     <Header {...headerData} isSticky showRssFeed showToggleTheme />
   </slot>

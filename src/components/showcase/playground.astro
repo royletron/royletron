@@ -1,0 +1,52 @@
+---
+import ReactPlayer from "react-player";
+---
+
+<div>
+  <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+    <div class="prose prose-xl">
+      <h2 class="mb-0">Diffblue: Playground</h2>
+      <h4>AI for code in 60 seconds</h4>
+    </div>
+    <video
+      loop
+      muted
+      controls
+      class="my-12 rounded-md shadow-md w-full aspect-[6/3]"
+    >
+      <source src="/assets/video/diffblue.mp4" type="video/mp4" />
+    </video>
+  </section>
+  <section class="mt-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+    <div class="prose prose-xl">
+      <p>
+        Diffblue Cover helps developers deliver higher quality code, faster,
+        accelerating your adoption of Shift Left and DevOps.
+      </p><p>
+        As well as being massively involved in the core product, I took a small
+        team along with me on a smaller project to produce a 'playground' for
+        the core technology of the business. Basically, we hit a point where
+        only very large enterprises could work with us - because of the
+        complexity of the product - and I pushed the CEO to make something
+        lightweight and free that anyone could use to better understand the
+        technology - which was AI that generates unit tests. <b>Playground</b> was
+        the outcome of that project, and was a web app where you could paste or write
+        a Java class file and we would run a trimmed down version of our main product
+        to generate tests for it.
+      </p>
+      <p>
+        This project was <b>massively</b> technical. The core technology was a beast
+        to run, and needed lots of cores and memory, as well as full access to the
+        entire codebase in order to better understand it. So it was far from straightforward
+        to get this to run on Lambda functions with a single class file - but me
+        and my ragtag team of 3 developers did! We utilised AWS, and Lambda to keep
+        the costs manageable and 'capped', with a completely bespoke serverless backend
+        that worked with buckets and <em>AWS Cognito</em> - which was still in beta
+        but we had very close links to AWS who wanted us to take it for a spin. The
+        frontend was all <em>React</em>, with a lot of interesting animations
+        and transitons to try to keep a high <b>wow factor</b>.
+      </p>
+      <p>Sadly this project was taken offline, but I still love it.</p>
+    </div>
+  </section>
+</div>

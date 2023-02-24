@@ -22,6 +22,6 @@ export default defineConfig({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
     mdx(),
-    preact(),
+    preact({ compat: true }),
   ],
 });

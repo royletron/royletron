@@ -1,0 +1,74 @@
+---
+const rotations = [
+  "rotate-2",
+  "-rotate-2",
+  "rotate-2",
+  "rotate-2",
+  "-rotate-2",
+];
+
+import img1 from "~/assets/images/se/serene-for-developers.png";
+import img2 from "~/assets/images/se/serene-for-marketers.png";
+import img3 from "~/assets/images/se/serene-for-writers.png";
+import img4 from "~/assets/images/se/serene-for-freelancers.png";
+import { Image } from "@astrojs/image/components";
+import { Icon } from "astro-icon";
+---
+
+<div>
+  <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+    <div class="prose prose-xl">
+      <a target="_blank" href="https://sereneapp.com/">
+        <h2 class="my-0 inline-flex items-center">
+          Serene <Icon name="uil:external-link-alt" class="w-6 h-6 ml-2" />
+        </h2></a
+      >
+      <h4 class="mt-0">The macOS app for Laser-focus</h4>
+    </div>
+  </section>
+  <div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+    {
+      [img1, img2, img3, img4].map((image, imageIndex) => (
+        <div
+          class={
+            "relative aspect-[5/3] w-44 flex-none overflow-hidden rounded-xl bg-base-100 sm:w-72 sm:rounded-2xl" +
+            " " +
+            rotations[imageIndex % rotations.length]
+          }
+        >
+          <Image
+            src={image}
+            sizes="(min-width: 640px) 18rem, 11rem"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+      ))
+    }
+  </div>
+  <section class="mt-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+    <div class="prose prose-xl">
+      <p>
+        Serene is a macOS app that gives you productivity superpowers by
+        layering three proven techniques to boost focus.
+      </p><p>
+        I arrived mid-way through the team producing Serene, which was being
+        worked on by a third party. A lot of the bones were put together, an <em
+          >Electron</em
+        > app with some custom JS framework and a macOs <em>proxy</em> for managing
+        application states. My work centered around bringing more reporting, interactivity,
+        and sharing capability to the app. Firstly moving it to utilising <em
+          >React</em
+        > so that we could quickly implement standard charting libraries - as well
+        as having a web-version. I produced a backend using <em>Firebase</em> which
+        gave us real time sync across teams, which I think was a first for an Electron
+        app at that time. I also worked with the team to skill them up, and started
+        pulling all of the development inhouse
+      </p>
+      <p>
+        Serene continues to have a serious cult following, inspiring thousands
+        of people to write, program and design to the very best of their
+        abilities - with no distractions!
+      </p>
+    </div>
+  </section>
+</div>

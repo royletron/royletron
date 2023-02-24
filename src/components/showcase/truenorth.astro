@@ -1,0 +1,65 @@
+---
+const rotations = [
+  "rotate-2",
+  "-rotate-2",
+  "rotate-2",
+  "rotate-2",
+  "-rotate-2",
+];
+
+import img1 from "~/assets/images/tn/Hero-Source-3-Alt.png";
+import img2 from "~/assets/images/tn/Hero-Source-1_3204b3765.png";
+import img3 from "~/assets/images/tn/Slide-Source-2.jpeg";
+import img4 from "~/assets/images/tn/Slide-Source-3.jpeg";
+import { Image } from "@astrojs/image/components";
+import { Icon } from "astro-icon";
+---
+
+<div>
+  <section class="mb-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+    <div class="prose prose-xl">
+      <a target="_blank" href="https://truenorth.io">
+        <h2 class="my-0 inline-flex items-center">
+          TrueNorth <Icon name="uil:external-link-alt" class="w-6 h-6 ml-2" />
+        </h2></a
+      >
+      <h4 class="mt-0">Growth Marketing Platform</h4>
+    </div>
+  </section>
+  <div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+    {
+      [img1, img2, img3, img4].map((image, imageIndex) => (
+        <div
+          class={
+            "relative aspect-[4/3] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl" +
+            " " +
+            rotations[imageIndex % rotations.length]
+          }
+        >
+          <Image
+            src={image}
+            sizes="(min-width: 640px) 18rem, 11rem"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+      ))
+    }
+  </div>
+  <section class="mt-12 flex-1 px-4 mx-auto container w-full max-w-4xl">
+    <div class="prose prose-xl">
+      <p>
+        TrueNorth is the only <b>growth marketing platform</b> to plan and track
+        marketing in one place, with everything and everyone focused on the goal.
+      </p><p>
+        Built from the ground up using <b>Next</b>, <b>Apollo</b>, <b>GraphQL</b
+        > and
+        <b>Postgres</b> this high performance marketing SaaS was a really meaty project,
+        and a lot of fun to bring to life. There is a lot going on behind the scenes
+        to keep track of campaigns across lots of different providers like <em
+          >Google</em
+        >, <em>Facebook</em> and <em>LinkedIn</em> ad platforms, as well as forecasting,
+        planning and reporting tools.
+      </p>
+    </div>
+  </section>
+</div>

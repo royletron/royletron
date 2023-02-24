@@ -22,6 +22,10 @@ export async function getCategories() {
 export const headerData = {
   links: [
     {
+      text: "Showcase",
+      href: getPermalink("/showcase"),
+    },
+    {
       text: "About",
       links: [
         {

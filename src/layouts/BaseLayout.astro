@@ -15,8 +15,7 @@ const { meta = {}, title } = Astro.props;
 <!DOCTYPE html>
 <html class="2xl:text-[20px] h-full">
   <head>
-    <MetaTags {...meta} />
-    <title>Royletron.dev ~ {title}</title>
+    <MetaTags {...meta} title={title} />
   </head>
 
   <body
