@@ -1,0 +1,27 @@
+---
+import Logo from "~/components/Logo.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getHomePermalink } from "~/utils/permalinks";
+import Canvas from "~/components/dev/canvas";
+import ToggleTheme from "~/components/common/ToggleTheme.astro";
+---
+
+<BaseLayout title="Welcome">
+  <div class="flex items-center absolute top-2 left-5 right-5 z-50 gap-8">
+    <a class="flex items-center" href={getHomePermalink()}>
+      <Logo />
+    </a>
+    <h1 class="flex-1 text-xl font-bold">Doodles</h1>
+    <ToggleTheme class={""} />
+  </div>
+  <div
+    class="absolute inset-5 top-16 bg-base-100 rounded-lg border-4 border-base-200"
+  >
+    <div class="absolute inset-0 flex items-center justify-center">
+      <h2 class="text-xl opacity-25">
+        Draw something here in one <b>single</b> stroke
+      </h2>
+    </div>
+    <Canvas client:only />
+  </div>
+</BaseLayout>

@@ -1,5 +1,4 @@
-import { Fragment } from "preact";
-import { useState, useEffect, useRef, useCallback } from "preact/hooks";
+import { Fragment, useState, useEffect, useRef, useCallback } from "react";
 
 const range = (count) => new Array(count).fill(undefined);
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;

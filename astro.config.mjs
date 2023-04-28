@@ -6,7 +6,7 @@ import mdx from "@astrojs/mdx";
 import image from "@astrojs/image";
 
 // https://astro.build/config
-import preact from "@astrojs/preact";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,6 +22,6 @@ export default defineConfig({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
     mdx(),
-    preact({ compat: true }),
+    react(),
   ],
 });
