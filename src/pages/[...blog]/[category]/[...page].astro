@@ -12,7 +12,7 @@ export async function getStaticPaths({ paginate }) {
     typeof post.category === "string" &&
       categories.add(post.category.toLowerCase());
   });
-  return Array.from(categories).map((category: string) =>
+  return Array.from(categories).flatMap((category: string) =>
     paginate(
       posts.filter(
         (post) =>
@@ -33,6 +33,7 @@ const meta = {
     currentPage > 1 ? ` — Page ${currentPage}` : ""
   }`,
 };
+import Sparkles from "~/components/Sparkles";
 ---
 
 <Layout meta={meta} title={category.replaceAll("-", " ")}>
@@ -40,7 +41,7 @@ const meta = {
     class="px-6 sm:px-6 py-4 sm:py-6 lg:py-10 mx-auto max-w-4xl text-base-content"
   >
     <Headline>
-      <span class="capitalize">{category.replaceAll("-", " ")}</span>
+      <span class="capitalize"><Sparkles load:client>{category.replaceAll("-", " ")}</Sparkles></span>
     </Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />

@@ -6,12 +6,14 @@ import { getCanonical, getPermalink } from "~/utils/permalinks";
 import { fetchPosts } from "~/utils/blog";
 import { findImage } from "~/utils/images";
 export async function getStaticPaths() {
-  return (await fetchPosts()).map((post) => ({
+  const posts = await fetchPosts()
+  const pages = posts.map((post) => ({
     params: {
       blog: post.permalink,
     },
     props: { post },
   }));
+  return pages
 }
 const { post } = Astro.props;
 const url = getCanonical(getPermalink(post.permalink, "post"));
@@ -19,7 +21,7 @@ const meta = {
   title: post.title,
   description: post.description,
   canonical: post.canonical || url,
-  image: await findImage(post.image),
+  image: post.image,
   ogType: "article",
 };
 ---

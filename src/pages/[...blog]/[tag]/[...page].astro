@@ -12,7 +12,7 @@ export async function getStaticPaths({ paginate }) {
     Array.isArray(post.tags) &&
       post.tags.map((tag) => tags.add(tag.toLowerCase()));
   });
-  return Array.from(tags).map((tag: string) =>
+  return Array.from(tags).flatMap((tag: string) =>
     paginate(
       posts.filter(
         (post) =>
@@ -34,13 +34,14 @@ const meta = {
     currentPage > 1 ? ` — Page ${currentPage} ` : ""
   }`,
 };
+import Sparkles from "~/components/Sparkles";
 ---
 
 <Layout meta={meta} title={`Tag: ${tag}`}>
   <section
     class="px-6 sm:px-6 py-4 sm:py-6 lg:py-10 mx-auto max-w-4xl text-base-content"
   >
-    <Headline>Tag: {tag}</Headline>
+    <Headline>Tag <Sparkles client:load>{tag}</Sparkles></Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>

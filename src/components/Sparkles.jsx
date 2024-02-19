@@ -94,7 +94,7 @@ const Sparkles = ({ color = DEFAULT_COLOR, children, ...delegated }) => {
       setSparkles(nextSparkles);
     },
     prefersReducedMotion ? null : 300,
-    prefersReducedMotion ? null : 900
+    prefersReducedMotion ? null : 1900
   );
   return (
     <Fragment>

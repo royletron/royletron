@@ -12,15 +12,11 @@ tags:
 canonical: https://royletron.dev/2022-02-28-wrestly
 ---
 
-import { Image } from "@astrojs/image/components";
-import request from "~/assets/images/screens/Wrestly-api-useful.png";
-import listing from "~/assets/images/screens/Wrestly-List.png";
-
 Typically, when doing this sort of work, I've always had this habit of running a dummy server that logs out requests and blindly responds to them. This helps me see what is going on, and what external things are either redirecting or posting directly to our APIs. Up to now I have never really done much more than run a server where all requests are `console.log`'ed and `res.send('ok')`'ed, but this time around added an SQLite backed so I could see request history, and a nice front end so the payloads were readable. [So here is _wrestly_](https://npmjs.com/wrestly)
 
 **Wrestly** is a simple http server that will accept any requests and store their `body`, `headers` and `cookies` as well as any `query` params into a SQLite DB. It allows you to list the requests already made, and look at each one in detail. We don't really focus on the response, it just gives you a nice `200` and whatever the contents of the original request was. Routes that go via `/api/**/*` paths will always respond with JSON - which was useful for us - otherwise it just shows Wrestly's own webpage with the contents of the original request. It'll parse any `JSON` or `x-www-form-urlencoded` bodies included with requests, and it'll also record the `method` and `url`.
 
-<Image src={listing} alt="Lists of requests that have come in" />
+![Lists of requests that have come in](../../assets/images/screens/Wrestly-List.png)
 
 You can access the list view at `http://localhost:6789/_x` and it should show all recorded requests to date. _Note_ that by default requests are stored in memory, so if you quit `wrestly` and start again it'll clear saved requests. You can override this by setting a designated `sqlite` file with the `-d` eg.
 
@@ -30,6 +26,6 @@ wrestly -d ./requests.sqlite
 
 <figcaption align="center">View of a single request</figcaption>
 
-<Image src={request} alt="Details of a single request" />
+![Details of a single request](../../assets/images/screens/Wrestly-api-useful.png)
 
 Combine this with something like [`ngrok`](https://ngrok.com) and you have a pretty whizzy environment for working on external webhooked services etc.

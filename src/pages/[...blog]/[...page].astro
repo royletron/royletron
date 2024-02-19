@@ -7,10 +7,13 @@ import { fetchPosts } from "~/utils/blog";
 import { BLOG_BASE } from "~/utils/permalinks";
 
 export async function getStaticPaths({ paginate }) {
-  return paginate(await fetchPosts(), {
+  const posts = await fetchPosts()
+  const paths = paginate(posts, {
     pageSize: 10,
     params: { blog: BLOG_BASE || undefined },
   });
+  return paths
+  // return {}
 }
 const { page } = Astro.props;
 const currentPage = page.currentPage ?? 1;

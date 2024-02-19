@@ -46,8 +46,8 @@ const getNormalizedPost = async (
   const publishDate = new Date(rawPublishDate);
   const category = rawCategory ? cleanSlug(rawCategory) : undefined;
   const tags = rawTags.map((tag: string) => cleanSlug(tag));
-
-  return {
+  data.image
+  return { 
     id: id,
     slug: slug,
 
