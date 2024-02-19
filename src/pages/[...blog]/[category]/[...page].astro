@@ -6,7 +6,7 @@ import Pagination from "~/components/blog/Pagination.astro";
 import { fetchPosts } from "~/utils/blog";
 import { CATEGORY_BASE } from "~/utils/permalinks";
 export async function getStaticPaths({ paginate }) {
-  const posts = await fetchPosts();
+  const posts = (await fetchPosts()).filter((post) => post.published);
   const categories = new Set();
   posts.map((post) => {
     typeof post.category === "string" &&

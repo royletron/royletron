@@ -157,16 +157,16 @@ declare module 'astro:content' {
   collection: "post";
   data: InferEntrySchema<"post">
 } & { render(): Render[".mdx"] };
-"2023-02-19-too-much-bg3.mdx": {
-	id: "2023-02-19-too-much-bg3.mdx";
-  slug: "2023-02-19-too-much-bg3";
+"2024-01-01-games-i-have-loved.mdx": {
+	id: "2024-01-01-games-i-have-loved.mdx";
+  slug: "2024-01-01-games-i-have-loved";
   body: string;
   collection: "post";
   data: InferEntrySchema<"post">
 } & { render(): Render[".mdx"] };
-"2024-01-01-games-i-have-loved.mdx": {
-	id: "2024-01-01-games-i-have-loved.mdx";
-  slug: "2024-01-01-games-i-have-loved";
+"2024-02-19-too-much-bg3.mdx": {
+	id: "2024-02-19-too-much-bg3.mdx";
+  slug: "2024-02-19-too-much-bg3";
   body: string;
   collection: "post";
   data: InferEntrySchema<"post">

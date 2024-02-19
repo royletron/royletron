@@ -1,7 +1,8 @@
 export interface Post {
   id: string;
   slug: string;
-
+  
+  published: boolean;
   publishDate: Date;
   title: string;
   description?: string;

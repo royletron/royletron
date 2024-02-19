@@ -7,7 +7,7 @@ const post = defineCollection({
     image: image(),
     featured: z.boolean().default(false),
     canonical: z.string().url().optional(),
-
+    published: z.boolean().default(true),
     publishDate: z.date(),
     draft: z.boolean().optional(),
 

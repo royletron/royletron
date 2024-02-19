@@ -16,7 +16,7 @@ console.log(post)
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
   <article>
-    <header class={post.image ? "" : ""}>
+    <header>
       <div
         class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center text-base-content"
       >
@@ -59,14 +59,12 @@ console.log(post)
         post.image ? (
           <Picture
             src={post.image}
-            class="max-w-full lg:max-w-6xl mx-auto mb-6 sm:rounded-md bg-base-300"
+            class="max-w-full lg:max-w-6xl mx-auto mb-6 md:rounded-md bg-base-300"
             widths={[400, 900]}
             sizes="(max-width: 900px) 400px, 900px"
             alt={post.description || ""}
             loading="eager"
             aspectRatio={16 / 9}
-            width={900}
-            height={506}
             background={"aliceblue"}
           />
         ) : (

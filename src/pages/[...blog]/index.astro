@@ -6,7 +6,7 @@ import { getCanonical, getPermalink } from "~/utils/permalinks";
 import { fetchPosts } from "~/utils/blog";
 import { findImage } from "~/utils/images";
 export async function getStaticPaths() {
-  const posts = await fetchPosts()
+  const posts = (await fetchPosts()).filter((post) => post.published);
   const pages = posts.map((post) => ({
     params: {
       blog: post.permalink,
