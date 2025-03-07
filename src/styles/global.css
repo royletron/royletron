@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+@plugin "@tailwindcss/typography";
 
 .tldraw {
   position: fixed;
@@ -25,7 +27,7 @@
 }
 
 .scroll {
-  @apply bg-base-200 bg-opacity-50 backdrop-blur-sm;
+  @apply bg-base-200 backdrop-blur-sm;
 }
 
 .commento-root {
@@ -33,12 +35,12 @@
 }
 
 .commento-root *:not(button) {
-  @apply text-base-content !important;
-  @apply text-lg !important;
+  @apply text-base-content;
+  @apply text-lg;
 }
 
 .commento-markdown-button-root {
-  @apply text-sm !important;
+  @apply text-sm;
 }
 
 #commento {
@@ -56,16 +58,16 @@
 }
 
 .commento-name {
-  @apply text-base-content !important;
+  @apply text-base-content;
 }
 
 #commento-comments-area {
-  @apply text-base-content !important;
+  @apply text-base-content;
 }
 
 .commento-card {
   @apply bg-base-100;
-  @apply border-base-300 border p-4 rounded-md my-6 !important;
+  @apply border-base-300 border p-4 rounded-md my-6;
 }
 
 .commento-body {
@@ -77,16 +79,16 @@
 }
 
 .commento-github-button {
-  @apply btn w-auto !important;
+  @apply btn w-auto;
 }
 
 .commento-gitlab-button {
-  @apply btn btn-warning w-auto !important;
+  @apply btn btn-warning w-auto;
 }
 
 #commento-login-box {
   @apply bg-base-300;
-  @apply text-base-content !important;
+  @apply text-base-content;
 }
 
 .commento-root
@@ -97,7 +99,7 @@
   .commento-login-box-container
   .commento-login-box
   .commento-login-box-close:before {
-  @apply bg-base-content !important;
+  @apply bg-base-content;
 }
 
 .commento-root
@@ -117,21 +119,21 @@
   .commento-email-container
   .commento-email
   .commento-email-button {
-  @apply bg-base-200 !important;
+  @apply bg-base-200;
   border-left: none;
 }
 
 #commento-textarea-super-container-root {
-  @apply mb-10 !important;
+  @apply mb-10;
 }
 
 .commento-sort-policy-buttons-container {
-  @apply mb-6 !important;
+  @apply mb-6;
 }
 
 .commento-subtitle *:not(button),
 .commento-root .commento-permalink {
-  @apply text-sm !important;
+  @apply text-sm;
 }
 
 .commento-name {
