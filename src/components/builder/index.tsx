@@ -1,5 +1,6 @@
 import NQImage from "./NQ/image";
 import { choices } from "./NQ/options";
+import type { ChoiceWithStyle } from "./NQ/options";
 
 import { useState } from "react";
 
@@ -14,13 +15,30 @@ export default function Builder() {
     )
   );
 
+  const selectedStyles = Object.fromEntries(
+    Object.keys(selectedChoices).map((key) => {
+      const choice = choices[key];
+      const selectedChoice = choice.options.find(
+        (option) => option.value === selectedChoices[key]
+      );
+      return [
+        key,
+        //@ts-ignore
+        selectedChoice?.style,
+      ];
+    })
+  );
+
+  console.log(selectedStyles);
+
   return (
     <div className="flex w-full max-w-8xl m-auto h-full">
       <div className="w-1/3 bg-slate-500 overflow-hidden max-h-full flex items-center justify-center">
         <NQImage
-          bodyColour={selectedChoices.bodyColour?.toString()}
-          fretboardWood={selectedChoices.fretboardWood?.toString()}
-          neckWood={selectedChoices.neckWood?.toString()}
+          body={selectedStyles.bodyColour}
+          fretboardWood={selectedStyles.fretboardWood}
+          neckWood={selectedStyles.neckWood}
+          pickGuard={selectedStyles.pickGuard}
         />
       </div>
       <div className="w-2/3 bg-slate-400">
