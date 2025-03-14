@@ -66,11 +66,11 @@ export default function Options() {
   return (
     <div className="flex flex-col gap-2">
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
-        <input type="radio" name="neck-choices" defaultChecked />
+        <input type="radio" name="choices" defaultChecked />
         <div className="collapse-title font-semibold">Step 1. Neck</div>
         <div className="collapse-content flex flex-col gap-3">
           <label className="w-full select">
-            <span className="label">Wood</span>
+            <span className="label w-32">Wood</span>
             <select
               {...register("neckWood")}
               onChange={(e) => {
@@ -94,7 +94,6 @@ export default function Options() {
                     break;
                 }
               }}
-              className="select select-bordered w-full"
             >
               <option disabled>Select wood for neck</option>
               <option value={NeckWoodTextures.MAPLE}>Maple</option>
@@ -105,46 +104,40 @@ export default function Options() {
             </select>
           </label>
           <label className="w-full select">
-            <span className="label">Fretboard</span>
-            <select
-              {...register("fretboardWood")}
-              className="select select-bordered w-full"
-            >
+            <span className="label w-32">Fretboard</span>
+            <select {...register("fretboardWood")}>
               <option disabled>Select wood for fretboard</option>
               {neckWood === NeckWoodTextures.ROAST_MAPLE && (
                 <>
-                  <option value={FretboardWoodTextures.ROSEWOOD}>
-                    Rosewood
-                  </option>
                   <option value={FretboardWoodTextures.ROAST_MAPLE}>
                     Roasted Maple
+                  </option>
+                  <option value={FretboardWoodTextures.ROSEWOOD}>
+                    Rosewood
                   </option>
                 </>
               )}
               {neckWood === NeckWoodTextures.FLAME_ROAST_MAPLE && (
                 <>
-                  <option value={FretboardWoodTextures.ROSEWOOD}>
-                    Rosewood
-                  </option>
                   <option value={FretboardWoodTextures.FLAME_ROAST_MAPLE}>
                     Flame Roasted Maple
+                  </option>
+                  <option value={FretboardWoodTextures.ROSEWOOD}>
+                    Rosewood
                   </option>
                 </>
               )}
               {neckWood === NeckWoodTextures.MAPLE && (
                 <>
-                  <option value={FretboardWoodTextures.EBONY}>Ebony</option>
                   <option value={FretboardWoodTextures.MAPLE}>Maple</option>
+                  <option value={FretboardWoodTextures.EBONY}>Ebony</option>
                 </>
               )}
             </select>
           </label>
           <label className="w-full select">
-            <span className="label">Length</span>
-            <select
-              {...register("neckLength")}
-              className="select select-bordered w-full"
-            >
+            <span className="label w-32">Length</span>
+            <select {...register("neckLength")}>
               <option disabled>Length of neck</option>
               <option value={24.5}>24.5 cm</option>
               <option value={25.5}>25.5 cm</option>
@@ -154,15 +147,12 @@ export default function Options() {
       </div>
 
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
-        <input type="radio" name="neck-choices" />
+        <input type="radio" name="choices" />
         <div className="collapse-title font-semibold">Step 2. Body</div>
         <div className="collapse-content flex flex-col gap-3">
           <label className="w-full select">
-            <span className="label">Wood</span>
-            <select
-              {...register("bodyWood")}
-              className="select select-bordered w-full"
-            >
+            <span className="label w-32">Wood</span>
+            <select {...register("bodyWood")}>
               <option disabled>Select wood for body</option>
               <option value={BodyWoodTextures.KORINA}>Korina</option>
               <option value={BodyWoodTextures.SWAMP_ASH}>Swamp Ash</option>
@@ -172,11 +162,8 @@ export default function Options() {
             </select>
           </label>
           <label className="w-full select">
-            <span className="label">Paint</span>
-            <select
-              {...register("bodyPaint")}
-              className="select select-bordered w-full"
-            >
+            <span className="label w-32">Paint</span>
+            <select {...register("bodyPaint")}>
               <option disabled>Select paint for body</option>
               <option value={undefined}>Natural</option>
               <option value={PaintColors.ConfettiPink}>Confetti Pink</option>
@@ -190,26 +177,20 @@ export default function Options() {
         </div>
       </div>
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
-        <input type="radio" name="electrics" />
+        <input type="radio" name="choices" />
         <div className="collapse-title font-semibold">Step 3. Electrics</div>
         <div className="collapse-content flex flex-col gap-3">
           <label className="w-full select">
-            <span className="label">Neck Pickup</span>
-            <select
-              {...register("pickupA")}
-              className="select select-bordered w-full"
-            >
+            <span className="label w-32">Neck Pickup</span>
+            <select {...register("pickupA")}>
               <option disabled>Select neck pickup</option>
               <option value={PickupType.SINGLE}>Single</option>
               <option value={PickupType.DOUBLE}>Double</option>
             </select>
           </label>
           <label className="w-full select">
-            <span className="label">Bridge Pickup</span>
-            <select
-              {...register("pickupC")}
-              className="select select-bordered w-full"
-            >
+            <span className="label w-32">Bridge Pickup</span>
+            <select {...register("pickupC")}>
               <option disabled>Select bridge pickup</option>
               <option value={PickupType.SINGLE}>Single</option>
               <option value={PickupType.DOUBLE}>Double</option>
