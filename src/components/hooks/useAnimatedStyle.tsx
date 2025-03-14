@@ -12,12 +12,12 @@ export default function useAnimatedStyle(style: React.CSSProperties) {
   useEffect(() => {
     const newStyle = { ...style };
     for (const key in props) {
-      if (!newStyle[key]) {
+      if (!newStyle.hasOwnProperty(key)) {
         newStyle[key] = "";
       }
     }
     api.start({
-      to: newStyle,
+      to: style,
     });
   }, [style, api]);
 

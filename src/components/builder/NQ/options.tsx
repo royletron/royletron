@@ -174,6 +174,23 @@ export default function Options() {
               <option value={PaintColors.FoolsGold}>Fools Gold</option>
             </select>
           </label>
+
+          <label className="w-full">
+            <span className="label text-sm w-32 pl-4">Hollow Body</span>
+            <input
+              type="checkbox"
+              className="toggle"
+              {...register("hollowBody")}
+            />
+          </label>
+          <label className="w-full">
+            <span className="label text-sm w-32 pl-4">German Carve</span>
+            <input
+              type="checkbox"
+              className="toggle"
+              {...register("germanCarve")}
+            />
+          </label>
         </div>
       </div>
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
