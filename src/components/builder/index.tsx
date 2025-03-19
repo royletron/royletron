@@ -16,6 +16,7 @@ import {
   FretboardWoodTextures,
   NeckWoodTextures,
 } from "./Textures/woods";
+import { PickguardTexture } from "./Textures/guards";
 
 export default function Builder() {
   const methods = useForm<NQProps>({
@@ -30,6 +31,7 @@ export default function Builder() {
       pickupC: PickupType.DOUBLE,
       hollowBody: false,
       germanCarve: false,
+      pickguard: PickguardTexture.RED_TORTOISESHELL,
     },
   });
 

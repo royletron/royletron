@@ -1,42 +1,32 @@
 import { useFormContext } from "react-hook-form";
 import {
-  BodyWoodTextures,
-  FretboardWoodTextures,
   NeckWoodTextures,
   woods,
   WoodsDef,
+  WoodTextures,
 } from "../Textures/woods";
 import { paintColors } from "../Textures/paints";
-import { AnimatedTexture, Texture } from "../Textures";
+import { AnimatedTexture } from "../Textures";
 import Pickup, { PickupType } from "./pickups";
 import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
 import { animated } from "@react-spring/web";
-
-export type NQProps = {
-  type: "rocket" | "nq";
-  bodyWood: string;
-  bodyPaint?: string;
-  neckWood: string;
-  fretboardWood: string;
-  pickupA: PickupType;
-  pickupB?: PickupType;
-  pickupC: PickupType;
-  hollowBody: boolean;
-  germanCarve: boolean;
-};
+import { OthersDef, PickguardTexture } from "../Textures/guards";
+import { NQType, type NQProps } from "./options";
 
 export const defaultProps: NQProps = {
-  type: "rocket",
-  bodyWood: "maple",
-  neckWood: "maple",
-  fretboardWood: "rosewood",
+  type: NQType.NQ,
+  bodyWood: WoodTextures.KORINA,
+  neckWood: NeckWoodTextures.MAPLE,
+  fretboardWood: WoodTextures.ROSEWOOD,
   pickupA: PickupType.DOUBLE,
   pickupC: PickupType.SINGLE,
   hollowBody: false,
   germanCarve: false,
+  neckLength: 24.5,
+  pickguard: PickguardTexture.RED_TORTOISESHELL,
 };
 
-export default function Raw(props: NQProps) {
+export default function Raw() {
   const { watch } = useFormContext();
   const bodyWood = watch("bodyWood");
   const neckWood = watch("neckWood");
@@ -50,6 +40,8 @@ export default function Raw(props: NQProps) {
   const germanCarve = watch("germanCarve");
   const bodyPaintColor = bodyPaint ? paintColors[bodyPaint]?.fill : undefined;
 
+  const pickguard = watch("pickguard");
+
   const hollowBodyStyle = useAnimatedStyle({ opacity: hollowBody ? 1 : 0 });
   const germanCarveStyle = useAnimatedStyle({ opacity: germanCarve ? 1 : 0 });
 
@@ -62,6 +54,7 @@ export default function Raw(props: NQProps) {
     >
       <defs>
         <WoodsDef />
+        <OthersDef />
       </defs>
       <g id="NQ FINAL">
         <g id="BODY">
@@ -228,13 +221,13 @@ export default function Raw(props: NQProps) {
               />
             </mask>
             <g mask="url(#mask3_9_7)">
-              <rect
-                id="Rectangle 46"
+              <AnimatedTexture
                 x="138"
                 y="911"
                 width="273"
                 height="415"
-                fill="#FF9797"
+                fill="black"
+                filter={pickguard}
               />
               <path
                 id="Vector 3"
@@ -410,13 +403,13 @@ export default function Raw(props: NQProps) {
               />
             </mask>
             <g mask="url(#mask5_9_7)">
-              <rect
-                id="Rectangle 47"
+              <AnimatedTexture
                 x="287"
                 y="63.9001"
                 width="62"
                 height="216"
-                fill="#FF9797"
+                fill="black"
+                filter={pickguard}
               />
               <path
                 id="Vector_7"
@@ -1267,7 +1260,7 @@ export default function Raw(props: NQProps) {
               y="406"
               width="95"
               height="506"
-              fill="#C6FFC4"
+              fill="#F1F1F1"
             />
             <g id="DOTS_2">
               <circle
@@ -1416,13 +1409,22 @@ export default function Raw(props: NQProps) {
               </mask>
               <g mask="url(#mask9_9_7)">
                 <rect
-                  id="PICKGUARD MATERIAL"
                   x="333.713"
                   y="1382.18"
                   width="241.715"
                   height="91.8915"
                   transform="rotate(-89.938 333.713 1382.18)"
-                  fill="#FF9797"
+                  fill={"black"}
+                  filter={pickguard}
+                />
+                <AnimatedTexture
+                  x="333.713"
+                  y="1382.18"
+                  width="241.715"
+                  height="91.8915"
+                  transform="rotate(-89.938 333.713 1382.18)"
+                  fill={"black"}
+                  filter={pickguard}
                 />
                 <g id="SCREW_5">
                   <path

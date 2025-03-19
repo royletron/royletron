@@ -14,6 +14,7 @@ import {
 } from "../Textures/woods";
 import { useFormContext } from "react-hook-form";
 import { PaintColors } from "../Textures/paints";
+import { PickguardTexture } from "../Textures/guards";
 
 export enum PickupType {
   "SINGLE" = "single",
@@ -37,6 +38,7 @@ export type NQProps = {
   pickupC: PickupType;
   hollowBody: boolean;
   germanCarve: boolean;
+  pickguard: PickguardTexture;
 };
 
 const NQTypeEnum = nativeEnum(NQType);
@@ -45,6 +47,7 @@ const BodyWoodEnum = nativeEnum(BodyWoodTextures);
 const NeckWoodEnum = nativeEnum(NeckWoodTextures);
 const FretboardWoodEnum = nativeEnum(FretboardWoodTextures);
 const PaintColorEnum = nativeEnum(PaintColors);
+const PickguardEnum = nativeEnum(PickguardTexture);
 
 export const NQFormSchema = object({
   type: NQTypeEnum.default(NQType.NQ),
@@ -58,6 +61,7 @@ export const NQFormSchema = object({
   pickupC: PickupTypeEnum.default(PickupType.SINGLE),
   hollowBody: boolean().default(false),
   germanCarve: boolean().default(false),
+  pickguard: PickguardEnum.default(PickguardTexture.RED_TORTOISESHELL),
 });
 
 export default function Options() {
@@ -174,7 +178,31 @@ export default function Options() {
               <option value={PaintColors.FoolsGold}>Fools Gold</option>
             </select>
           </label>
-
+          <label className="w-full select">
+            <span className="label w-32">Pickguard</span>
+            <select {...register("pickguard")}>
+              <option disabled>Select pickguard</option>
+              <option value={PickguardTexture.BWB}>BWB</option>
+              <option value={PickguardTexture.BLACK_SINGLEPLY}>
+                Black single ply
+              </option>
+              <option value={PickguardTexture.BROWN_TORTOISESHELL}>
+                Brown Tortoiseshell
+              </option>
+              <option value={PickguardTexture.RED_TORTOISESHELL}>
+                Red Tortoiseshell
+              </option>
+              <option value={PickguardTexture.CREAM_SINGLEPLY}>
+                Cream single ply
+              </option>
+              <option value={PickguardTexture.VINTAGE_WHITE_SINGLEPLY}>
+                Vintage white
+              </option>
+              <option value={PickguardTexture.WHITE_SINGLEPLY}>
+                White single ply
+              </option>
+            </select>
+          </label>
           <label className="w-full">
             <span className="label text-sm w-32 pl-4">Hollow Body</span>
             <input

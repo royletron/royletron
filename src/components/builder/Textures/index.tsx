@@ -8,59 +8,32 @@ import {
 import { useEffect } from "react";
 import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
 
-export type TextureProps = {
-  x: string;
-  y: string;
-  width: string;
-  height: string;
+export type TextureProps = React.SVGProps<SVGRectElement> & {
   fill: string;
   filter: string;
 };
 
-export const Texture = ({
-  x,
-  y,
-  width,
-  height,
-  fill,
-  filter,
-}: TextureProps) => {
+export const Texture = ({ fill, filter, ...props }: TextureProps) => {
   return (
     <>
-      <rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={fill}
-        filter={`url(#${filter})`}
-      />
+      <rect fill={fill} filter={`url(#${filter})`} {...props} />
     </>
   );
 };
 
-const AnimatedRect = ({ x, y, width, height, fill, filter }: TextureProps) => {
+const AnimatedRect = ({ fill, filter, ...props }: TextureProps) => {
   const styles = useAnimatedStyle({ fill });
   return (
     <animated.rect
-      x={x}
-      y={y}
-      width={width}
-      height={height}
       filter={`url(#${filter})`}
       style={styles}
+      {...props}
+      ref={null}
     ></animated.rect>
   );
 };
 
-export const AnimatedTexture = ({
-  x,
-  y,
-  width,
-  height,
-  fill,
-  filter,
-}: TextureProps) => {
+export const AnimatedTexture = ({ fill, filter, ...props }: TextureProps) => {
   const transRef = useSpringRef();
   const [transitions, api] = useTransition(filter, () => ({
     from: { opacity: 0, fill },
@@ -75,14 +48,7 @@ export const AnimatedTexture = ({
 
   return transitions((style, item) => (
     <animated.g opacity={style.opacity}>
-      <AnimatedRect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={fill}
-        filter={item}
-      />
+      <AnimatedRect fill={fill} filter={item} {...props} />
     </animated.g>
   ));
 };
