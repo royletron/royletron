@@ -22,7 +22,7 @@ export default function Builder() {
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
     defaultValues: {
-      type: NQType.NQ,
+      type: NQType.STAGE,
       neckLength: 24.5,
       bodyWood: BodyWoodTextures.KORINA,
       neckWood: NeckWoodTextures.MAPLE,

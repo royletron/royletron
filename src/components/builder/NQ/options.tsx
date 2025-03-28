@@ -15,6 +15,7 @@ import {
 import { useFormContext } from "react-hook-form";
 import { PaintColors } from "../Textures/paints";
 import { PickguardTexture } from "../Textures/guards";
+import { useEffect } from "react";
 
 export enum PickupType {
   "SINGLE" = "single",
@@ -23,7 +24,8 @@ export enum PickupType {
 
 export enum NQType {
   "ROCKET" = "rocket",
-  "NQ" = "nq",
+  "STAGE" = "stage",
+  "STANDARD" = "standard",
 }
 
 export type NQProps = {
@@ -31,6 +33,7 @@ export type NQProps = {
   neckLength: 24.5 | 25.5;
   bodyWood: BodyWoodTextures;
   bodyPaint?: PaintColors;
+  headstockPaint: boolean;
   neckWood: NeckWoodTextures;
   fretboardWood: FretboardWoodTextures;
   pickupA: PickupType;
@@ -50,10 +53,11 @@ const PaintColorEnum = nativeEnum(PaintColors);
 const PickguardEnum = nativeEnum(PickguardTexture);
 
 export const NQFormSchema = object({
-  type: NQTypeEnum.default(NQType.NQ),
+  type: NQTypeEnum.default(NQType.STAGE),
   neckLength: union([literal(24.5), literal(25.5)]),
   bodyWood: BodyWoodEnum.default(BodyWoodTextures.KORINA),
   bodyPaint: PaintColorEnum.optional(),
+  headstockPaint: boolean().default(false),
   neckWood: NeckWoodEnum.default(NeckWoodTextures.ROAST_MAPLE),
   fretboardWood: FretboardWoodEnum.default(FretboardWoodTextures.ROSEWOOD),
   pickupA: PickupTypeEnum.default(PickupType.SINGLE),
@@ -67,6 +71,15 @@ export const NQFormSchema = object({
 export default function Options() {
   const { register, setValue, watch } = useFormContext();
   const neckWood = watch("neckWood");
+  const bodyPaint = watch("bodyPaint");
+  const bodyPainted =
+    bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
+
+  useEffect(() => {
+    if (!bodyPainted) {
+      setValue("headstockPaint", false);
+    }
+  }, [bodyPainted]);
   return (
     <div className="flex flex-col gap-2">
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
@@ -155,6 +168,15 @@ export default function Options() {
         <div className="collapse-title font-semibold">Step 2. Body</div>
         <div className="collapse-content flex flex-col gap-3">
           <label className="w-full select">
+            <span className="label w-32">Type</span>
+            <select {...register("type")}>
+              <option disabled>Type of shape</option>
+              <option value={NQType.STAGE}>Stage</option>
+              <option value={NQType.ROCKET}>Rocket</option>
+              <option value={NQType.STANDARD}>Standard</option>
+            </select>
+          </label>
+          <label className="w-full select">
             <span className="label w-32">Wood</span>
             <select {...register("bodyWood")}>
               <option disabled>Select wood for body</option>
@@ -204,7 +226,16 @@ export default function Options() {
             </select>
           </label>
           <label className="w-full">
-            <span className="label text-sm w-32 pl-4">Hollow Body</span>
+            <span className="label text-sm w-36 pl-4">Painted Headstock</span>
+            <input
+              type="checkbox"
+              className="toggle"
+              disabled={!bodyPainted}
+              {...register("headstockPaint")}
+            />
+          </label>
+          <label className="w-full">
+            <span className="label text-sm w-36 pl-4">Hollow Body</span>
             <input
               type="checkbox"
               className="toggle"
@@ -212,7 +243,7 @@ export default function Options() {
             />
           </label>
           <label className="w-full">
-            <span className="label text-sm w-32 pl-4">German Carve</span>
+            <span className="label text-sm w-36 pl-4">German Carve</span>
             <input
               type="checkbox"
               className="toggle"
