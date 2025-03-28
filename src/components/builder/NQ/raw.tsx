@@ -51,7 +51,7 @@ export default function Raw() {
 
   return (
     <svg
-      className="h-full"
+      className="h-full w-full"
       viewBox="0 0 547 1473"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1319,7 +1319,6 @@ export default function Raw() {
             strokeLinejoin="round"
           />
         </g>
-
         <g id="JACK">
           <g id="g530">
             <path

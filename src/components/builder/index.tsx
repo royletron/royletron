@@ -4,19 +4,22 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 import Options, {
   NQFormSchema,
   NQType,
   PickupType,
   type NQProps,
 } from "./NQ/options";
-import Raw, { defaultProps } from "./NQ/raw";
+import Raw from "./NQ/raw";
 import {
   BodyWoodTextures,
   FretboardWoodTextures,
   NeckWoodTextures,
 } from "./Textures/woods";
 import { PickguardTexture } from "./Textures/guards";
+import Controls from "./Controls";
 
 export default function Builder() {
   const methods = useForm<NQProps>({
@@ -42,8 +45,20 @@ export default function Builder() {
         onSubmit={methods.handleSubmit(onSubmit)}
         className="flex w-full max-w-8xl m-auto h-full"
       >
-        <div className="w-1/3 bg-slate-500 overflow-hidden max-h-full flex items-center justify-center">
-          <Raw {...defaultProps} />
+        <div className="w-1/3 bg-slate-500 overflow-hidden max-h-full flex items-center justify-center relative">
+          <TransformWrapper>
+            <TransformComponent
+              wrapperClass="w-full h-full"
+              contentClass="w-full h-full"
+              wrapperStyle={{
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Raw />
+            </TransformComponent>
+            <Controls />
+          </TransformWrapper>
         </div>
         <div className="w-2/3 bg-slate-400">
           <form className="max-w-2xl p-4 flex gap-4 flex-col">
