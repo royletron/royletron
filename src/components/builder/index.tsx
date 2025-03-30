@@ -52,9 +52,6 @@ export default function Builder() {
           <div className="w-full bg-gray-300 overflow-hidden relative flex-1">
             <TransformComponent
               wrapperStyle={{ width: "100%", height: "100%" }}
-              contentStyle={{
-                willChange: "contents",
-              }}
             >
               <Raw />
             </TransformComponent>

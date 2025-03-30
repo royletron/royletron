@@ -56,6 +56,7 @@ export default function Raw() {
       viewBox="0 0 547 1473"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{ willChange: "transform" }}
     >
       <defs>
         <WoodsDef />
