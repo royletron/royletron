@@ -489,8 +489,11 @@ export function Tabs() {
             />
           </svg>
         </button>
-        <div className="font-semibold">
-          {TabList[currentTab]} {currentTab + 1}/{TabList.length}
+        <div className="flex items-center gap-2">
+          <span className="font-semibold">{TabList[currentTab]}</span>{" "}
+          <small>
+            {currentTab + 1}/{TabList.length}
+          </small>
         </div>
         <button
           className="btn btn-square btn-ghost"
