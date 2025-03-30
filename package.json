@@ -31,6 +31,7 @@
     "@tldraw/vec": "^1.9.2",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "@uidotdev/usehooks": "^2.4.1",
     "astro": "5.4.2",
     "astro-icon": "^0.8.0",
     "daisyui": "^5.0.0",

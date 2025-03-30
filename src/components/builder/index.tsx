@@ -9,7 +9,9 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Options, {
   NQFormSchema,
   NQType,
+  OrientationType,
   PickupType,
+  Tabs,
   type NQProps,
 } from "./NQ/options";
 import Raw from "./NQ/raw";
@@ -26,6 +28,7 @@ export default function Builder() {
     resolver: zodResolver(NQFormSchema),
     defaultValues: {
       type: NQType.STAGE,
+      orientation: OrientationType.RIGHT,
       neckLength: 24.5,
       bodyWood: BodyWoodTextures.KORINA,
       neckWood: NeckWoodTextures.MAPLE,
@@ -41,60 +44,24 @@ export default function Builder() {
   const onSubmit = (data) => console.log(data);
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="flex w-full max-w-8xl m-auto h-full"
-      >
-        <div className="w-1/3 bg-slate-500 overflow-hidden max-h-full flex items-center justify-center relative">
-          <TransformWrapper>
+      <TransformWrapper>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className="flex flex-col w-full max-h-full h-full"
+        >
+          <div className="w-full bg-gray-300 overflow-hidden relative flex-1">
             <TransformComponent
-              wrapperClass="w-full h-full"
-              contentClass="w-full h-full"
-              wrapperStyle={{
-                width: "100%",
-                height: "100%",
-              }}
+              wrapperStyle={{ width: "100%", height: "100%" }}
             >
               <Raw />
             </TransformComponent>
             <Controls />
-          </TransformWrapper>
-        </div>
-        <div className="w-2/3 bg-slate-400">
-          <form className="max-w-2xl p-4 flex gap-4 flex-col">
-            <Options />
-            {/* {Object.keys(choices).map((key, idx) => {
-            const choice = choices[key];
-            return (
-              <div key={`choice_${idx}`}>
-                <label className="w-full select">
-                  <span className="label">{choice.name}</span>
-                  <select
-                    defaultValue={selectedChoices[key]}
-                    onChange={(e) => {
-                      setSelectedChoices((prev) => ({
-                        ...prev,
-                        [key]: e.target.value,
-                      }));
-                    }}
-                  >
-                    {choice.placeholder && (
-                      <option disabled={true}>{choice.placeholder}</option>
-                    )}
-                    {choice.options.map((option, idx) => (
-                      <option key={`option_${idx}`} value={option.value}>
-                        {option.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-            );
-          })} */}
-          </form>
-          <pre></pre>
-        </div>
-      </form>
+          </div>
+          <div className="w-full">
+            <Tabs />
+          </div>
+        </form>
+      </TransformWrapper>
     </FormProvider>
   );
 }

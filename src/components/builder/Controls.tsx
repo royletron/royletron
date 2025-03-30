@@ -1,7 +1,7 @@
 import { useControls } from "react-zoom-pan-pinch";
 
 export default function Controls() {
-  const { zoomIn, zoomOut, centerView, resetTransform } = useControls();
+  const { zoomIn, zoomOut, zoomToElement } = useControls();
   return (
     <div className="absolute bottom-0 right-0 p-4 flex flex-col gap-2">
       <button className="btn btn-square" onClick={() => zoomIn()}>
@@ -39,8 +39,7 @@ export default function Controls() {
       <button
         className="btn btn-square"
         onClick={() => {
-          centerView();
-          resetTransform();
+          zoomToElement("full");
         }}
       >
         <svg

@@ -60,8 +60,8 @@ export default function Raw() {
         <WoodsDef />
         <OthersDef />
       </defs>
-      <g id="NQ FINAL">
-        <g id="BODY">
+      <g id="full">
+        <g id="body">
           <mask
             id="mask0_9_7"
             style={{ maskType: "alpha" }}
@@ -252,7 +252,7 @@ export default function Raw() {
             </g>
           </g>
         </g>
-        <g id="HEADSTOCK">
+        <g id="headstock">
           <g id="HEADSTOCK BODY">
             <mask
               id="mask4_9_7"
@@ -779,7 +779,7 @@ export default function Raw() {
             </g>
           </g>
         </g>
-        <g id="NECK">
+        <g id="neck">
           <mask
             id="mask7_9_7"
             style={{ maskType: "alpha" }}

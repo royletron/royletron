@@ -12,10 +12,13 @@ import {
   FretboardWoodTextures,
   NeckWoodTextures,
 } from "../Textures/woods";
+import { useDebounce } from "@uidotdev/usehooks";
 import { useFormContext } from "react-hook-form";
-import { PaintColors } from "../Textures/paints";
+import { paintColors, PaintColors } from "../Textures/paints";
 import { PickguardTexture } from "../Textures/guards";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useControls } from "react-zoom-pan-pinch";
+import Selector, { Option } from "../components/Selector";
 
 export enum PickupType {
   "SINGLE" = "single",
@@ -28,8 +31,14 @@ export enum NQType {
   "STANDARD" = "standard",
 }
 
+export enum OrientationType {
+  "LEFT" = "left",
+  "RIGHT" = "right",
+}
+
 export type NQProps = {
   type: NQType;
+  orientation: OrientationType;
   neckLength: 24.5 | 25.5;
   bodyWood: BodyWoodTextures;
   bodyPaint?: PaintColors;
@@ -45,6 +54,7 @@ export type NQProps = {
 };
 
 const NQTypeEnum = nativeEnum(NQType);
+const orientationEnum = nativeEnum(OrientationType);
 const PickupTypeEnum = nativeEnum(PickupType);
 const BodyWoodEnum = nativeEnum(BodyWoodTextures);
 const NeckWoodEnum = nativeEnum(NeckWoodTextures);
@@ -54,6 +64,7 @@ const PickguardEnum = nativeEnum(PickguardTexture);
 
 export const NQFormSchema = object({
   type: NQTypeEnum.default(NQType.STAGE),
+  orientation: orientationEnum.default(OrientationType.RIGHT),
   neckLength: union([literal(24.5), literal(25.5)]),
   bodyWood: BodyWoodEnum.default(BodyWoodTextures.KORINA),
   bodyPaint: PaintColorEnum.optional(),
@@ -273,6 +284,240 @@ export default function Options() {
             </select>
           </label>
         </div>
+      </div>
+    </div>
+  );
+}
+
+const OptionGroup = ({
+  active,
+  children,
+}: {
+  active: boolean;
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className={`flex flex-col gap-4 ${active ? "" : "hidden"}`}>
+      {children}
+    </div>
+  );
+};
+
+const Neck = ({ active }: { active: boolean }) => {
+  const { watch, setValue } = useFormContext();
+  const neckWood = watch("neckWood");
+
+  useEffect(() => {
+    switch (neckWood) {
+      case NeckWoodTextures.MAPLE:
+        setValue("fretboardWood", FretboardWoodTextures.MAPLE);
+        break;
+      case NeckWoodTextures.FLAME_ROAST_MAPLE:
+        setValue("fretboardWood", FretboardWoodTextures.FLAME_ROAST_MAPLE);
+        break;
+      case NeckWoodTextures.ROAST_MAPLE:
+        setValue("fretboardWood", FretboardWoodTextures.ROAST_MAPLE);
+        break;
+    }
+  }, [neckWood]);
+  return (
+    <OptionGroup active={active}>
+      <Selector name="neckWood" label="Wood">
+        <Option value={NeckWoodTextures.MAPLE}>Maple</Option>
+        <Option value={NeckWoodTextures.ROAST_MAPLE}>Roast Maple</Option>
+        <Option value={NeckWoodTextures.FLAME_ROAST_MAPLE}>
+          Flamed Roast Maple
+        </Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const Fingerboard = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const neckWood = watch("neckWood");
+
+  const options = useMemo(() => {
+    switch (neckWood) {
+      case NeckWoodTextures.ROAST_MAPLE:
+        return [
+          <Option value={FretboardWoodTextures.ROAST_MAPLE}>
+            Roasted Maple
+          </Option>,
+          <Option value={FretboardWoodTextures.ROSEWOOD}>Rosewood</Option>,
+        ];
+      case NeckWoodTextures.FLAME_ROAST_MAPLE:
+        return [
+          <Option value={FretboardWoodTextures.FLAME_ROAST_MAPLE}>
+            Flame Roasted Maple
+          </Option>,
+          <Option value={FretboardWoodTextures.ROSEWOOD}>Rosewood</Option>,
+        ];
+      case NeckWoodTextures.MAPLE:
+        return [
+          <Option value={FretboardWoodTextures.MAPLE}>Maple</Option>,
+          <Option value={FretboardWoodTextures.EBONY}>Ebony</Option>,
+        ];
+      default:
+        return [];
+    }
+  }, [neckWood]);
+  return (
+    <OptionGroup active={active}>
+      <Selector name="fretboardWood" label="Wood">
+        {options}
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const Body = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
+      <Selector name="bodyWood" label="Wood">
+        <Option value={BodyWoodTextures.KORINA}>Korina</Option>
+        <Option value={BodyWoodTextures.SWAMP_ASH}>Swamp Ash</Option>
+        <Option value={BodyWoodTextures.AMERICAN_WALNUT}>
+          American Walnut
+        </Option>
+      </Selector>
+      <Selector name="bodyPaint" label="Paint" className="!gap-2">
+        <Option
+          value={undefined}
+          className="!rounded-full h-6 w-6"
+          tooltip="Natural"
+        >
+          {" "}
+        </Option>
+        {Object.keys(paintColors).map((key) => (
+          <Option
+            value={key}
+            className="!rounded-full h-6 w-6"
+            style={{ backgroundColor: paintColors[key].fill }}
+            tooltip={paintColors[key].name}
+          >
+            {" "}
+          </Option>
+        ))}
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const Orientation = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
+      <Selector name="type" label="Type">
+        <Option value={NQType.STAGE}>Stage</Option>
+        <Option value={NQType.ROCKET}>Rocket</Option>
+        <Option value={NQType.STANDARD}>Standard</Option>
+      </Selector>
+      <Selector name="orientation" label="Orientation">
+        <Option value={OrientationType.RIGHT}>Right</Option>
+        <Option value={OrientationType.LEFT}>Left</Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const TabList = [
+  "Type & Orientation",
+  "Body",
+  "Neck",
+  "Fingerboard",
+  "Headstock",
+  "Tuners",
+  "Pickups",
+  "Pickguard",
+  "Bridge",
+];
+
+const zoom = {
+  full: [0],
+  body: [1, 6, 7, 8],
+  neck: [2, 3],
+  headstock: [4, 5],
+};
+
+export function Tabs() {
+  const [currentTab, setCurrentTab] = useState(0);
+  const debouncedTab = useDebounce(currentTab, 300);
+  const { zoomToElement } = useControls();
+
+  const nextTab = () => {
+    if (currentTab < TabList.length - 1) {
+      setCurrentTab((prev) => prev + 1);
+    }
+  };
+
+  const prevTab = () => {
+    if (currentTab > 0) {
+      setCurrentTab((prev) => prev - 1);
+    }
+  };
+
+  useEffect(() => {
+    const zoomTo = Object.keys(zoom).find((key) => {
+      return zoom[key].includes(debouncedTab);
+    });
+
+    if (zoomTo) {
+      zoomToElement(zoomTo);
+    }
+  }, [zoomToElement, debouncedTab]);
+
+  return (
+    <div className="p-4">
+      <div className="flex items-center w-full justify-center gap-4">
+        <button
+          className={"btn btn-square btn-ghost"}
+          disabled={currentTab === 0}
+          onClick={prevTab}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+            />
+          </svg>
+        </button>
+        <div className="font-semibold">
+          {TabList[currentTab]} {currentTab + 1}/{TabList.length}
+        </div>
+        <button
+          className="btn btn-square btn-ghost"
+          disabled={currentTab === TabList.length - 1}
+          onClick={nextTab}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="pt-2">
+        <Orientation active={currentTab === 0} />
+        <Body active={currentTab === 1} />
+        <Neck active={currentTab === 2} />
+        <Fingerboard active={currentTab === 3} />
       </div>
     </div>
   );
