@@ -52,7 +52,10 @@ export default function Builder() {
   };
   return (
     <FormProvider {...methods}>
-      <TransformWrapper customTransform={getMatrixTransformStyles}>
+      <TransformWrapper
+        customTransform={getMatrixTransformStyles}
+        minScale={0.3}
+      >
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="flex flex-col w-full max-h-full h-full"
