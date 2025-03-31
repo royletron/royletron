@@ -14,6 +14,8 @@ import { OthersDef, PickguardTexture } from "../Textures/guards";
 import { NQType, OrientationType, type NQProps } from "./options";
 import Pickguards from "./pickguards";
 import Controls from "./controls";
+import { useTransformEffect } from "react-zoom-pan-pinch";
+import { useEffect, useState } from "react";
 
 export const defaultProps: NQProps = {
   type: NQType.STAGE,
@@ -31,6 +33,7 @@ export const defaultProps: NQProps = {
 };
 
 export default function Raw() {
+  const [moving, setMoving] = useState(false);
   const { watch } = useFormContext();
   const bodyWood = watch("bodyWood");
   const neckWood = watch("neckWood");
@@ -50,13 +53,27 @@ export default function Raw() {
   const hollowBodyStyle = useAnimatedStyle({ opacity: hollowBody ? 1 : 0 });
   const germanCarveStyle = useAnimatedStyle({ opacity: germanCarve ? 1 : 0 });
 
+  useTransformEffect(() => {
+    setMoving(true);
+  });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setMoving(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [moving]);
+
   return (
     <svg
       className="h-full w-full"
       viewBox="0 0 547 1473"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ willChange: "transform" }}
+      style={moving ? { willChange: "transform" } : { willChange: "unset" }}
     >
       <defs>
         <WoodsDef />

@@ -1,10 +1,16 @@
+import { useCallback, useEffect, useState } from "react";
+
 import "~/styles/global.css";
 
 import { FormProvider, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {
+  TransformWrapper,
+  TransformComponent,
+  getMatrixTransformStyles,
+} from "react-zoom-pan-pinch";
 
 import Options, {
   NQFormSchema,
@@ -41,10 +47,12 @@ export default function Builder() {
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: NQProps) => {
+    console.log(data);
+  };
   return (
     <FormProvider {...methods}>
-      <TransformWrapper>
+      <TransformWrapper customTransform={getMatrixTransformStyles}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="flex flex-col w-full max-h-full h-full"

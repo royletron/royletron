@@ -469,8 +469,9 @@ export function Tabs() {
   return (
     <div className="p-4">
       <div className="flex items-center w-full justify-center gap-4">
-        <button
+        <a
           className={"btn btn-square btn-ghost"}
+          //@ts-expect-error disabled prop
           disabled={currentTab === 0}
           onClick={prevTab}
         >
@@ -488,15 +489,16 @@ export function Tabs() {
               d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
             />
           </svg>
-        </button>
+        </a>
         <div className="flex items-center gap-2">
           <span className="font-semibold">{TabList[currentTab]}</span>{" "}
           <small>
             {currentTab + 1}/{TabList.length}
           </small>
         </div>
-        <button
+        <a
           className="btn btn-square btn-ghost"
+          //@ts-expect-error disabled prop
           disabled={currentTab === TabList.length - 1}
           onClick={nextTab}
         >
@@ -514,7 +516,7 @@ export function Tabs() {
               d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
             />
           </svg>
-        </button>
+        </a>
       </div>
       <div className="pt-2">
         <Orientation active={currentTab === 0} />

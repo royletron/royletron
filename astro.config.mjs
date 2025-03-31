@@ -13,8 +13,10 @@ export default defineConfig({
   site: "https://royletron.dev",
   base: "/",
   integrations: [mdx(), react()],
-
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ["c75d-194-120-133-8.ngrok-free.app"],
+    },
   },
 });
