@@ -53,7 +53,7 @@ export default function Builder() {
   return (
     <FormProvider {...methods}>
       <TransformWrapper
-        customTransform={getMatrixTransformStyles}
+        // customTransform={getMatrixTransformStyles}
         minScale={0.3}
       >
         <form

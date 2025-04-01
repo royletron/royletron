@@ -435,7 +435,8 @@ const TabList = [
 const zoom = {
   full: [0],
   body: [1, 6, 7, 8],
-  neck: [2, 3],
+  neck: [2],
+  fretboard: [3],
   headstock: [4, 5],
 };
 
