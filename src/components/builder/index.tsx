@@ -60,9 +60,9 @@ export default function Builder() {
           className="flex flex-col w-full max-h-full h-full"
           style={{
             backgroundImage: `url(${bg.src})`,
-            backgroundSize: "contain",
+            backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "top right",
+            backgroundPosition: "top center",
           }}
         >
           <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
