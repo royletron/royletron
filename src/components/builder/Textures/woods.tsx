@@ -1,5 +1,5 @@
 import { useSpring, animated, useSpringValue } from "@react-spring/web";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 export enum BodyWoodTextures {
   KORINA = "korina",
@@ -454,8 +454,12 @@ export const woods: Record<WoodTextures, WoodTexture> = {
 export const WoodsDef = () => {
   return (
     <>
-      {Object.keys(woods).map((wood) => {
-        return woods[wood].filter();
+      {Object.keys(woods).map((wood, idx) => {
+        return (
+          <React.Fragment key={`wood_${idx}`}>
+            {woods[wood].filter()}
+          </React.Fragment>
+        );
       })}
     </>
   );

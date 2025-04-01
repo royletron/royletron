@@ -36,6 +36,11 @@ export enum OrientationType {
   "RIGHT" = "right",
 }
 
+export enum TunerType {
+  "LOCKING" = "locking",
+  "STANDARD" = "standard",
+}
+
 export type NQProps = {
   type: NQType;
   orientation: OrientationType;
@@ -372,6 +377,10 @@ const Fingerboard = ({ active }: { active: boolean }) => {
 };
 
 const Body = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const bodyPaint = watch("bodyPaint");
+  const bodyPainted =
+    bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
   return (
     <OptionGroup active={active}>
       <Selector name="bodyWood" label="Wood">
@@ -384,7 +393,7 @@ const Body = ({ active }: { active: boolean }) => {
       <Selector name="bodyPaint" label="Paint" className="!gap-2">
         <Option
           value={undefined}
-          className="!rounded-full h-6 w-6"
+          className="!rounded-full !h-6 !w-6"
           tooltip="Natural"
         >
           {" "}
@@ -392,13 +401,21 @@ const Body = ({ active }: { active: boolean }) => {
         {Object.keys(paintColors).map((key) => (
           <Option
             value={key}
-            className="!rounded-full h-6 w-6"
+            className="!rounded-full !h-6 !w-6"
             style={{ backgroundColor: paintColors[key].fill }}
             tooltip={paintColors[key].name}
           >
             {" "}
           </Option>
         ))}
+      </Selector>
+      <Selector
+        name="headstockPaint"
+        label={"Matching Headstock?"}
+        disabled={!bodyPainted}
+      >
+        <Option value={true}>Yes</Option>
+        <Option value={false}>No</Option>
       </Selector>
     </OptionGroup>
   );
@@ -420,13 +437,86 @@ const Orientation = ({ active }: { active: boolean }) => {
   );
 };
 
+const Headstock = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
+      <p>todo</p>
+    </OptionGroup>
+  );
+};
+
+const Pickups = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
+      <Selector name="pickupA" label="Neck Pickup">
+        <Option value={PickupType.SINGLE}>Single</Option>
+        <Option value={PickupType.DOUBLE}>Double</Option>
+      </Selector>
+      <Selector name="pickupC" label="Bridge Pickup">
+        <Option value={PickupType.SINGLE}>Single</Option>
+        <Option value={PickupType.DOUBLE}>Double</Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const Pickguard = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
+      <Selector name="pickguard" label="Pickguard" className="overflow-x-auto">
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.BWB}
+        >
+          BWB
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.BLACK_SINGLEPLY}
+        >
+          Black single ply
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.BROWN_TORTOISESHELL}
+        >
+          Brown Tortoiseshell
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.RED_TORTOISESHELL}
+        >
+          Red Tortoiseshell
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.CREAM_SINGLEPLY}
+        >
+          Cream single ply
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.VINTAGE_WHITE_SINGLEPLY}
+        >
+          Vintage white
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.WHITE_SINGLEPLY}
+        >
+          White single ply
+        </Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
 const TabList = [
   "Type & Orientation",
   "Body",
   "Neck",
   "Fingerboard",
   "Headstock",
-  "Tuners",
   "Pickups",
   "Pickguard",
   "Bridge",
@@ -434,16 +524,27 @@ const TabList = [
 
 const zoom = {
   full: [0],
-  body: [1, 6, 7, 8],
+  body: [1, 5, 6, 7],
   neck: [2],
   fretboard: [3],
-  headstock: [4, 5],
+  headstock: [4],
 };
 
 export function Tabs() {
   const [currentTab, setCurrentTab] = useState(0);
   const debouncedTab = useDebounce(currentTab, 300);
   const { zoomToElement } = useControls();
+  const { watch, setValue } = useFormContext();
+
+  const bodyPaint = watch("bodyPaint");
+  const bodyPainted =
+    bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
+
+  useEffect(() => {
+    if (!bodyPainted) {
+      setValue("headstockPaint", false);
+    }
+  }, [bodyPainted]);
 
   const nextTab = () => {
     if (currentTab < TabList.length - 1) {
@@ -465,11 +566,11 @@ export function Tabs() {
     if (zoomTo) {
       zoomToElement(zoomTo);
     }
-  }, [zoomToElement, debouncedTab]);
+  }, [debouncedTab]);
 
   return (
-    <div className="p-4">
-      <div className="flex items-center w-full justify-center gap-4">
+    <div className="py-4">
+      <div className="flex items-center w-full justify-center gap-4 px-4">
         <a
           className={"btn btn-square btn-ghost"}
           //@ts-expect-error disabled prop
@@ -524,6 +625,9 @@ export function Tabs() {
         <Body active={currentTab === 1} />
         <Neck active={currentTab === 2} />
         <Fingerboard active={currentTab === 3} />
+        <Headstock active={currentTab === 4} />
+        <Pickups active={currentTab === 5} />
+        <Pickguard active={currentTab === 6} />
       </div>
     </div>
   );

@@ -1,7 +1,18 @@
 import { useControls } from "react-zoom-pan-pinch";
+import { toPng } from "html-to-image";
+import download from "downloadjs";
 
 export default function Controls() {
   const { zoomIn, zoomOut, zoomToElement } = useControls();
+  const takeScreenshot = () => {
+    const node = document.getElementById("guitar");
+    if (!node) return;
+    toPng(node)
+      .then((dataUrl) => download(dataUrl, "my-node.png"))
+      .catch((err) => {
+        console.error("oops, something went wrong!", err);
+      });
+  };
   return (
     <div className="absolute bottom-0 right-0 p-4 flex flex-col gap-2">
       <button className="btn btn-square" onClick={() => zoomIn()}>
@@ -57,7 +68,7 @@ export default function Controls() {
           />
         </svg>
       </button>
-      <button className="btn btn-square">
+      <button className="btn btn-square" onClick={takeScreenshot}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

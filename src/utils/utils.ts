@@ -16,3 +16,9 @@ export const trim = (str = "", ch?: string) => {
   while (end > start && str[end - 1] === ch) --end;
   return start > 0 || end < str.length ? str.substring(start, end) : str;
 };
+
+export const classes = (...args: (string | undefined)[]) =>
+  args.filter(Boolean).join(" ");
+
+export const classIf = (condition: boolean, className: string) =>
+  condition ? className : "";

@@ -29,6 +29,8 @@ import {
 import { PickguardTexture } from "./Textures/guards";
 import Controls from "./Controls";
 
+import bg from "~/assets/images/guitar/bg.avif";
+
 export default function Builder() {
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
@@ -52,15 +54,18 @@ export default function Builder() {
   };
   return (
     <FormProvider {...methods}>
-      <TransformWrapper
-        // customTransform={getMatrixTransformStyles}
-        minScale={0.3}
-      >
+      <TransformWrapper minScale={0.3}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="flex flex-col w-full max-h-full h-full"
+          style={{
+            backgroundImage: `url(${bg.src})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top right",
+          }}
         >
-          <div className="w-full bg-gray-300 overflow-hidden relative flex-1">
+          <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
             <TransformComponent
               wrapperStyle={{ width: "100%", height: "100%" }}
             >
@@ -68,7 +73,7 @@ export default function Builder() {
             </TransformComponent>
             <Controls />
           </div>
-          <div className="w-full">
+          <div className="w-full border-t border-neutral-300">
             <Tabs />
           </div>
         </form>

@@ -106,6 +106,7 @@ export default function Raw() {
     <animated.svg
       className="h-full w-full"
       viewBox="0 0 547 1473"
+      id="guitar"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{
