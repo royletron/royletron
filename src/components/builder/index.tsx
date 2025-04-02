@@ -73,7 +73,7 @@ export default function Builder() {
             </TransformComponent>
             <Controls />
           </div>
-          <div className="w-full border-t border-neutral-300">
+          <div className="w-full border-t border-neutral-300 bg-white">
             <Tabs />
           </div>
         </form>
