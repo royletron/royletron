@@ -1,32 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-
 import "~/styles/global.css";
 
 import { FormProvider, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  TransformWrapper,
-  TransformComponent,
-  getMatrixTransformStyles,
-} from "react-zoom-pan-pinch";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-import Options, {
-  NQFormSchema,
-  NQType,
-  OrientationType,
-  PickupType,
-  Tabs,
-  type NQProps,
-} from "./NQ/options";
-import Raw from "./NQ/raw";
-import {
-  BodyWoodTextures,
-  FretboardWoodTextures,
-  NeckWoodTextures,
-} from "./Textures/woods";
-import { PickguardTexture } from "./Textures/guards";
+import { NQFormSchema, Tabs, type NQProps } from "./NQ/options";
+import Raw, { defaultValues } from "./NQ/raw";
 import Controls from "./Controls";
 
 import bg from "~/assets/images/guitar/bg.avif";
@@ -34,19 +15,7 @@ import bg from "~/assets/images/guitar/bg.avif";
 export default function Builder() {
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
-    defaultValues: {
-      type: NQType.STAGE,
-      orientation: OrientationType.RIGHT,
-      neckLength: 24.5,
-      bodyWood: BodyWoodTextures.KORINA,
-      neckWood: NeckWoodTextures.MAPLE,
-      fretboardWood: FretboardWoodTextures.MAPLE,
-      pickupA: PickupType.DOUBLE,
-      pickupC: PickupType.DOUBLE,
-      hollowBody: false,
-      germanCarve: false,
-      pickguard: PickguardTexture.RED_TORTOISESHELL,
-    },
+    defaultValues,
   });
 
   const onSubmit = (data: NQProps) => {
