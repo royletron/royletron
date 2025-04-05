@@ -1,7 +1,69 @@
-import React, { Children, cloneElement } from "react";
+import React, {
+  Children,
+  cloneElement,
+  useRef,
+  useState,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+} from "react";
 import type { HTMLProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { classes, classIf } from "~/utils/utils";
+
+export const useIsOverflow = (ref) => {
+  const [overFlow, setOverflow] = useState<{
+    isOverflow: boolean;
+    start: boolean;
+    end: boolean;
+  }>({
+    isOverflow: false,
+    start: false,
+    end: false,
+  });
+
+  const trigger = useCallback(() => {
+    if (!ref.current) return;
+    const { current } = ref;
+    const scrollLeft = current.scrollLeft;
+    const scrollWidth = current.scrollWidth;
+    const clientWidth = current.clientWidth;
+    const isOverflow = scrollWidth > clientWidth;
+    const start = scrollLeft <= 0;
+    const end = scrollWidth - clientWidth <= scrollLeft;
+    setOverflow({ isOverflow, start, end });
+  }, [ref]);
+
+  useLayoutEffect(() => {
+    const { current } = ref;
+
+    if (current) {
+      trigger();
+    }
+  }, [ref]);
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      trigger();
+    });
+    observer.observe(ref.current);
+    return () => ref.current && observer.unobserve(ref.current);
+  }, []);
+
+  useEffect(() => {
+    const { current } = ref;
+    if (current) {
+      current.addEventListener("scroll", trigger);
+    }
+    return () => {
+      if (current) {
+        current.removeEventListener("scroll", trigger);
+      }
+    };
+  }, [ref]);
+
+  return overFlow;
+};
 
 type OptionProps = Omit<HTMLProps<HTMLDivElement>, "value"> & {
   children: React.ReactNode;
@@ -50,8 +112,11 @@ const Selector = ({
   disabled,
 }: SelectorProps) => {
   const { control } = useFormContext();
+  const scroller = useRef<HTMLDivElement>(null);
+  const { isOverflow, start, end } = useIsOverflow(scroller);
+
   return (
-    <div className="flex flex-col w-full gap-1">
+    <div className="flex flex-col w-full gap-1 relative">
       {label && (
         <label
           htmlFor={name}
@@ -70,10 +135,11 @@ const Selector = ({
           return (
             <div
               className={classes(
-                "flex flex-row mx-auto max-w-dvw items-stretch justify-start gap-4 hide-scrollbar py-0.5 px-4",
+                "mx-auto max-w-dvw hide-scrollbar overflow-x-auto py-0.5 px-4 flex flex-row items-stretch justify-start gap-4",
                 className || "",
                 classIf(disabled === true, "opacity-50 pointer-events-none")
               )}
+              ref={scroller}
             >
               {Children.map(children, (child) => {
                 if (!React.isValidElement(child)) return child;
@@ -83,6 +149,74 @@ const Selector = ({
                   ...child.props,
                 });
               })}
+
+              {isOverflow && (
+                <>
+                  {!start && (
+                    <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-white from-40% to-white/0 z-10">
+                      <a
+                        className="h-full"
+                        href={`#${name}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scroller.current?.scrollTo({
+                            left: Math.max(
+                              0,
+                              scroller.current.scrollLeft - 240
+                            ),
+                            behavior: "smooth",
+                          });
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15.75 19.5 8.25 12l7.5-7.5"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
+                  {!end && (
+                    <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white from-40% to-white/0 z-10">
+                      <a
+                        className="h-full"
+                        href={`#${name}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scroller.current?.scrollTo({
+                            left: scroller.current.scrollLeft + 240,
+                            behavior: "smooth",
+                          });
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           );
         }}

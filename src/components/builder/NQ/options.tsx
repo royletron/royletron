@@ -19,6 +19,7 @@ import { PickguardTexture } from "../Textures/guards";
 import { useEffect, useMemo, useState } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 import Selector, { Option } from "../components/Selector";
+import { PickupTypeMap } from "./pickups";
 
 export enum PickupType {
   "SINGLE" = "single",
@@ -328,9 +329,22 @@ const Neck = ({ active }: { active: boolean }) => {
   return (
     <OptionGroup active={active}>
       <Selector name="neckWood" label="Wood">
-        <Option value={NeckWoodTextures.MAPLE}>Maple</Option>
-        <Option value={NeckWoodTextures.ROAST_MAPLE}>Roast Maple</Option>
-        <Option value={NeckWoodTextures.FLAME_ROAST_MAPLE}>
+        <Option
+          value={NeckWoodTextures.MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Maple
+        </Option>
+        <Option
+          value={NeckWoodTextures.ROAST_MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Roast Maple
+        </Option>
+        <Option
+          value={NeckWoodTextures.FLAME_ROAST_MAPLE}
+          className="w-32 text-center justify-center"
+        >
           Flamed Roast Maple
         </Option>
       </Selector>
@@ -449,12 +463,26 @@ const Pickups = ({ active }: { active: boolean }) => {
   return (
     <OptionGroup active={active}>
       <Selector name="pickupA" label="Neck Pickup">
-        <Option value={PickupType.SINGLE}>Single</Option>
-        <Option value={PickupType.DOUBLE}>Double</Option>
+        {Object.keys(PickupTypeMap).map((key) => (
+          <Option
+            key={key}
+            value={key}
+            className="w-32 text-center justify-center"
+          >
+            {PickupTypeMap[key]}
+          </Option>
+        ))}
       </Selector>
       <Selector name="pickupC" label="Bridge Pickup">
-        <Option value={PickupType.SINGLE}>Single</Option>
-        <Option value={PickupType.DOUBLE}>Double</Option>
+        {Object.keys(PickupTypeMap).map((key) => (
+          <Option
+            key={key}
+            value={key}
+            className="w-32 text-center justify-center"
+          >
+            {PickupTypeMap[key]}
+          </Option>
+        ))}
       </Selector>
     </OptionGroup>
   );
