@@ -18,6 +18,7 @@ import { useControls, useTransformEffect } from "react-zoom-pan-pinch";
 import { useEffect, useState } from "react";
 import Strings from "./strings";
 import Bridge from "./bridge";
+import { isSafari } from "react-device-detect";
 
 export const defaultValues: NQProps = {
   type: NQType.STAGE,
@@ -109,7 +110,7 @@ export default function Raw() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        ...(state.moving
+        ...(state.moving || isSafari
           ? { willChange: "transform" }
           : { willChange: "unset" }),
         ...styles,
