@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { AnimatedTexture } from "../../Textures";
+import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
+import { PickguardTexture } from "../../Textures/guards";
 
 export default function Stage() {
   const { watch } = useFormContext();
@@ -22,14 +23,15 @@ export default function Stage() {
         />
       </mask>
       <g mask="url(#mask0_63_2584)">
-        <AnimatedTexture
-          x="29.7129"
-          y="241.181"
-          width="241.715"
-          height="91.8915"
-          transform="rotate(-89.938 29.7129 241.181)"
+        <AnimatedMountedTexture
+          x="29"
+          y="241"
+          width="242"
+          height="92"
+          transform="rotate(-89 29 241)"
           fill="black"
           filter={pickguard}
+          allFilters={Object.values(PickguardTexture)}
         />
         <path
           d="M44.974 223.638L45.6134 223.479L45.9337 222.84M44.974 223.638L44.9725 224.597M44.974 223.638L44.0152 223.637L44.0146 224.116L44.0136 224.596L44.9725 224.597M45.9337 222.84L45.9349 221.721L46.8938 221.722M45.9337 222.84L46.7327 222.841M46.7327 222.841L46.7339 221.722M46.7327 222.841L47.0517 223.48L47.6907 223.641M47.6907 223.641L48.6496 223.642L48.6483 224.601L47.6893 224.6M47.6907 223.641L47.6893 224.6M47.6893 224.6L47.0499 224.759L46.7296 225.398M45.9305 225.397L45.6116 224.757L44.9725 224.597M45.9305 225.397L45.9297 226.515L46.8886 226.516M45.9305 225.397L46.7296 225.398M46.7296 225.398L46.7284 226.516M50.407 224.123L50.2484 223.004L49.7702 221.885L48.972 221.085L48.0138 220.445L47.0553 220.124L45.7768 220.123L44.8176 220.442L43.858 221.08L43.0581 221.878L42.5775 222.996L42.4164 224.115L42.575 225.233L43.0533 226.353L43.8514 227.153L44.8096 227.793L45.7681 228.113L47.0466 228.115L48.0058 227.796L48.9654 227.158L49.7653 226.36L50.246 225.242L50.407 224.123Z"

@@ -6,7 +6,7 @@ import {
   WoodTextures,
 } from "../Textures/woods";
 import { paintColors } from "../Textures/paints";
-import { AnimatedTexture } from "../Textures";
+import { AnimatedMountedTexture, AnimatedTexture } from "../Textures";
 import Pickup, { PickupType } from "./pickups";
 import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
 import { animated, useSpring } from "@react-spring/web";
@@ -152,13 +152,14 @@ export default function Raw() {
             </g>
           </mask>
           <g mask="url(#mask0_9_7)">
-            <AnimatedTexture
+            <AnimatedMountedTexture
               x="40"
               y="781"
               width="482"
               height="666"
               fill={bodyPaintColor || woods[bodyWood]?.baseColor}
               filter={bodyWood}
+              allFilters={Object.keys(woods)}
             />
             <path
               id="BODY_3"
@@ -191,13 +192,14 @@ export default function Raw() {
               />
             </mask>
             <g mask="url(#mask1_9_7)">
-              <AnimatedTexture
+              <AnimatedMountedTexture
                 x="43"
-                y="800.84"
+                y="800"
                 width="478"
                 height="646"
                 fill={bodyPaintColor || woods[bodyWood]?.baseColor}
                 filter={bodyWood}
+                allFilters={Object.keys(woods)}
               />
             </g>
           </g>
@@ -218,13 +220,14 @@ export default function Raw() {
               />
             </mask>
             <g mask="url(#mask2_9_7)">
-              <AnimatedTexture
+              <AnimatedMountedTexture
                 x="42"
-                y="831.843"
+                y="831"
                 width="482"
                 height="666"
                 fill={bodyPaintColor || woods[bodyWood]?.baseColor}
                 filter={bodyWood}
+                allFilters={Object.keys(woods)}
               />
             </g>
           </g>
@@ -301,15 +304,16 @@ export default function Raw() {
                 </g>
               </mask>
               <g mask="url(#mask4_9_7)">
-                <AnimatedTexture
+                <AnimatedMountedTexture
                   x="196"
-                  y="42.9001"
+                  y="42"
                   width="146"
                   height="272"
                   fill={
                     headstockPaint ? bodyPaintColor : woods[neckWood]?.baseColor
                   }
                   filter={neckWood}
+                  allFilters={Object.keys(woods)}
                 />
                 <g id="g3172_2">
                   <path
@@ -351,13 +355,14 @@ export default function Raw() {
                 />
               </mask>
               <g mask="url(#mask5_9_7)">
-                <AnimatedTexture
+                <AnimatedMountedTexture
                   x="287"
-                  y="63.9001"
+                  y="63"
                   width="62"
                   height="216"
                   fill="black"
                   filter={pickguard}
+                  allFilters={Object.values(PickguardTexture)}
                 />
                 <path
                   id="Vector_7"
@@ -816,13 +821,14 @@ export default function Raw() {
               />
             </mask>
             <g mask="url(#mask7_9_7)">
-              <AnimatedTexture
+              <AnimatedMountedTexture
                 x="222"
                 y="310"
                 width="93"
                 height="657"
                 fill={woods[fretboardWood]?.baseColor}
                 filter={fretboardWood}
+                allFilters={Object.keys(woods)}
               />
               <path
                 id="NECK BODY_2"

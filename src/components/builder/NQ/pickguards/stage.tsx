@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { AnimatedTexture } from "../../Textures";
+import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
+import { PickguardTexture } from "../../Textures/guards";
 
 export default function Stage() {
   const { watch } = useFormContext();
@@ -29,13 +30,14 @@ export default function Stage() {
         )}
       </mask>
       <g mask="url(#mask0_22_104)">
-        <AnimatedTexture
-          x="-36.9995"
-          y="-37.9996"
+        <AnimatedMountedTexture
+          x="-36"
+          y="-37"
           width="273"
           height="415"
           fill="black"
           filter={pickguard}
+          allFilters={Object.values(PickguardTexture)}
         />
         {tremolo ? (
           <path

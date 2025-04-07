@@ -6,7 +6,6 @@ export enum PickguardTexture {
   WHITE_SINGLEPLY = "White_SinglePly",
   CREAM_SINGLEPLY = "Cream_SinglePly",
   VINTAGE_WHITE_SINGLEPLY = "Vintage_White_SinglePly",
-  PERSPEX = "Perspex",
 }
 
 export default function Pearl() {

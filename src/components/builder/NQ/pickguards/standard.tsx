@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { AnimatedTexture } from "../../Textures";
+import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
+import { PickguardTexture } from "../../Textures/guards";
 
 export default function Standard() {
   const { watch } = useFormContext();
@@ -57,13 +58,14 @@ export default function Standard() {
         />
       </mask>
       <g mask="url(#mask0_21_20)">
-        <AnimatedTexture
+        <AnimatedMountedTexture
           x="-18"
           y="-13"
           width="388"
           height="501"
           fill="black"
           filter={pickguard}
+          allFilters={Object.values(PickguardTexture)}
         />
         <mask
           id="path-4-outside-1_21_20"
@@ -74,13 +76,14 @@ export default function Standard() {
           height="463"
           fill="black"
         >
-          <AnimatedTexture
-            x="0.400879"
-            y="-0.299438"
+          <AnimatedMountedTexture
+            x="0"
+            y="0"
             width="347"
             height="463"
             fill="black"
             filter={pickguard}
+            allFilters={Object.values(PickguardTexture)}
           />
           <path d="M294.18 273.16L294.98 271.08L296.1 268.68L297.22 265.8L298.66 262.44L300.26 258.92L302.02 254.92L303.94 250.44L306.02 245.8L308.26 240.68L310.66 235.24L313.22 229.48L315.78 223.4L318.66 217L321.38 210.28L324.26 203.4L327.14 196.2L332.74 181.64L335.46 174.12L338.02 166.76L340.26 159.4L342.18 152.2L343.78 145.32L344.9 138.76L345.22 135.56L345.54 132.68V127.08L345.38 124.36L345.22 121.96L344.74 119.72L344.26 117.64L343.3 113.8L342.66 112.2L342.02 110.76L340.9 108.36L339.94 106.44L339.14 105.16L338.5 104.36L338.02 104.2H337.54L336.9 104.68L335.78 105.48L335.14 105.96L334.18 106.44L333.06 107.08L331.94 107.56L328.9 108.84L325.54 110.12L321.7 111.4L317.54 112.68L308.9 115.08L304.58 116.04L300.42 117L292.74 118.6L285.54 119.72L278.34 120.68L271.14 121.16L263.62 121.48H255.78L247.62 121.16L238.82 120.68L294.18 273.16Z" />
           <path d="M224.4 461.203H230.731C232.376 461.203 233.891 460.304 234.68 458.86L304.4 331.203L230.207 115.053C229.711 113.608 228.453 112.559 226.943 112.33L212.9 110.203V122.303C212.9 125.837 210.035 128.703 206.5 128.703H143.6C140.176 128.703 137.4 125.927 137.4 122.503L137.4 81.7027L129.217 81.7027C126.302 81.7027 123.674 83.4602 122.562 86.1544L54.4003 251.203L121.4 411.203C122.9 414.203 125.4 413.203 125.4 413.203L125.4 358.903C125.4 355.81 127.908 353.303 131 353.303L218.706 353.303C221.796 353.303 224.303 355.807 224.306 358.897L224.4 461.203Z" />

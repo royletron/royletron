@@ -7,6 +7,7 @@ import {
 } from "@react-spring/web";
 import { useEffect } from "react";
 import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
+import Toggle from "../components/Toggle";
 
 export type TextureProps = React.SVGProps<SVGRectElement> & {
   fill: string;
@@ -51,4 +52,21 @@ export const AnimatedTexture = ({ fill, filter, ...props }: TextureProps) => {
       <AnimatedRect fill={fill} filter={item} {...props} />
     </animated.g>
   ));
+};
+
+export const AnimatedMountedTexture = ({
+  fill,
+  filter,
+  allFilters,
+  ...props
+}: TextureProps & { allFilters: string[] }) => {
+  return (
+    <g data-filter={filter}>
+      {allFilters.map((f) => (
+        <Toggle key={f} on={f === filter}>
+          <AnimatedRect fill={fill} filter={f} {...props} />
+        </Toggle>
+      ))}
+    </g>
+  );
 };

@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { AnimatedTexture } from "../../Textures";
+import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
+import { PickguardTexture } from "../../Textures/guards";
 
 export default function Rocket() {
   const { watch } = useFormContext();
@@ -45,13 +46,14 @@ export default function Rocket() {
           height="415"
           fill="#FF9797"
         />
-        <AnimatedTexture
-          x="-30.6992"
-          y="-38.3002"
+        <AnimatedMountedTexture
+          x="-30"
+          y="-38"
           width="273"
           height="415"
           fill="black"
           filter={pickguard}
+          allFilters={Object.values(PickguardTexture)}
         />
         <path
           d="M40.9558 292.807L41.0156 292.675L40.9958 292.532L15.1149 104.895C15.0645 104.53 14.8793 104.188 14.593 103.966C14.2958 103.736 13.8902 103.639 13.4771 103.796C12.566 104.141 11.7023 104.92 10.8912 105.95C10.073 106.99 9.27173 108.334 8.49937 109.881C6.9541 112.977 5.49691 116.944 4.24155 121.059C1.73571 129.274 0.000488281 138.196 0.000446498 142.1L0.000530064 142.106L2.97156 371.866C2.98537 372.934 4.44028 373.239 4.88203 372.266L40.9558 292.807Z"
