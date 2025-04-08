@@ -235,7 +235,7 @@ const Headstock = ({ active }: { active: boolean }) => {
       <Selector
         name="headstockPaint"
         label={"Matching Headstock?"}
-        disabled={!bodyPainted}
+        disabled={!bodyPainted ? "Select a body paint first" : undefined}
       >
         <Option value={true}>Yes</Option>
         <Option value={false}>No</Option>
@@ -339,8 +339,35 @@ const Bridge = ({ active }: { active: boolean }) => {
   );
 };
 
+const Construction = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const hollowBody = watch("hollowBody");
+  const germanCarve = watch("germanCarve");
+  return (
+    <OptionGroup active={active}>
+      <Selector
+        name="hollowBody"
+        label="Hollow Body"
+        disabled={germanCarve ? "German carve is selected" : undefined}
+      >
+        <Option value={true}>Yes</Option>
+        <Option value={false}>No</Option>
+      </Selector>
+      <Selector
+        name="germanCarve"
+        label="German Carve"
+        disabled={hollowBody ? "Hollow body is selected" : undefined}
+      >
+        <Option value={true}>Yes</Option>
+        <Option value={false}>No</Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
 const TabList = [
   "Type & Orientation",
+  "Construction",
   "Body",
   "Neck",
   "Fingerboard",
@@ -352,9 +379,9 @@ const TabList = [
 
 const zoom = {
   full: [0],
-  body: [1, 5, 6, 7],
-  neck: [2, 3],
-  headstock: [4],
+  body: [1, 2, 6, 7, 8],
+  neck: [3, 4],
+  headstock: [5],
 };
 
 export function Tabs() {
@@ -461,13 +488,14 @@ export function Tabs() {
       </div>
       <div className="pt-2 grid">
         <Orientation active={currentTab === 0} />
-        <Body active={currentTab === 1} />
-        <Neck active={currentTab === 2} />
-        <Fingerboard active={currentTab === 3} />
-        <Headstock active={currentTab === 4} />
-        <Pickups active={currentTab === 5} />
-        <Pickguard active={currentTab === 6} />
-        <Bridge active={currentTab === 7} />
+        <Construction active={currentTab === 1} />
+        <Body active={currentTab === 2} />
+        <Neck active={currentTab === 3} />
+        <Fingerboard active={currentTab === 4} />
+        <Headstock active={currentTab === 5} />
+        <Pickups active={currentTab === 6} />
+        <Pickguard active={currentTab === 7} />
+        <Bridge active={currentTab === 8} />
       </div>
     </div>
   );

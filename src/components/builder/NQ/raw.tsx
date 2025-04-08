@@ -237,7 +237,40 @@ export default function Raw() {
           </g>
         </Toggle>
         <Toggle on={hollowBody === true}>
-          <g id="SOUNDHOLE" fill="#000" fillOpacity="0.49" stroke="#000">
+          <AnimatedTextureContainer
+            texture={bodyTexture}
+            fill={woods[bodyWood].baseColor}
+          >
+            <g>
+              <path
+                id="Rectangle 40"
+                d="m145.64 1316.22-37.235-83.91a4.6 4.6 0 0 1 8.41-3.73l37.235 83.91a4.6 4.6 0 0 1-8.41 3.73Z"
+              ></path>
+              <path
+                id="Rectangle 41"
+                d="m175.539 1331.93-60.842-137.11a4.504 4.504 0 0 1 2.288-5.94 4.51 4.51 0 0 1 5.939 2.29l60.841 137.11a4.5 4.5 0 1 1-8.226 3.65Z"
+              ></path>
+              <path
+                id="Rectangle 42"
+                d="m184.918 1301.87-28.393-63.98a4.5 4.5 0 1 1 8.226-3.65l28.393 63.98a4.5 4.5 0 1 1-8.226 3.65Z"
+              ></path>
+              <path
+                id="Rectangle 43"
+                d="m148.413 1219.61-28.393-63.98a4.5 4.5 0 0 1 2.288-5.94 4.493 4.493 0 0 1 5.939 2.29l28.392 63.98a4.5 4.5 0 1 1-8.226 3.65Z"
+              ></path>
+              <path
+                id="Rectangle 44"
+                d="m185.779 1252.62-31.354-70.65a4.5 4.5 0 0 1 2.288-5.94 4.493 4.493 0 0 1 5.939 2.29l31.353 70.65a4.5 4.5 0 0 1-2.287 5.94 4.5 4.5 0 0 1-5.939-2.29Z"
+              ></path>
+            </g>
+          </AnimatedTextureContainer>
+          <g
+            stroke="black"
+            strokeOpacity={0.5}
+            strokeWidth="1"
+            fill="black"
+            fillOpacity={0.1}
+          >
             <path
               id="Rectangle 40"
               d="m145.64 1316.22-37.235-83.91a4.6 4.6 0 0 1 8.41-3.73l37.235 83.91a4.6 4.6 0 0 1-8.41 3.73Z"

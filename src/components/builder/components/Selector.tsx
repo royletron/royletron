@@ -102,7 +102,7 @@ interface SelectorProps {
   className?: string;
   label?: React.ReactNode;
   name: string;
-  disabled?: boolean;
+  disabled?: string;
 }
 const Selector = ({
   children,
@@ -116,13 +116,19 @@ const Selector = ({
   const { isOverflow, start, end } = useIsOverflow(scroller);
 
   return (
-    <div className="flex flex-col w-full gap-1 relative">
+    <div
+      className={classes(
+        "flex flex-col w-full gap-1 relative",
+        classIf(disabled != undefined, "tooltip")
+      )}
+      data-tip={disabled}
+    >
       {label && (
         <label
           htmlFor={name}
           className={classes(
             "text-center w-full",
-            classIf(disabled === true, "opacity-50 pointer-events-none")
+            classIf(disabled != undefined, "opacity-50 pointer-events-none")
           )}
         >
           {label}
@@ -135,9 +141,9 @@ const Selector = ({
           return (
             <div
               className={classes(
-                "mx-auto max-w-dvw hide-scrollbar overflow-x-auto py-0.5 px-4 flex flex-row items-stretch justify-start gap-4",
+                "mx-auto max-w-dvw hide-scrollbar overflow-x-auto pb-0.5 -mt-10 pt-10 px-10 flex flex-row items-stretch justify-start gap-4",
                 className || "",
-                classIf(disabled === true, "opacity-50 pointer-events-none")
+                classIf(disabled != undefined, "opacity-50 pointer-events-none")
               )}
               ref={scroller}
             >
