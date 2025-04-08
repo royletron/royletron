@@ -21,6 +21,9 @@ import { useControls } from "react-zoom-pan-pinch";
 import Selector, { Option } from "../components/Selector";
 import { PickupType, PickupTypeMap } from "./pickups";
 
+import { useSpring, animated } from "@react-spring/web";
+import { classes, classIf } from "~/utils/utils";
+
 export enum NQType {
   "ROCKET" = "rocket",
   "STAGE" = "stage",
@@ -89,10 +92,27 @@ const OptionGroup = ({
   active: boolean;
   children: React.ReactNode;
 }) => {
+  const [styles, api] = useSpring(() => ({
+    from: {
+      opacity: 0,
+    },
+  }));
+
+  useEffect(() => {
+    api.start({
+      to: { opacity: active ? 1 : 0 },
+    });
+  }, [active]);
   return (
-    <div className={`flex flex-col gap-4 ${active ? "" : "hidden"}`}>
+    <animated.div
+      style={styles}
+      className={classes(
+        `flex flex-col gap-4 col-1 row-1`,
+        classIf(!active, "pointer-events-none")
+      )}
+    >
       {children}
-    </div>
+    </animated.div>
   );
 };
 
@@ -291,15 +311,15 @@ const Pickguard = ({ active }: { active: boolean }) => {
         </Option>
         <Option
           className="w-32 text-center justify-center"
-          value={PickguardTexture.BROWN_TORTOISESHELL}
-        >
-          Brown Tortoiseshell
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
           value={PickguardTexture.RED_TORTOISESHELL}
         >
           Red Tortoiseshell
+        </Option>
+        <Option
+          className="w-32 text-center justify-center"
+          value={PickguardTexture.PEARL}
+        >
+          Pearl
         </Option>
         <Option
           className="w-32 text-center justify-center"
@@ -415,11 +435,23 @@ export function Tabs() {
             />
           </svg>
         </a>
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">{TabList[currentTab]}</span>{" "}
-          <small>
-            {currentTab + 1}/{TabList.length}
-          </small>
+        <div className="grid">
+          {TabList.map((tab, index) => {
+            return (
+              <div
+                className={classes(
+                  "flex items-center justify-center gap-2 col-1 row-1 opacity-0 transition-opacity",
+                  classIf(currentTab === index, "opacity-100")
+                )}
+                key={index}
+              >
+                <span className="font-semibold">{tab}</span>{" "}
+                <small>
+                  {index + 1}/{TabList.length}
+                </small>
+              </div>
+            );
+          })}
         </div>
         <a
           className="btn btn-square btn-ghost"
@@ -443,7 +475,7 @@ export function Tabs() {
           </svg>
         </a>
       </div>
-      <div className="pt-2">
+      <div className="pt-2 grid">
         <Orientation active={currentTab === 0} />
         <Body active={currentTab === 1} />
         <Neck active={currentTab === 2} />

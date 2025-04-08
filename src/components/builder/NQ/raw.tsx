@@ -127,10 +127,12 @@ export default function Raw() {
       fill="none"
       viewBox="0 0 547 1473"
       id="guitar"
+      className={"w-full h-full"}
       style={{ ...styles, ...additions }}
     >
       <defs>
         <WoodsDef />
+        <OthersDef />
       </defs>
       <g>
         <rect id="full" width="434" height="1473" x="57" y="20" />
@@ -322,11 +324,9 @@ export default function Raw() {
               ></path>
             </mask>
             <g mask="url(#mask10_9_7)">
-              <path
-                id="PICKGUARD"
-                fill="#FF9797"
-                d="M287 63.9h62v216h-62z"
-              ></path>
+              <AnimatedTextureContainer texture={pickguard} fill="white">
+                <rect x="40" y="0" width="2000" height="2000" />
+              </AnimatedTextureContainer>
               <path
                 id="Vector_25"
                 stroke="#000"

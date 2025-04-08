@@ -42,7 +42,8 @@ export default function Builder() {
                 height: "100%",
               }}
               contentStyle={{
-                willChange: isSafari ? "transform" : "unset",
+                width: "100%",
+                height: "100%",
               }}
             >
               <Raw />

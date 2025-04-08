@@ -2,6 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
 import { PickguardTexture } from "../../Textures/guards";
 import Toggle from "../../components/Toggle";
+import AnimatedTextureContainer from "../../Textures/animated";
 
 export default function Stage() {
   const { watch } = useFormContext();
@@ -27,11 +28,9 @@ export default function Stage() {
             ></path>
           </mask>
           <g mask="url(#mask5_9_7)">
-            <path
-              id="Rectangle 46_3"
-              fill="#FF9797"
-              d="M138 911h273v415H138z"
-            ></path>
+            <AnimatedTextureContainer texture={pickguard} fill="white">
+              <rect x="40" y="400" width="2000" height="2000" />
+            </AnimatedTextureContainer>
             <path
               id="Vector 3"
               stroke="#000"
@@ -58,11 +57,9 @@ export default function Stage() {
             ></path>
           </mask>
           <g mask="url(#mask6_9_7)">
-            <path
-              id="Rectangle 46_4"
-              fill="#FF9797"
-              d="M138 911h273v415H138z"
-            ></path>
+            <AnimatedTextureContainer texture={pickguard} fill="white">
+              <rect x="40" y="400" width="2000" height="2000" />
+            </AnimatedTextureContainer>
             <path
               id="Vector 3_2"
               stroke="#000"

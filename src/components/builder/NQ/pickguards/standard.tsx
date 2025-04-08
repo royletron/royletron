@@ -2,6 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
 import { PickguardTexture } from "../../Textures/guards";
 import Toggle from "../../components/Toggle";
+import AnimatedTextureContainer from "../../Textures/animated";
 
 export default function Standard() {
   const { watch } = useFormContext();
@@ -32,11 +33,9 @@ export default function Standard() {
             </g>
           </mask>
           <g mask="url(#mask3_9_7)">
-            <path
-              id="Rectangle 46"
-              fill="#FF9797"
-              d="M76 825h388v501H76z"
-            ></path>
+            <AnimatedTextureContainer texture={pickguard} fill="white">
+              <rect x="40" y="400" width="2000" height="2000" />
+            </AnimatedTextureContainer>
             <g id="Vector_2" fill="#000">
               <mask
                 id="path-17-outside-1_9_7"
