@@ -67,6 +67,8 @@ export default function Raw() {
 
   const pickguard = watch("pickguard");
 
+  const lhs = watch("orientation") === OrientationType.LEFT;
+
   const hollowBodyStyle = useAnimatedStyle({ opacity: hollowBody ? 1 : 0 });
   const germanCarveStyle = useAnimatedStyle({ opacity: germanCarve ? 1 : 0 });
 
@@ -118,6 +120,11 @@ export default function Raw() {
 
   if (state.moving) {
     additions.willChange = "transform";
+  }
+
+  if (lhs) {
+    //@ts-ignore
+    additions.transform = `scaleX(-1)`;
   }
 
   return (
