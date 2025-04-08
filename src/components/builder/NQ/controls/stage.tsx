@@ -146,7 +146,7 @@ export default function Stage() {
               <g id="g478_3">
                 <path
                   id="path480_3"
-                  fill="#D9D9D9"
+                  fill="#231F20"
                   stroke="#000"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -225,7 +225,7 @@ export default function Stage() {
               <g id="g478_4">
                 <path
                   id="path480_4"
-                  fill="#D9D9D9"
+                  fill="#231F20"
                   stroke="#000"
                   strokeLinecap="round"
                   strokeLinejoin="round"

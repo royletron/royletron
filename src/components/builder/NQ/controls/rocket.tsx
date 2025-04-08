@@ -49,7 +49,7 @@ export default function Rocket() {
         <g id="g478_5">
           <path
             id="path480_5"
-            fill="#D9D9D9"
+            fill="#231F20"
             stroke="#000"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -128,7 +128,7 @@ export default function Rocket() {
         <g id="g478_6">
           <path
             id="path480_6"
-            fill="#D9D9D9"
+            fill="#231F20"
             stroke="#000"
             strokeLinecap="round"
             strokeLinejoin="round"

@@ -56,6 +56,7 @@ export type NQProps = {
   germanCarve: boolean;
   pickguard: PickguardTexture;
   tremolo: boolean;
+  tuners: TunerType;
 };
 
 const NQTypeEnum = nativeEnum(NQType);
@@ -66,6 +67,7 @@ const NeckWoodEnum = nativeEnum(NeckWoodTextures);
 const FretboardWoodEnum = nativeEnum(FretboardWoodTextures);
 const PaintColorEnum = nativeEnum(PaintColors);
 const PickguardEnum = nativeEnum(PickguardTexture);
+const TunerTypeEnum = nativeEnum(TunerType);
 
 export const NQFormSchema = object({
   type: NQTypeEnum.default(NQType.STAGE),
@@ -83,6 +85,7 @@ export const NQFormSchema = object({
   germanCarve: boolean().default(false),
   pickguard: PickguardEnum.default(PickguardTexture.RED_TORTOISESHELL),
   tremolo: boolean().default(false),
+  tuners: TunerTypeEnum.default(TunerType.STANDARD),
 });
 
 const OptionGroup = ({
@@ -117,22 +120,6 @@ const OptionGroup = ({
 };
 
 const Neck = ({ active }: { active: boolean }) => {
-  const { watch, setValue } = useFormContext();
-  const neckWood = watch("neckWood");
-
-  useEffect(() => {
-    switch (neckWood) {
-      case NeckWoodTextures.MAPLE:
-        setValue("fretboardWood", FretboardWoodTextures.MAPLE);
-        break;
-      case NeckWoodTextures.FLAME_ROAST_MAPLE:
-        setValue("fretboardWood", FretboardWoodTextures.FLAME_ROAST_MAPLE);
-        break;
-      case NeckWoodTextures.ROAST_MAPLE:
-        setValue("fretboardWood", FretboardWoodTextures.ROAST_MAPLE);
-        break;
-    }
-  }, [neckWood]);
   return (
     <OptionGroup active={active}>
       <Selector name="neckWood" label="Wood">
@@ -160,46 +147,39 @@ const Neck = ({ active }: { active: boolean }) => {
 };
 
 const Fingerboard = ({ active }: { active: boolean }) => {
-  const { watch } = useFormContext();
-  const neckWood = watch("neckWood");
-
-  const options = useMemo(() => {
-    switch (neckWood) {
-      case NeckWoodTextures.ROAST_MAPLE:
-        return [
-          <Option value={FretboardWoodTextures.ROAST_MAPLE}>
-            Roasted Maple
-          </Option>,
-          <Option value={FretboardWoodTextures.ROSEWOOD}>Rosewood</Option>,
-        ];
-      case NeckWoodTextures.FLAME_ROAST_MAPLE:
-        return [
-          <Option value={FretboardWoodTextures.FLAME_ROAST_MAPLE}>
-            Flame Roasted Maple
-          </Option>,
-          <Option value={FretboardWoodTextures.ROSEWOOD}>Rosewood</Option>,
-        ];
-      case NeckWoodTextures.MAPLE:
-        return [
-          <Option value={FretboardWoodTextures.MAPLE}>Maple</Option>,
-          <Option value={FretboardWoodTextures.EBONY}>Ebony</Option>,
-        ];
-      default:
-        return [];
-    }
-  }, [neckWood]);
   return (
     <OptionGroup active={active}>
       <Selector name="fretboardWood" label="Wood">
-        {options}
+        <Option
+          value={FretboardWoodTextures.MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Maple
+        </Option>
+        <Option
+          value={FretboardWoodTextures.ROAST_MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Roasted Maple
+        </Option>
+        <Option
+          value={FretboardWoodTextures.FLAME_ROAST_MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Flame Roasted Maple
+        </Option>
+        <Option
+          value={FretboardWoodTextures.ROSEWOOD}
+          className="w-32 text-center justify-center"
+        >
+          Rosewood
+        </Option>
       </Selector>
     </OptionGroup>
   );
 };
 
 const Body = ({ active }: { active: boolean }) => {
-  const { watch } = useFormContext();
-  const bodyPaint = watch("bodyPaint");
   return (
     <OptionGroup active={active}>
       <Selector name="bodyWood" label="Wood">
@@ -259,6 +239,10 @@ const Headstock = ({ active }: { active: boolean }) => {
       >
         <Option value={true}>Yes</Option>
         <Option value={false}>No</Option>
+      </Selector>
+      <Selector name="tuners" label="Tuners">
+        <Option value={TunerType.STANDARD}>Standard</Option>
+        <Option value={TunerType.LOCKING}>Locking</Option>
       </Selector>
     </OptionGroup>
   );

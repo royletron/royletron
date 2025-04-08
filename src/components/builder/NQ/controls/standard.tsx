@@ -49,7 +49,7 @@ export default function Standard() {
         <g id="g478">
           <path
             id="path480"
-            fill="#D9D9D9"
+            fill="#231F20"
             stroke="#000"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -164,7 +164,7 @@ export default function Standard() {
         <g id="g478_2">
           <path
             id="path480_2"
-            fill="#D9D9D9"
+            fill="#231F20"
             stroke="#000"
             strokeLinecap="round"
             strokeLinejoin="round"

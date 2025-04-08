@@ -11,7 +11,7 @@ import Pickup, { PickupType } from "./pickups";
 import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
 import { animated, useSpring } from "@react-spring/web";
 import { OthersDef, PickguardTexture } from "../Textures/guards";
-import { NQType, OrientationType, type NQProps } from "./options";
+import { NQType, OrientationType, TunerType, type NQProps } from "./options";
 import Pickguards from "./pickguards";
 import Controls from "./controls";
 import { useControls, useTransformEffect } from "react-zoom-pan-pinch";
@@ -36,6 +36,7 @@ export const defaultValues: NQProps = {
   neckLength: 24.5,
   pickguard: PickguardTexture.RED_TORTOISESHELL,
   tremolo: false,
+  tuners: TunerType.STANDARD,
 };
 
 export default function Raw() {
@@ -722,7 +723,7 @@ export default function Raw() {
               strokeWidth="2"
               d="M239.199 966.798a8 8 0 0 1-7.999-8.098l7.901-643.7h60l7.9 643.7a8 8 0 0 1-7.999 8.098z"
             ></path>
-            <g id="FRETS" fill="#fff" stroke="#000" strokeWidth="0.5">
+            <g id="FRETS" fill="#C0C0C0" stroke="#000" strokeWidth="0.5">
               <rect
                 id="Rectangle 2"
                 width="2.4"
