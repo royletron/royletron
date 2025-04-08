@@ -3737,134 +3737,7 @@ export function TortoiseShell({
 }) {
   return (
     <>
-      <filter id={id}>
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.01"
-          numOctaves="6"
-          seed="0"
-          stitchTiles="stitch"
-          result="feTurbulence-7efa1b62"
-        ></feTurbulence>
-        <feTurbulence
-          type="turbulence"
-          baseFrequency="0.01"
-          numOctaves="4"
-          seed="6"
-          stitchTiles="stitch"
-          result="feTurbulence-cd349346"
-        ></feTurbulence>
-        <feDiffuseLighting
-          in="feTurbulence-7efa1b62"
-          surfaceScale="5"
-          diffuseConstant="3"
-          lightingColor={accent}
-          result="feDiffuseLighting-1afe173c"
-        >
-          <feDistantLight azimuth="55" elevation="7"></feDistantLight>
-        </feDiffuseLighting>
-        <feColorMatrix
-          in="feDiffuseLighting-1afe173c"
-          type="saturate"
-          values="0.5"
-          result="feColorMatrix-3ec88fbe"
-        ></feColorMatrix>
-        <feDiffuseLighting
-          in="feTurbulence-cd349346"
-          surfaceScale="2"
-          diffuseConstant="1"
-          lightingColor={color}
-          result="feDiffuseLighting-aac24d46"
-        >
-          <feDistantLight azimuth="14" elevation="6"></feDistantLight>
-        </feDiffuseLighting>
-        <feFlood
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          floodColor={alt}
-          floodOpacity="1"
-          result="feFlood-c255919d"
-        ></feFlood>
-        <feColorMatrix
-          in="feDiffuseLighting-aac24d46"
-          type="saturate"
-          values="0.5"
-          result="feColorMatrix-54118400"
-        ></feColorMatrix>
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.0003 0.00002"
-          numOctaves="1"
-          seed="30"
-          stitchTiles="noStitch"
-          result="feTurbulence-10792003"
-        ></feTurbulence>
-        <feBlend
-          in="feFlood-c255919d"
-          in2="feColorMatrix-3ec88fbe"
-          mode="overlay"
-          result="feBlend-c2fe2b1b"
-        ></feBlend>
-        <feDiffuseLighting
-          in="feTurbulence-10792003"
-          surfaceScale="10"
-          diffuseConstant="25"
-          lightingColor="#ffffff"
-          result="feDiffuseLighting-c67d27c1"
-        >
-          <feDistantLight azimuth="1" elevation="0"></feDistantLight>
-        </feDiffuseLighting>
-        <feBlend
-          in="feBlend-c2fe2b1b"
-          in2="feColorMatrix-54118400"
-          mode="screen"
-          result="feBlend-5b42dd66"
-        ></feBlend>
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.1"
-          numOctaves="10"
-          seed="0"
-          stitchTiles="stitch"
-          result="feTurbulence-68bb4932"
-        ></feTurbulence>
-        <feComposite
-          in="feBlend-5b42dd66"
-          in2="feDiffuseLighting-c67d27c1"
-          operator="lighter"
-          result="feComposite-0354f1ad"
-        ></feComposite>
-        <feFlood
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          floodColor={alt2}
-          floodOpacity="0.5"
-          result="feFlood-afa48fcc"
-        ></feFlood>
-        <feDisplacementMap
-          in="feComposite-0354f1ad"
-          in2="feTurbulence-68bb4932"
-          scale="50"
-          xChannelSelector="R"
-          yChannelSelector="B"
-          result="feDisplacementMap-55796b24"
-        ></feDisplacementMap>
-        <feBlend
-          in="feDisplacementMap-55796b24"
-          in2="feFlood-afa48fcc"
-          mode="darken"
-          result="feBlend-2a320ba6"
-        ></feBlend>
-        <feBlend
-          in="feBlend-2a320ba6"
-          in2="SourceGraphic"
-          mode="normal"
-        ></feBlend>
-      </filter>
+      <filter id={id}></filter>
     </>
   );
 }
@@ -3886,51 +3759,11 @@ export function OthersDef() {
         alt2="#54473F"
         accent="#ffeb85"
       />
-      <filter id={PickguardTexture.BWB}>
-        <feFlood floodColor="#101010" result="flood" />
-        <feComposite
-          in="flood"
-          in2="SourceGraphic"
-          operator="in"
-          result="mask"
-        />
-      </filter>
-      <filter id={PickguardTexture.BLACK_SINGLEPLY}>
-        <feFlood floodColor="#000000" result="flood" />
-        <feComposite
-          in="flood"
-          in2="SourceGraphic"
-          operator="in"
-          result="mask"
-        />
-      </filter>
-      <filter id={PickguardTexture.WHITE_SINGLEPLY}>
-        <feFlood floodColor="#ffffff" result="flood" />
-        <feComposite
-          in="flood"
-          in2="SourceGraphic"
-          operator="in"
-          result="mask"
-        />
-      </filter>
-      <filter id={PickguardTexture.CREAM_SINGLEPLY}>
-        <feFlood floodColor="#f5f5dc" result="flood" />
-        <feComposite
-          in="flood"
-          in2="SourceGraphic"
-          operator="in"
-          result="mask"
-        />
-      </filter>
-      <filter id={PickguardTexture.VINTAGE_WHITE_SINGLEPLY}>
-        <feFlood floodColor="#f5f5dc" result="flood" />
-        <feComposite
-          in="flood"
-          in2="SourceGraphic"
-          operator="in"
-          result="mask"
-        />
-      </filter>
+      <filter id={PickguardTexture.BWB}></filter>
+      <filter id={PickguardTexture.BLACK_SINGLEPLY}></filter>
+      <filter id={PickguardTexture.WHITE_SINGLEPLY}></filter>
+      <filter id={PickguardTexture.CREAM_SINGLEPLY}></filter>
+      <filter id={PickguardTexture.VINTAGE_WHITE_SINGLEPLY}></filter>
     </>
   );
 }

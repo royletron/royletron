@@ -180,16 +180,11 @@ const Fingerboard = ({ active }: { active: boolean }) => {
 const Body = ({ active }: { active: boolean }) => {
   const { watch } = useFormContext();
   const bodyPaint = watch("bodyPaint");
-  const bodyPainted =
-    bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
   return (
     <OptionGroup active={active}>
       <Selector name="bodyWood" label="Wood">
         <Option value={BodyWoodTextures.KORINA}>Korina</Option>
         <Option value={BodyWoodTextures.SWAMP_ASH}>Swamp Ash</Option>
-        <Option value={BodyWoodTextures.AMERICAN_WALNUT}>
-          American Walnut
-        </Option>
       </Selector>
       <Selector name="bodyPaint" label="Paint" className="!gap-2">
         <Option
@@ -209,14 +204,6 @@ const Body = ({ active }: { active: boolean }) => {
             {" "}
           </Option>
         ))}
-      </Selector>
-      <Selector
-        name="headstockPaint"
-        label={"Matching Headstock?"}
-        disabled={!bodyPainted}
-      >
-        <Option value={true}>Yes</Option>
-        <Option value={false}>No</Option>
       </Selector>
     </OptionGroup>
   );
@@ -239,9 +226,20 @@ const Orientation = ({ active }: { active: boolean }) => {
 };
 
 const Headstock = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const bodyPaint = watch("bodyPaint");
+  const bodyPainted =
+    bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
   return (
     <OptionGroup active={active}>
-      <p>todo</p>
+      <Selector
+        name="headstockPaint"
+        label={"Matching Headstock?"}
+        disabled={!bodyPainted}
+      >
+        <Option value={true}>Yes</Option>
+        <Option value={false}>No</Option>
+      </Selector>
     </OptionGroup>
   );
 };
@@ -351,8 +349,7 @@ const TabList = [
 const zoom = {
   full: [0],
   body: [1, 5, 6, 7],
-  neck: [2],
-  fretboard: [3],
+  neck: [2, 3],
   headstock: [4],
 };
 

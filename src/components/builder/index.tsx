@@ -11,6 +11,7 @@ import Raw, { defaultValues } from "./NQ/raw";
 import Controls from "./Controls";
 
 import bg from "~/assets/images/guitar/bg.avif";
+import { isSafari } from "react-device-detect";
 
 export default function Builder() {
   const methods = useForm<NQProps>({
@@ -36,7 +37,13 @@ export default function Builder() {
         >
           <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
             <TransformComponent
-              wrapperStyle={{ width: "100%", height: "100%" }}
+              wrapperStyle={{
+                width: "100%",
+                height: "100%",
+              }}
+              contentStyle={{
+                willChange: isSafari ? "transform" : "unset",
+              }}
             >
               <Raw />
             </TransformComponent>

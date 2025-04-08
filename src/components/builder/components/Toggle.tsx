@@ -18,7 +18,6 @@ export default function Toggle({
   useEffect(() => {
     api.start({
       to: { opacity: on ? 1 : 0 },
-      delay: on ? 0 : 200,
     });
   }, [on]);
 

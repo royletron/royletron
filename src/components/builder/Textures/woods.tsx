@@ -1,9 +1,15 @@
 import { useSpring, animated, useSpringValue } from "@react-spring/web";
 import React, { useEffect } from "react";
 
+import korina from "./imgs/korina_texture.jpg";
+import swamp from "./imgs/swamp_texture.jpg";
+import maple from "./imgs/maple.jpg";
+import roastedMaple from "./imgs/roasted_maple_texture.jpg";
+import flameRoastedMaple from "./imgs/flame_roasted_maple_texture.jpg";
+import roseWood from "./imgs/rosewood_texture.jpg";
+
 export enum BodyWoodTextures {
   KORINA = "korina",
-  AMERICAN_WALNUT = "american-walnut",
   SWAMP_ASH = "swamp-ash",
 }
 
@@ -20,6 +26,57 @@ export enum FretboardWoodTextures {
   ROAST_MAPLE = "roast-maple",
   FLAME_ROAST_MAPLE = "flame-roast-maple",
 }
+
+export const WoodPattern = ({
+  id,
+  width,
+  height,
+  src,
+}: {
+  id: string;
+  width: number;
+  height: number;
+  src: string;
+}) => (
+  <pattern
+    id={id}
+    patternUnits="userSpaceOnUse"
+    width={width * 2}
+    height={height * 2}
+  >
+    <image href={src} x="0" y="0" />
+    <image
+      href={src}
+      x={width}
+      y="0"
+      style={{
+        transformBox: "content-box",
+        transform: "scaleX(-1)",
+        transformOrigin: "unset",
+      }}
+    />
+    <image
+      href={src}
+      x="0"
+      y={height}
+      style={{
+        transformBox: "content-box",
+        transform: "scaleY(-1)",
+        transformOrigin: "unset",
+      }}
+    />
+    <image
+      href={src}
+      x={width}
+      y={height}
+      style={{
+        transformBox: "content-box",
+        transform: "scale(-1)",
+        transformOrigin: "unset",
+      }}
+    />
+  </pattern>
+);
 
 export const WoodTextures = {
   ...BodyWoodTextures,
@@ -40,413 +97,79 @@ export const woods: Record<WoodTextures, WoodTexture> = {
   [WoodTextures.EBONY]: {
     baseColor: "#575250",
     filter: () => (
-      <filter id={WoodTextures.EBONY} x="0" y="0" width="100%" height="100%">
-        <feTurbulence
-          result="noise1"
-          type="turbulence"
-          seed="5"
-          baseFrequency="0.002 0.006"
-          numOctaves="30"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.001 0.02"
-          numOctaves="7"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise3"
-          type="turbulence"
-          seed="3"
-          baseFrequency="0.002 0.0005"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feDiffuseLighting
-          in="noise1"
-          result="lighting1"
-          surfaceScale="0"
-          diffuseConstant="0.9"
-        >
-          <feDistantLight azimuth="235" elevation="45" />
-        </feDiffuseLighting>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-3"
-          diffuseConstant="0.33"
-        >
-          <feDistantLight azimuth="125" elevation="65" />
-        </feDiffuseLighting>
-        <feBlend
-          in="lighting1"
-          in2="lighting2"
-          result="combined1"
-          mode="overlay"
-        />
-        <feBlend
-          in="combined1"
-          in2="lighting3"
-          result="combined2"
-          mode="overlay"
-        />
-        <feBlend in="SourceGraphic" in2="combined2" mode="overlay" />
-      </filter>
+      <filter
+        id={WoodTextures.EBONY}
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+      ></filter>
     ),
   },
   [WoodTextures.FLAME_ROAST_MAPLE]: {
     baseColor: "#a16b04",
     filter: () => (
-      <filter
+      <WoodPattern
         id={WoodTextures.FLAME_ROAST_MAPLE}
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-      >
-        <feTurbulence
-          result="noise1"
-          type="turbulence"
-          seed="5"
-          baseFrequency="0.002 0.006"
-          numOctaves="30"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.001 0.02"
-          numOctaves="7"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise3"
-          type="turbulence"
-          seed="3"
-          baseFrequency="0.002 0.0005"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feDiffuseLighting
-          in="noise1"
-          result="lighting1"
-          surfaceScale="0"
-          diffuseConstant="0.9"
-        >
-          <feDistantLight azimuth="235" elevation="45" />
-        </feDiffuseLighting>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-3"
-          diffuseConstant="0.33"
-        >
-          <feDistantLight azimuth="125" elevation="65" />
-        </feDiffuseLighting>
-        <feBlend
-          in="lighting1"
-          in2="lighting2"
-          result="combined1"
-          mode="overlay"
-        />
-        <feBlend
-          in="combined1"
-          in2="lighting3"
-          result="combined2"
-          mode="overlay"
-        />
-        <feColorMatrix
-          in2="combined2"
-          result="matrix"
-          type="luminanceToAlpha"
-        />
-        <feBlend in="SourceGraphic" in2="matrix" mode="overlay" />
-      </filter>
+        width={flameRoastedMaple.width}
+        height={flameRoastedMaple.height}
+        src={flameRoastedMaple.src}
+      />
     ),
   },
   [WoodTextures.MAPLE]: {
-    baseColor: "#f2d29f",
+    baseColor: "#edcd97",
     filter: () => (
-      <filter id={WoodTextures.MAPLE} x="0" y="0" width="100%" height="100%">
-        <feTurbulence
-          result="noise1"
-          type="turbulence"
-          seed="5"
-          baseFrequency="0.002 0.006"
-          numOctaves="30"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.001 0.02"
-          numOctaves="7"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise3"
-          type="turbulence"
-          seed="3"
-          baseFrequency="0.002 0.0005"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feDiffuseLighting
-          in="noise1"
-          result="lighting1"
-          surfaceScale="0"
-          diffuseConstant="0.9"
-        >
-          <feDistantLight azimuth="235" elevation="45" />
-        </feDiffuseLighting>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-3"
-          diffuseConstant="0.33"
-        >
-          <feDistantLight azimuth="125" elevation="65" />
-        </feDiffuseLighting>
-        <feBlend
-          in="lighting1"
-          in2="lighting2"
-          result="combined1"
-          mode="overlay"
-        />
-        <feBlend
-          in="combined1"
-          in2="lighting3"
-          result="combined2"
-          mode="overlay"
-        />
-        <feColorMatrix
-          in2="combined2"
-          result="matrix"
-          type="luminanceToAlpha"
-        />
-        <feBlend in="SourceGraphic" in2="matrix" mode="overlay" />
-      </filter>
+      <WoodPattern
+        id={WoodTextures.MAPLE}
+        width={maple.width}
+        height={maple.height}
+        src={maple.src}
+      />
     ),
   },
   [WoodTextures.ROSEWOOD]: {
     baseColor: "#965436",
     filter: () => (
-      <filter id={WoodTextures.ROSEWOOD} x="0" y="0" width="100%" height="100%">
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.2 0.015"
-          numOctaves="1"
-          stitchTiles="stitch"
-        ></feTurbulence>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-5"
-          diffuseConstant="0.3"
-        >
-          <feDistantLight azimuth="225" elevation="75"></feDistantLight>
-        </feDiffuseLighting>
-        <feBlend in="SourceGraphic" in2="lighting2" mode="overlay"></feBlend>
-      </filter>
+      <WoodPattern
+        id={WoodTextures.ROSEWOOD}
+        width={roseWood.width}
+        height={roseWood.height}
+        src={roseWood.src}
+      />
     ),
   },
   [WoodTextures.ROAST_MAPLE]: {
     baseColor: "#99682f",
     filter: () => (
-      <filter
+      <WoodPattern
         id={WoodTextures.ROAST_MAPLE}
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-      >
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.3 0.05"
-          numOctaves="1"
-          stitchTiles="stitch"
-        ></feTurbulence>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-5"
-          diffuseConstant="0.3"
-        >
-          <feDistantLight azimuth="225" elevation="75"></feDistantLight>
-        </feDiffuseLighting>
-        <feBlend in="SourceGraphic" in2="lighting2" mode="overlay"></feBlend>
-      </filter>
+        width={roastedMaple.width}
+        height={roastedMaple.height}
+        src={roastedMaple.src}
+      />
     ),
   },
   [WoodTextures.KORINA]: {
     baseColor: "#f2bd78",
     filter: () => (
-      <filter id={WoodTextures.KORINA} x="0" y="0" width="100%" height="100%">
-        <feTurbulence
-          result="noise1"
-          type="turbulence"
-          seed="5"
-          baseFrequency="0.06 0.02"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.1 0.01"
-          numOctaves="5"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise3"
-          type="turbulence"
-          seed="3"
-          baseFrequency="0.02 0.005"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feDiffuseLighting
-          in="noise1"
-          result="lighting1"
-          surfaceScale="0"
-          diffuseConstant="0.9"
-        >
-          <feDistantLight azimuth="235" elevation="45" />
-        </feDiffuseLighting>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-2"
-          diffuseConstant="0.3"
-        >
-          <feDistantLight azimuth="225" elevation="75" />
-        </feDiffuseLighting>
-        <feBlend
-          in="lighting1"
-          in2="lighting2"
-          result="combined1"
-          mode="overlay"
-        />
-        <feBlend
-          in="combined1"
-          in2="lighting3"
-          result="combined2"
-          mode="overlay"
-        />
-        <feBlend in="SourceGraphic" in2="combined2" mode="overlay" />
-      </filter>
+      <WoodPattern
+        id={WoodTextures.KORINA}
+        width={korina.width}
+        height={korina.height}
+        src={korina.src}
+      />
     ),
   },
   [WoodTextures.SWAMP_ASH]: {
     baseColor: "#fabe7f",
     filter: () => (
-      <filter
+      <WoodPattern
         id={WoodTextures.SWAMP_ASH}
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-      >
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency=".1 .01"
-          result="noise2"
-          stitchTiles="stitch"
-        />
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-5"
-          diffuseConstant="0.3"
-        >
-          <feDistantLight azimuth="225" elevation="75" />
-        </feDiffuseLighting>
-        <feBlend in="SourceGraphic" in2="lighting2" mode="overlay" />
-      </filter>
-    ),
-  },
-  [WoodTextures.AMERICAN_WALNUT]: {
-    baseColor: "#4d2e1e",
-    filter: () => (
-      <filter
-        id={WoodTextures.AMERICAN_WALNUT}
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-      >
-        <feTurbulence
-          result="noise1"
-          type="turbulence"
-          seed="5"
-          baseFrequency="0.06 0.02"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise2"
-          type="fractalNoise"
-          seed="4"
-          baseFrequency="0.3 0.05"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feTurbulence
-          result="noise3"
-          type="turbulence"
-          seed="3"
-          baseFrequency="0.02 0.005"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feDiffuseLighting
-          in="noise1"
-          result="lighting1"
-          surfaceScale="0"
-          diffuseConstant="0.9"
-        >
-          <feDistantLight azimuth="235" elevation="45" />
-        </feDiffuseLighting>
-        <feDiffuseLighting
-          in="noise2"
-          result="lighting2"
-          surfaceScale="-2"
-          diffuseConstant="0.3"
-        >
-          <feDistantLight azimuth="225" elevation="75" />
-        </feDiffuseLighting>
-        <feDiffuseLighting
-          in="noise3"
-          result="lighting3"
-          surfaceScale="5"
-          diffuseConstant="0.55"
-        >
-          <feDistantLight azimuth="225" elevation="90" />
-        </feDiffuseLighting>
-        <feBlend
-          in="lighting1"
-          in2="lighting2"
-          result="combined1"
-          mode="overlay"
-        />
-        <feBlend
-          in="combined1"
-          in2="lighting3"
-          result="combined2"
-          mode="overlay"
-        />
-        <feBlend in="SourceGraphic" in2="combined2" mode="overlay" />
-      </filter>
+        width={swamp.width}
+        height={swamp.height}
+        src={swamp.src}
+      />
     ),
   },
 };

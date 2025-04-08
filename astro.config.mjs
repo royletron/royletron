@@ -16,7 +16,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: ["c75d-194-120-133-8.ngrok-free.app"],
+      allowedHosts: ["f661-194-120-133-8.ngrok-free.app"],
     },
   },
 });
