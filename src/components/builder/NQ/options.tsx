@@ -11,12 +11,13 @@ import {
   BodyWoodTextures,
   FretboardWoodTextures,
   NeckWoodTextures,
+  woods,
 } from "../Textures/woods";
 import { useDebounce } from "@uidotdev/usehooks";
 import { useFormContext } from "react-hook-form";
 import { paintColors, PaintColors } from "../Textures/paints";
 import { PickguardTexture } from "../Textures/guards";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 import Selector, { Option } from "../components/Selector";
 import { PickupType, PickupTypeMap } from "./pickups";
@@ -180,6 +181,8 @@ const Fingerboard = ({ active }: { active: boolean }) => {
 };
 
 const Body = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const bodyWood = watch("bodyWood");
   return (
     <OptionGroup active={active}>
       <Selector name="bodyWood" label="Wood">
@@ -190,6 +193,7 @@ const Body = ({ active }: { active: boolean }) => {
         <Option
           value={undefined}
           className="!rounded-full !h-6 !w-6"
+          style={{ backgroundColor: woods[bodyWood].baseColor }}
           tooltip="Natural"
         >
           {" "}
@@ -234,7 +238,7 @@ const Headstock = ({ active }: { active: boolean }) => {
     <OptionGroup active={active}>
       <Selector
         name="headstockPaint"
-        label={"Matching Headstock?"}
+        label={"Painted Headstock?"}
         disabled={!bodyPainted ? "Select a body paint first" : undefined}
       >
         <Option value={true}>Yes</Option>

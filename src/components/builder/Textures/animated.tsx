@@ -7,11 +7,13 @@ export default function AnimatedTextureContainer({
   texture,
   fill,
   fillOpacity = 1,
+  textureOpacity = 1,
 }: {
   children: React.ReactNode;
   texture?: string;
   fill?: string;
   fillOpacity?: number;
+  textureOpacity?: number;
 }) {
   const [styles, api] = useSpring(() => ({
     from: {
@@ -25,7 +27,9 @@ export default function AnimatedTextureContainer({
   }, [fill, fillOpacity]);
   return (
     <>
-      <g fill={`url(#${texture})`}>{children}</g>
+      <g fill={`url(#${texture})`} fillOpacity={textureOpacity}>
+        {children}
+      </g>
       <animated.g style={{ mixBlendMode: "multiply", ...styles }}>
         {children}
       </animated.g>

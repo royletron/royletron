@@ -69,6 +69,7 @@ export default function Raw() {
 
   const lhs = watch("orientation") === OrientationType.LEFT;
 
+  const bodyOpacity = bodyPaint ? 0.7 : 1;
   const hollowBodyStyle = useAnimatedStyle({ opacity: hollowBody ? 1 : 0 });
   const germanCarveStyle = useAnimatedStyle({ opacity: germanCarve ? 1 : 0 });
 
@@ -165,6 +166,7 @@ export default function Raw() {
           <g mask="url(#mask0_9_7)">
             <AnimatedTextureContainer
               texture={bodyTexture}
+              textureOpacity={bodyOpacity}
               fill={bodyPaintColor}
             >
               <rect x="40" y="400" width="2000" height="2000" />
@@ -203,6 +205,7 @@ export default function Raw() {
               <g mask="url(#mask1_9_7)">
                 <AnimatedTextureContainer
                   texture={bodyTexture}
+                  textureOpacity={bodyOpacity}
                   fill={bodyPaintColor}
                 >
                   <rect x="40" y="400" width="2000" height="2000" />
@@ -228,6 +231,7 @@ export default function Raw() {
               <g mask="url(#mask2_9_7)">
                 <AnimatedTextureContainer
                   texture={bodyTexture}
+                  textureOpacity={bodyOpacity}
                   fill={bodyPaintColor}
                 >
                   <rect x="40" y="400" width="2000" height="2000" />
@@ -239,6 +243,7 @@ export default function Raw() {
         <Toggle on={hollowBody === true}>
           <AnimatedTextureContainer
             texture={bodyTexture}
+            textureOpacity={bodyOpacity}
             fill={woods[bodyWood].baseColor}
           >
             <g>

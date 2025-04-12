@@ -232,119 +232,122 @@ export default function Standard() {
             ></path>
           </g>
         </g>
-        <g id="SCREW_2">
-          <g id="g902_2">
-            <path
-              id="path904_2"
-              fill="#B9B9B9"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="m218 1231-.16-1.12-.48-1.12-.8-.8-.96-.64-.96-.32h-1.28l-.96.32-.96.64-.8.8-.48 1.12-.16 1.12.16 1.12.48 1.12.8.8.96.64.96.32h1.28l.96-.32.96-.64.8-.8.48-1.12z"
-            ></path>
+        <Toggle on={tremolo === false}>
+          <g id="SCREW_2">
+            <g id="g902_2">
+              <path
+                id="path904_2"
+                fill="#B9B9B9"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="m218 1231-.16-1.12-.48-1.12-.8-.8-.96-.64-.96-.32h-1.28l-.96.32-.96.64-.8.8-.48 1.12-.16 1.12.16 1.12.48 1.12.8.8.96.64.96.32h1.28l.96-.32.96-.64.8-.8.48-1.12z"
+              ></path>
+            </g>
+            <g id="g866_2">
+              <path
+                id="path868_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="m212.56 1230.52.64-.16.32-.64v-1.12"
+              ></path>
+            </g>
+            <g id="g870_2">
+              <path
+                id="path872_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M214.48 1228.6h-.96"
+              ></path>
+            </g>
+            <g id="g874_2">
+              <path
+                id="path876_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M213.52 1229.72h.8m0 0v-1.12m0 1.12.32.64.64.16h.96"
+              ></path>
+            </g>
+            <g id="g878_2">
+              <path
+                id="path880_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M216.24 1231.48v-.96"
+              ></path>
+            </g>
+            <g id="g882_2">
+              <path
+                id="path884_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M215.28 1230.52v.96m0 0h.96m-.96 0-.64.16-.32.64v1.12m-.8-1.12-.32-.64-.64-.16h-.96"
+              ></path>
+            </g>
+            <g id="g886_2">
+              <path
+                id="path888_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M211.6 1230.52v.96"
+              ></path>
+            </g>
+            <g id="g890_2">
+              <path
+                id="path892_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M212.56 1231.48v-.96m.96 2.88v-1.12"
+              ></path>
+            </g>
+            <g id="g894_2">
+              <path
+                id="path896_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M213.52 1233.4h.96"
+              ></path>
+            </g>
+            <g id="g898_2">
+              <path
+                id="path900_2"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="0.5"
+                d="M214.32 1232.28h-.8m-1.92-1.76h.96"
+              ></path>
+            </g>
           </g>
-          <g id="g866_2">
-            <path
-              id="path868_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="m212.56 1230.52.64-.16.32-.64v-1.12"
-            ></path>
-          </g>
-          <g id="g870_2">
-            <path
-              id="path872_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M214.48 1228.6h-.96"
-            ></path>
-          </g>
-          <g id="g874_2">
-            <path
-              id="path876_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M213.52 1229.72h.8m0 0v-1.12m0 1.12.32.64.64.16h.96"
-            ></path>
-          </g>
-          <g id="g878_2">
-            <path
-              id="path880_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M216.24 1231.48v-.96"
-            ></path>
-          </g>
-          <g id="g882_2">
-            <path
-              id="path884_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M215.28 1230.52v.96m0 0h.96m-.96 0-.64.16-.32.64v1.12m-.8-1.12-.32-.64-.64-.16h-.96"
-            ></path>
-          </g>
-          <g id="g886_2">
-            <path
-              id="path888_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M211.6 1230.52v.96"
-            ></path>
-          </g>
-          <g id="g890_2">
-            <path
-              id="path892_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M212.56 1231.48v-.96m.96 2.88v-1.12"
-            ></path>
-          </g>
-          <g id="g894_2">
-            <path
-              id="path896_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M213.52 1233.4h.96"
-            ></path>
-          </g>
-          <g id="g898_2">
-            <path
-              id="path900_2"
-              stroke="#000"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              strokeWidth="0.5"
-              d="M214.32 1232.28h-.8m-1.92-1.76h.96"
-            ></path>
-          </g>
-        </g>
+        </Toggle>
+
         <g id="SCREW_3">
           <g id="g902_3">
             <path

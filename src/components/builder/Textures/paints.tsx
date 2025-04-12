@@ -1,14 +1,16 @@
 export enum PaintColors {
-  ConfettiPink = "confetti-pink",
-  FoolsGold = "fools-gold",
-  JackBlack = "jack-black",
-  SonicRed = "sonic-red",
-  MidAzureGreen = "azure-mid-green",
-  OffWhite = "off-white",
-  MrDavidYellow = "mr-david-yellow",
-  MarineBlue = "marine-blue",
-  JewelBeetleGreen = "jewel-beetle-green",
+  AtomicRed = "atomic-red",
+  BakedCherry = "baked-cherry-red",
   HeatOrange = "heat-orange",
+  MarigoldOrange = "marigold-orange",
+  BlueVerditer = "blue-verditer",
+  MarineBlue = "marine-blue",
+  MidAzureGreen = "mid-azure-green",
+  JewelBeetleGreen = "jewel-beetle-green",
+  SilentWhite = "silent-white",
+  JackBlack = "jack-black",
+  MrDavidYellow = "mr-david-yellow",
+  ConfettiPink = "confetti-pink",
 }
 
 type PaintColor = {
@@ -18,44 +20,54 @@ type PaintColor = {
 };
 
 export const paintColors: Record<PaintColors, PaintColor> = {
+  // not found
+  [PaintColors.AtomicRed]: {
+    fill: "#bd2520",
+    name: "Atomic Red",
+  },
+  // not found
+  [PaintColors.BakedCherry]: {
+    fill: "#611117",
+    name: "Baked Cherry Red",
+  },
+  [PaintColors.HeatOrange]: {
+    fill: "#9f3c19",
+    name: "Heat Orange",
+  },
+  [PaintColors.MarigoldOrange]: {
+    fill: "#f0841f",
+    name: "Marigold Orange",
+  },
+  [PaintColors.BlueVerditer]: {
+    fill: "#659ab2",
+    name: "Blue Verditer",
+  },
+  [PaintColors.MarineBlue]: {
+    fill: "#03414e",
+    name: "Marine Blue",
+  },
+  [PaintColors.MidAzureGreen]: {
+    fill: "#063025",
+    name: "Mid Azure Green",
+  },
+  [PaintColors.JewelBeetleGreen]: {
+    fill: "#566038",
+    name: "Jewel Beetle Green",
+  },
+  [PaintColors.SilentWhite]: {
+    fill: "#F5F3E2",
+    name: "Silent White",
+  },
+  [PaintColors.JackBlack]: {
+    fill: "#040e0f",
+    name: "Jack Black",
+  },
+  [PaintColors.MrDavidYellow]: {
+    fill: "#e1c022",
+    name: "Mr David Yellow",
+  },
   [PaintColors.ConfettiPink]: {
     fill: "#e9d0cf",
     name: "Confetti Pink",
-  },
-  [PaintColors.FoolsGold]: {
-    fill: "#b08d57",
-    name: "Fool's Gold",
-  },
-  [PaintColors.JackBlack]: {
-    fill: "#1a1a1a",
-    name: "Jack Black",
-  },
-  [PaintColors.SonicRed]: {
-    fill: "#ff0000",
-    name: "Sonic Red",
-  },
-  [PaintColors.MidAzureGreen]: {
-    fill: "#007f7f",
-    name: "Mid Azure Green",
-  },
-  [PaintColors.OffWhite]: {
-    fill: "#f0f0f0",
-    name: "Off White",
-  },
-  [PaintColors.MrDavidYellow]: {
-    fill: "#f0f000",
-    name: "Mr. David Yellow",
-  },
-  [PaintColors.MarineBlue]: {
-    fill: "#0000f0",
-    name: "Marine Blue",
-  },
-  [PaintColors.JewelBeetleGreen]: {
-    fill: "#00f000",
-    name: "Jewel Beetle Green",
-  },
-  [PaintColors.HeatOrange]: {
-    fill: "#f07f00",
-    name: "Heat Orange",
   },
 };

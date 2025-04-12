@@ -129,7 +129,7 @@ export const woods: Record<WoodTextures, WoodTexture> = {
     ),
   },
   [WoodTextures.ROSEWOOD]: {
-    baseColor: "#965436",
+    baseColor: "#661f00",
     filter: () => (
       <WoodPattern
         id={WoodTextures.ROSEWOOD}
