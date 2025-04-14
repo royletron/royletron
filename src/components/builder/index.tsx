@@ -36,7 +36,7 @@ export default function Builder() {
   };
   return (
     <FormProvider {...methods}>
-      <TransformWrapper minScale={0.3} smooth>
+      <TransformWrapper minScale={0.5} maxScale={5} smooth>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="flex flex-col w-full max-h-full h-full"
