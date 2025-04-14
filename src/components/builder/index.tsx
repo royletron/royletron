@@ -11,7 +11,7 @@ import Raw, { defaultValues } from "./NQ/raw";
 import Controls from "./Controls";
 
 import bg from "~/assets/images/guitar/bg.avif";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 const context = createContext<{
   rotation: number;
@@ -25,6 +25,7 @@ export const useRotation = () => {
 
 export default function Builder() {
   const [rotation, setRotation] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
     defaultValues,
@@ -58,7 +59,9 @@ export default function Builder() {
                   height: "100%",
                 }}
               >
-                <Raw />
+                <div className="w-full h-full">
+                  <Raw />
+                </div>
               </TransformComponent>
               <Controls />
             </div>
