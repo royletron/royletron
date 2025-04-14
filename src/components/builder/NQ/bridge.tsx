@@ -1067,7 +1067,6 @@ const WithTrem = () => (
 export default function Bridge() {
   const { watch } = useFormContext();
   const trem = watch("tremolo");
-  console.log("t", trem);
   return (
     <g>
       <Toggle on={trem}>

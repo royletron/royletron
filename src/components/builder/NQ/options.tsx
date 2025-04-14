@@ -41,10 +41,14 @@ export enum TunerType {
   "STANDARD" = "standard",
 }
 
+export enum NeckLength {
+  "24_75" = "24.75",
+  "25_5" = "25.5",
+}
+
 export type NQProps = {
   type: NQType;
   orientation: OrientationType;
-  neckLength: 24.5 | 25.5;
   bodyWood: BodyWoodTextures;
   bodyPaint?: PaintColors;
   headstockPaint: boolean;
@@ -58,6 +62,7 @@ export type NQProps = {
   pickguard: PickguardTexture;
   tremolo: boolean;
   tuners: TunerType;
+  neckLength: NeckLength;
 };
 
 const NQTypeEnum = nativeEnum(NQType);
@@ -69,11 +74,11 @@ const FretboardWoodEnum = nativeEnum(FretboardWoodTextures);
 const PaintColorEnum = nativeEnum(PaintColors);
 const PickguardEnum = nativeEnum(PickguardTexture);
 const TunerTypeEnum = nativeEnum(TunerType);
+const NeckLengthEnum = nativeEnum(NeckLength);
 
 export const NQFormSchema = object({
   type: NQTypeEnum.default(NQType.STAGE),
   orientation: orientationEnum.default(OrientationType.RIGHT),
-  neckLength: union([literal(24.5), literal(25.5)]),
   bodyWood: BodyWoodEnum.default(BodyWoodTextures.KORINA),
   bodyPaint: PaintColorEnum.optional(),
   headstockPaint: boolean().default(false),
@@ -87,6 +92,7 @@ export const NQFormSchema = object({
   pickguard: PickguardEnum.default(PickguardTexture.RED_TORTOISESHELL),
   tremolo: boolean().default(false),
   tuners: TunerTypeEnum.default(TunerType.STANDARD),
+  neckLength: NeckLengthEnum.default(NeckLength["25_5"]),
 });
 
 const OptionGroup = ({
@@ -142,6 +148,10 @@ const Neck = ({ active }: { active: boolean }) => {
         >
           Flamed Roast Maple
         </Option>
+      </Selector>
+      <Selector name="neckLength" label="Neck Length">
+        <Option value={NeckLength["24_75"]}>24.75</Option>
+        <Option value={NeckLength["25_5"]}>25.5</Option>
       </Selector>
     </OptionGroup>
   );

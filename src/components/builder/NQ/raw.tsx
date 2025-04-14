@@ -11,7 +11,13 @@ import Pickup, { PickupType } from "./pickups";
 import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
 import { animated, useSpring } from "@react-spring/web";
 import { OthersDef, PickguardTexture } from "../Textures/guards";
-import { NQType, OrientationType, TunerType, type NQProps } from "./options";
+import {
+  NeckLength,
+  NQType,
+  OrientationType,
+  TunerType,
+  type NQProps,
+} from "./options";
 import Pickguards from "./pickguards";
 import Controls from "./controls";
 import { useControls, useTransformEffect } from "react-zoom-pan-pinch";
@@ -34,10 +40,10 @@ export const defaultValues: NQProps = {
   pickupC: PickupType.DOUBLEA,
   hollowBody: false,
   germanCarve: false,
-  neckLength: 24.5,
   pickguard: PickguardTexture.RED_TORTOISESHELL,
   tremolo: false,
   tuners: TunerType.STANDARD,
+  neckLength: NeckLength["25_5"],
 };
 
 export default function Raw() {
