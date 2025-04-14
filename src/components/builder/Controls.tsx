@@ -20,7 +20,7 @@ export default function Controls({ photo = true }) {
   };
   return (
     <>
-      {photo && <PhotoBooth open={open} onClose={() => {}} />}
+      {photo && <PhotoBooth open={open} onClose={() => setOpen(false)} />}
       <div className="absolute bottom-0 right-0 p-4 flex flex-col gap-2">
         <div className="h-28 flex justify-center items-center">
           <input
