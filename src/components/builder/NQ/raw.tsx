@@ -21,6 +21,7 @@ import Bridge from "./bridge";
 import { isSafari } from "react-device-detect";
 import AnimatedTextureContainer from "../Textures/animated";
 import Toggle from "../components/Toggle";
+import { useRotation } from "..";
 
 export const defaultValues: NQProps = {
   type: NQType.STAGE,
@@ -40,8 +41,10 @@ export const defaultValues: NQProps = {
 };
 
 export default function Raw() {
+  const { rotation, setRotation } = useRotation();
+  const [scaleX, setScaleX] = useState(1);
   const [styles, api] = useSpring(() => ({
-    from: { opacity: 0 },
+    from: { opacity: 0, transform: "scaleX(1)" },
   }));
   const { zoomToElement } = useControls();
   const { watch } = useFormContext();
@@ -115,17 +118,19 @@ export default function Raw() {
     }, 1400);
   }, []);
 
+  useEffect(() => {
+    api.start({
+      transform: `scaleX(${lhs ? -1 : 1}) rotateZ(${rotation}deg)`,
+    });
+  }, [rotation, lhs]);
+
   const additions = {
     willChange: "unset",
+    transformOrigin: "50% 50%",
   };
 
   if (state.moving) {
     additions.willChange = "transform";
-  }
-
-  if (lhs) {
-    //@ts-ignore
-    additions.transform = `scaleX(-1)`;
   }
 
   return (

@@ -1,9 +1,12 @@
 import { useControls } from "react-zoom-pan-pinch";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
+import "rc-slider/assets/index.css";
+import { useRotation } from ".";
 
 export default function Controls() {
   const { zoomIn, zoomOut, zoomToElement } = useControls();
+  const { rotation, setRotation } = useRotation();
   const takeScreenshot = () => {
     const node = document.getElementById("guitar");
     if (!node) return;
@@ -13,8 +16,31 @@ export default function Controls() {
         console.error("oops, something went wrong!", err);
       });
   };
+
+  const reset = async () => {
+    if (rotation != 0) {
+      setRotation(0);
+      setTimeout(() => {
+        zoomToElement("full");
+      }, 400);
+    } else {
+      zoomToElement("full");
+    }
+  };
   return (
     <div className="absolute bottom-0 right-0 p-4 flex flex-col gap-2">
+      <div className="h-28 flex justify-center items-center">
+        <input
+          type="range"
+          min={0}
+          max={360}
+          value={rotation}
+          onChange={(e) => {
+            setRotation(parseInt(e.target.value));
+          }}
+          className="range range-vertical"
+        />
+      </div>
       <button className="btn btn-square" onClick={() => zoomIn()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +76,7 @@ export default function Controls() {
       <button
         className="btn btn-square"
         onClick={() => {
-          zoomToElement("full");
+          reset();
         }}
       >
         <svg

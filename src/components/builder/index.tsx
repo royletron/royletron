@@ -11,9 +11,20 @@ import Raw, { defaultValues } from "./NQ/raw";
 import Controls from "./Controls";
 
 import bg from "~/assets/images/guitar/bg.avif";
-import { isSafari } from "react-device-detect";
+import { createContext, useContext, useState } from "react";
+
+const context = createContext<{
+  rotation: number;
+  setRotation: React.Dispatch<React.SetStateAction<number>>;
+}>({ rotation: 0, setRotation: () => {} });
+
+export const useRotation = () => {
+  const { rotation, setRotation } = useContext(context);
+  return { rotation, setRotation };
+};
 
 export default function Builder() {
+  const [rotation, setRotation] = useState(0);
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
     defaultValues,
@@ -35,21 +46,23 @@ export default function Builder() {
             backgroundPosition: "top center",
           }}
         >
-          <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
-            <TransformComponent
-              wrapperStyle={{
-                width: "100%",
-                height: "100%",
-              }}
-              contentStyle={{
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Raw />
-            </TransformComponent>
-            <Controls />
-          </div>
+          <context.Provider value={{ rotation, setRotation }}>
+            <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
+              <TransformComponent
+                wrapperStyle={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                contentStyle={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Raw />
+              </TransformComponent>
+              <Controls />
+            </div>
+          </context.Provider>
           <div className="w-full border-t border-neutral-300 bg-white">
             <Tabs />
           </div>
