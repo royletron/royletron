@@ -86,6 +86,7 @@ export default function Raw() {
     positionX: 0,
     positionY: 0,
     scale: 1,
+    rotation: 0,
     moving: false,
   });
 
@@ -102,10 +103,19 @@ export default function Raw() {
         positionX: ref.state.positionX,
         positionY: ref.state.positionY,
         scale: ref.state.scale,
+        rotation,
         moving: true,
       };
     });
   });
+
+  useEffect(() => {
+    setState((state) => ({
+      ...state,
+      rotation,
+      moving: true,
+    }));
+  }, [rotation]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -115,7 +125,7 @@ export default function Raw() {
     return () => {
       clearTimeout(timeout);
     };
-  }, [state.positionX, state.positionY, state.scale]);
+  }, [state.positionX, state.positionY, state.scale, rotation]);
 
   useEffect(() => {
     setTimeout(() => {

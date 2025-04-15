@@ -213,12 +213,12 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
     <animated.div className="fixed inset-0 z-10" style={styles}>
       <Flashbulb run={screen} />
       <TransformWrapper minScale={0.5} maxScale={5}>
-        <Passthru
+        {/* <Passthru
           open={open}
           scale={instance.transformState.scale}
           positionX={instance.transformState.positionX}
           positionY={instance.transformState.positionY}
-        />
+        /> */}
         <div className="inset-0 absolute bg-white z-10 p-4 flex flex-col">
           <a
             className="absolute btn btn-square top-4 right-4 z-20"

@@ -22,18 +22,6 @@ export default function Controls({ photo = true }) {
     <>
       {photo && <PhotoBooth open={open} onClose={() => setOpen(false)} />}
       <div className="absolute bottom-0 right-0 p-4 flex flex-col gap-2">
-        <div className="h-28 flex justify-center items-center">
-          <input
-            type="range"
-            min={0}
-            max={360}
-            value={rotation}
-            onChange={(e) => {
-              setRotation(parseInt(e.target.value));
-            }}
-            className="range range-primary range-vertical"
-          />
-        </div>
         <a className="btn btn-square" onClick={() => zoomIn()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

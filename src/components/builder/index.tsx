@@ -25,7 +25,6 @@ export const useRotation = () => {
 
 export default function Builder() {
   const [rotation, setRotation] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
     defaultValues,
@@ -47,25 +46,25 @@ export default function Builder() {
             backgroundPosition: "top center",
           }}
         >
-          <context.Provider value={{ rotation, setRotation }}>
-            <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
-              <TransformComponent
-                wrapperStyle={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                contentStyle={{
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <div className="w-full h-full">
-                  <Raw />
-                </div>
-              </TransformComponent>
+          <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
+            <TransformComponent
+              wrapperStyle={{
+                width: "100%",
+                height: "100%",
+              }}
+              contentStyle={{
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <div className="w-full h-full">
+                <Raw />
+              </div>
+            </TransformComponent>
+            <context.Provider value={{ rotation, setRotation }}>
               <Controls />
-            </div>
-          </context.Provider>
+            </context.Provider>
+          </div>
           <div className="w-full border-t border-neutral-300 bg-white">
             <Tabs />
           </div>
