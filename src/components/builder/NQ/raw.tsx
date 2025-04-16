@@ -28,6 +28,7 @@ import { isSafari } from "react-device-detect";
 import AnimatedTextureContainer from "../Textures/animated";
 import Toggle from "../components/Toggle";
 import { useRotation } from "..";
+import HeadstockLogo from "./headstock-logo";
 
 export const defaultValues: NQProps = {
   type: NQType.STAGE,
@@ -373,6 +374,7 @@ export default function Raw() {
               </g>
             </g>
           </g>
+          <HeadstockLogo />
           <g id="NOTCH">
             <mask
               id="mask10_9_7"

@@ -39,6 +39,7 @@
     "d3-svg-to-png": "^0.3.2",
     "daisyui": "^5.0.0",
     "downloadjs": "^1.4.7",
+    "get-contrast": "^3.0.0",
     "html-to-image": "^1.11.13",
     "perfect-freehand": "^1.2.0",
     "pixi.js": "^8.2.6",
