@@ -21,7 +21,6 @@ export enum NeckWoodTextures {
 
 export enum FretboardWoodTextures {
   ROSEWOOD = "rosewood",
-  EBONY = "ebony",
   MAPLE = "maple",
   ROAST_MAPLE = "roast-maple",
   FLAME_ROAST_MAPLE = "flame-roast-maple",
@@ -94,18 +93,6 @@ type WoodTexture = {
 };
 
 export const woods: Record<WoodTextures, WoodTexture> = {
-  [WoodTextures.EBONY]: {
-    baseColor: "#575250",
-    filter: () => (
-      <filter
-        id={WoodTextures.EBONY}
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-      ></filter>
-    ),
-  },
   [WoodTextures.FLAME_ROAST_MAPLE]: {
     baseColor: "#a16b04",
     filter: () => (

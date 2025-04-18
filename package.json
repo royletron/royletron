@@ -43,6 +43,7 @@
     "file-saver": "^2.0.5",
     "get-contrast": "^3.0.0",
     "html-to-image": "^1.11.13",
+    "html2canvas": "^1.4.1",
     "perfect-freehand": "^1.2.0",
     "pixi.js": "^8.2.6",
     "preact": "^10.12.1",
