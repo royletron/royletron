@@ -84,7 +84,7 @@ export const Option = ({
   return (
     <div className={tooltip && "tooltip"} data-tip={tooltip}>
       <div
-        className={`p-2 border rounded-md h-full flex items-center border-neutral-300 hover:border-neutral-500 cursor-pointer ${
+        className={`p-2 border rounded-md h-full flex flex-col justify-center items-center border-neutral-300 hover:border-neutral-500 cursor-pointer ${
           active ? "outline-1" : ""
         } ${className}`}
         {...props}

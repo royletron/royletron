@@ -12,6 +12,8 @@ import Controls from "./Controls";
 
 import bg from "~/assets/images/guitar/bg.avif";
 import { createContext, useContext, useRef, useState } from "react";
+import { PricingProvider } from "./components/Pricing";
+import Cost from "./NQ/cost";
 
 const context = createContext<{
   rotation: number;
@@ -35,41 +37,44 @@ export default function Builder() {
   };
   return (
     <FormProvider {...methods}>
-      <TransformWrapper minScale={0.5} maxScale={5} smooth>
-        <form
-          onSubmit={methods.handleSubmit(onSubmit)}
-          className="flex flex-col w-full max-h-full h-full"
-          style={{
-            backgroundImage: `url(${bg.src})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "top center",
-          }}
-        >
-          <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
-            <TransformComponent
-              wrapperStyle={{
-                width: "100%",
-                height: "100%",
-              }}
-              contentStyle={{
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <div className="w-full h-full">
-                <Raw />
-              </div>
-            </TransformComponent>
-            <context.Provider value={{ rotation, setRotation }}>
-              <Controls />
-            </context.Provider>
-          </div>
-          <div className="w-full border-t border-neutral-300 bg-white">
-            <Tabs />
-          </div>
-        </form>
-      </TransformWrapper>
+      <PricingProvider>
+        <TransformWrapper minScale={0.5} maxScale={5} smooth>
+          <form
+            onSubmit={methods.handleSubmit(onSubmit)}
+            className="flex flex-col w-full max-h-full h-full"
+            style={{
+              backgroundImage: `url(${bg.src})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "top center",
+            }}
+          >
+            <div className="w-full overflow-hidden relative flex-1 bg-neutral-400/10">
+              <TransformComponent
+                wrapperStyle={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                contentStyle={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <div className="w-full h-full">
+                  <Raw />
+                </div>
+              </TransformComponent>
+              <Cost />
+              <context.Provider value={{ rotation, setRotation }}>
+                <Controls />
+              </context.Provider>
+            </div>
+            <div className="w-full border-t border-neutral-300 bg-white">
+              <Tabs />
+            </div>
+          </form>
+        </TransformWrapper>
+      </PricingProvider>
     </FormProvider>
   );
 }

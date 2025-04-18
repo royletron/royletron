@@ -10,13 +10,17 @@ export default function HeadstockLogo() {
   const neckWood = watch("neckWood");
   const headstockPaint = watch("headstockPaint");
   const bodyPaint = watch("bodyPaint");
+  const orientation = watch("orientation");
   const headstockPaintColor =
     bodyPaint && headstockPaint
       ? paintColors[bodyPaint]?.fill
       : woods[neckWood].baseColor;
 
   const [props, api] = useSpring(() => ({
-    from: { transform: "translate(241px, 169px) scaleX(1)", fill: "#000" },
+    from: {
+      transform: "scaleX(0) translate(241px, 169px)",
+      fill: "#000",
+    },
   }));
 
   useEffect(() => {
@@ -27,8 +31,19 @@ export default function HeadstockLogo() {
     });
   }, [headstockPaintColor]);
 
+  useEffect(() => {
+    api.start({
+      transform: `translate(${
+        orientation === "left" ? "245px, -1212.6px" : "241px, 169px"
+      }) scaleY(${orientation === "left" ? -1 : 1})`,
+    });
+  }, [orientation]);
+
   return (
-    <animated.g id="LOGO" style={props}>
+    <animated.g
+      id="LOGO"
+      style={{ ...props, transformOrigin: "center center" }}
+    >
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

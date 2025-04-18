@@ -24,6 +24,7 @@ import { PickupType, PickupTypeMap } from "./pickups";
 
 import { useSpring, animated } from "@react-spring/web";
 import { classes, classIf } from "~/utils/utils";
+import { PricingLabel, usePricingContext } from "../components/Pricing";
 
 export enum NQType {
   "ROCKET" = "rocket",
@@ -129,6 +130,29 @@ const OptionGroup = ({
 const Neck = ({ active }: { active: boolean }) => {
   return (
     <OptionGroup active={active}>
+      <Selector name="neckLength" label="Neck Length">
+        <Option
+          value={NeckLength["24_75"]}
+          className="w-32 text-center justify-center"
+        >
+          24.75
+          <PricingLabel pricingKey="neckLength" value={0} />
+        </Option>
+        <Option
+          value={NeckLength["25_5"]}
+          className="w-32 text-center justify-center"
+        >
+          25.5
+          <PricingLabel pricingKey="neckLength" value={0} />
+        </Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const NeckWood = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
       <Selector name="neckWood" label="Wood">
         <Option
           value={NeckWoodTextures.MAPLE}
@@ -148,10 +172,6 @@ const Neck = ({ active }: { active: boolean }) => {
         >
           Flamed Roast Maple
         </Option>
-      </Selector>
-      <Selector name="neckLength" label="Neck Length">
-        <Option value={NeckLength["24_75"]}>24.75</Option>
-        <Option value={NeckLength["25_5"]}>25.5</Option>
       </Selector>
     </OptionGroup>
   );
@@ -190,15 +210,11 @@ const Fingerboard = ({ active }: { active: boolean }) => {
   );
 };
 
-const Body = ({ active }: { active: boolean }) => {
+const BodyPaint = ({ active }: { active: boolean }) => {
   const { watch } = useFormContext();
   const bodyWood = watch("bodyWood");
   return (
     <OptionGroup active={active}>
-      <Selector name="bodyWood" label="Wood">
-        <Option value={BodyWoodTextures.KORINA}>Korina</Option>
-        <Option value={BodyWoodTextures.SWAMP_ASH}>Swamp Ash</Option>
-      </Selector>
       <Selector name="bodyPaint" label="Paint" className="!gap-2">
         <Option
           value={undefined}
@@ -223,17 +239,138 @@ const Body = ({ active }: { active: boolean }) => {
   );
 };
 
-const Orientation = ({ active }: { active: boolean }) => {
+const BodyWood = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const { setPrice } = usePricingContext();
+  const bodyWood = watch("bodyWood");
+  useEffect(
+    () =>
+      setPrice("bodyWood", bodyWood === BodyWoodTextures.SWAMP_ASH ? 200 : 0),
+    [bodyWood]
+  );
+  return (
+    <OptionGroup active={active}>
+      <Selector name="bodyWood" label="Wood">
+        <Option
+          value={BodyWoodTextures.KORINA}
+          className="w-32 text-center justify-center"
+        >
+          Korina
+          <PricingLabel pricingKey="bodyWood" value={0} />
+        </Option>
+        <Option
+          value={BodyWoodTextures.SWAMP_ASH}
+          className="w-32 text-center justify-center"
+        >
+          Swamp Ash
+          <PricingLabel pricingKey="bodyWood" value={200} />
+        </Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const BodyType = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const { setPrice } = usePricingContext();
+  const type = watch("type");
+  useEffect(() => {
+    switch (type) {
+      case NQType.STAGE:
+        setPrice("type", 800);
+        break;
+      case NQType.ROCKET:
+        setPrice("type", 1200);
+        break;
+      case NQType.STANDARD:
+        setPrice("type", 2000);
+        break;
+    }
+  }, [type]);
   return (
     <OptionGroup active={active}>
       <Selector name="type" label="Type">
-        <Option value={NQType.STAGE}>Stage</Option>
-        <Option value={NQType.ROCKET}>Rocket</Option>
-        <Option value={NQType.STANDARD}>Standard</Option>
+        <Option
+          value={NQType.STAGE}
+          className="w-32 text-center justify-center"
+        >
+          Stage
+          <PricingLabel pricingKey="type" value={800} />
+        </Option>
+        <Option
+          value={NQType.ROCKET}
+          className="w-32 text-center justify-center"
+        >
+          Rocket
+          <PricingLabel pricingKey="type" value={1200} />
+        </Option>
+        <Option
+          value={NQType.STANDARD}
+          className="w-32 text-center justify-center"
+        >
+          Standard
+          <PricingLabel pricingKey="type" value={2000} />
+        </Option>
       </Selector>
+    </OptionGroup>
+  );
+};
+
+const Orientation = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
       <Selector name="orientation" label="Orientation">
-        <Option value={OrientationType.RIGHT}>Right</Option>
-        <Option value={OrientationType.LEFT}>Left</Option>
+        <Option
+          value={OrientationType.RIGHT}
+          className="w-32 text-center justify-center"
+        >
+          Right
+          <PricingLabel pricingKey="orientation" value={0} />
+        </Option>
+        <Option
+          value={OrientationType.LEFT}
+          className="w-32 text-center justify-center"
+        >
+          Left
+          <PricingLabel pricingKey="orientation" value={0} />
+        </Option>
+      </Selector>
+    </OptionGroup>
+  );
+};
+
+const Tuners = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const tuners = watch("tuners");
+
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    switch (tuners) {
+      case TunerType.LOCKING:
+        setPrice("tuners", 200);
+        break;
+      case TunerType.STANDARD:
+        setPrice("tuners", 0);
+        break;
+    }
+  }, [tuners]);
+  return (
+    <OptionGroup active={active}>
+      <Selector name="tuners" label="Tuners">
+        <Option
+          value={TunerType.STANDARD}
+          className="w-32 text-center justify-center"
+        >
+          Standard
+          <PricingLabel pricingKey="tuners" value={0} />
+        </Option>
+        <Option
+          value={TunerType.LOCKING}
+          className="w-32 text-center justify-center"
+        >
+          Locking
+          <PricingLabel pricingKey="tuners" value={200} />
+        </Option>
       </Selector>
     </OptionGroup>
   );
@@ -244,6 +381,18 @@ const Headstock = ({ active }: { active: boolean }) => {
   const bodyPaint = watch("bodyPaint");
   const bodyPainted =
     bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
+
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    switch (bodyPainted) {
+      case true:
+        setPrice("headstockPaint", 200);
+        break;
+      case false:
+        setPrice("headstockPaint", 0);
+        break;
+    }
+  }, [bodyPainted]);
   return (
     <OptionGroup active={active}>
       <Selector
@@ -251,18 +400,20 @@ const Headstock = ({ active }: { active: boolean }) => {
         label={"Painted Headstock?"}
         disabled={!bodyPainted ? "Select a body paint first" : undefined}
       >
-        <Option value={true}>Yes</Option>
-        <Option value={false}>No</Option>
-      </Selector>
-      <Selector name="tuners" label="Tuners">
-        <Option value={TunerType.STANDARD}>Standard</Option>
-        <Option value={TunerType.LOCKING}>Locking</Option>
+        <Option value={true} className="w-32 text-center justify-center">
+          Yes
+          <PricingLabel pricingKey="headstockPaint" value={200} />
+        </Option>
+        <Option value={false} className="w-32 text-center justify-center">
+          No
+          <PricingLabel pricingKey="headstockPaint" value={0} />
+        </Option>
       </Selector>
     </OptionGroup>
   );
 };
 
-const Pickups = ({ active }: { active: boolean }) => {
+const NeckPickup = ({ active }: { active: boolean }) => {
   return (
     <OptionGroup active={active}>
       <Selector name="pickupA" label="Neck Pickup">
@@ -276,6 +427,13 @@ const Pickups = ({ active }: { active: boolean }) => {
           </Option>
         ))}
       </Selector>
+    </OptionGroup>
+  );
+};
+
+const BridgePickup = ({ active }: { active: boolean }) => {
+  return (
+    <OptionGroup active={active}>
       <Selector name="pickupC" label="Bridge Pickup">
         {Object.keys(PickupTypeMap).map((key) => (
           <Option
@@ -343,59 +501,144 @@ const Pickguard = ({ active }: { active: boolean }) => {
 };
 
 const Bridge = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const tremolo = watch("tremolo");
+  const orientation = watch("orientation");
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    switch (tremolo) {
+      case true:
+        setPrice("tremolo", 200);
+        break;
+      case false:
+        setPrice("tremolo", 0);
+        break;
+    }
+  }, [tremolo]);
   return (
     <OptionGroup active={active}>
-      <Selector name="tremolo" label="Tremolo">
-        <Option value={true}>Yes</Option>
-        <Option value={false}>No</Option>
+      <Selector
+        name="tremolo"
+        label="Tremolo"
+        disabled={
+          orientation === "left" ? "Left orientation is selected" : undefined
+        }
+      >
+        <Option value={true} className="w-32 text-center justify-center">
+          Yes
+          <PricingLabel pricingKey="tremolo" value={200} />
+        </Option>
+        <Option value={false} className="w-32 text-center justify-center">
+          No
+          <PricingLabel pricingKey="tremolo" value={0} />
+        </Option>
       </Selector>
     </OptionGroup>
   );
 };
 
-const Construction = ({ active }: { active: boolean }) => {
+const HollowBody = ({ active }: { active: boolean }) => {
   const { watch } = useFormContext();
   const hollowBody = watch("hollowBody");
   const germanCarve = watch("germanCarve");
+  const orientation = watch("orientation");
+
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    switch (hollowBody) {
+      case true:
+        setPrice("hollow", 200);
+        break;
+      case false:
+        setPrice("hollow", 0);
+        break;
+    }
+  }, [hollowBody]);
   return (
     <OptionGroup active={active}>
       <Selector
         name="hollowBody"
         label="Hollow Body"
-        disabled={germanCarve ? "German carve is selected" : undefined}
+        disabled={
+          orientation === "left"
+            ? "Left orientation is selected"
+            : germanCarve
+            ? "German carve is selected"
+            : undefined
+        }
       >
-        <Option value={true}>Yes</Option>
-        <Option value={false}>No</Option>
+        <Option value={true} className="w-32 text-center justify-center">
+          Yes
+          <PricingLabel pricingKey="hollow" value={200} />
+        </Option>
+        <Option value={false} className="w-32 text-center justify-center">
+          No
+          <PricingLabel pricingKey="hollow" value={0} />
+        </Option>
       </Selector>
+    </OptionGroup>
+  );
+};
+
+const GermanCarve = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const hollowBody = watch("hollowBody");
+  const germanCarve = watch("germanCarve");
+
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    switch (germanCarve) {
+      case true:
+        setPrice("carve", 200);
+        break;
+      case false:
+        setPrice("carve", 0);
+        break;
+    }
+  }, [germanCarve]);
+  return (
+    <OptionGroup active={active}>
       <Selector
         name="germanCarve"
         label="German Carve"
         disabled={hollowBody ? "Hollow body is selected" : undefined}
       >
-        <Option value={true}>Yes</Option>
-        <Option value={false}>No</Option>
+        <Option value={true} className="w-32 text-center justify-center">
+          Yes
+          <PricingLabel pricingKey="carve" value={200} />
+        </Option>
+        <Option value={false} className="w-32 text-center justify-center">
+          No
+          <PricingLabel pricingKey="carve" value={0} />
+        </Option>
       </Selector>
     </OptionGroup>
   );
 };
 
 const TabList = [
-  "Type & Orientation",
-  "Construction",
-  "Body",
-  "Neck",
+  "Orientation",
+  "Type",
+  "Hollow Body",
+  "German Carve",
+  "Body Wood",
+  "Body Paint",
+  "Neck Length",
+  "Neck Wood",
   "Fingerboard",
   "Headstock",
-  "Pickups",
+  "Tuners",
+  "Neck Pickup",
+  "Bridge Pickup",
   "Pickguard",
   "Bridge",
 ];
 
 const zoom = {
-  full: [0],
-  body: [1, 2, 6, 7, 8],
-  neck: [3, 4],
-  headstock: [5],
+  full: [0, 1],
+  body: [2, 3, 4, 5, 11, 12, 13, 14],
+  neck: [6, 7, 8],
+  headstock: [9, 10],
 };
 
 export function Tabs() {
@@ -502,14 +745,20 @@ export function Tabs() {
       </div>
       <div className="pt-2 grid">
         <Orientation active={currentTab === 0} />
-        <Construction active={currentTab === 1} />
-        <Body active={currentTab === 2} />
-        <Neck active={currentTab === 3} />
-        <Fingerboard active={currentTab === 4} />
-        <Headstock active={currentTab === 5} />
-        <Pickups active={currentTab === 6} />
-        <Pickguard active={currentTab === 7} />
-        <Bridge active={currentTab === 8} />
+        <BodyType active={currentTab === 1} />
+        <HollowBody active={currentTab === 2} />
+        <GermanCarve active={currentTab === 3} />
+        <BodyWood active={currentTab === 4} />
+        <BodyPaint active={currentTab === 5} />
+        <Neck active={currentTab === 6} />
+        <NeckWood active={currentTab === 7} />
+        <Fingerboard active={currentTab === 8} />
+        <Headstock active={currentTab === 9} />
+        <Tuners active={currentTab === 10} />
+        <NeckPickup active={currentTab === 11} />
+        <BridgePickup active={currentTab === 12} />
+        <Pickguard active={currentTab === 13} />
+        <Bridge active={currentTab === 14} />
       </div>
     </div>
   );
