@@ -14,7 +14,7 @@ import download from "downloadjs";
 
 import { useRotation } from "..";
 import { classes, classIf } from "~/utils/utils";
-import PhotoboothOverlay, { Background, Foreground } from "./PhotoOverlay";
+import { Foreground } from "./PhotoOverlay";
 
 interface PhotoBoothProps {
   open: boolean;
