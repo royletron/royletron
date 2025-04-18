@@ -17,7 +17,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { useFormContext } from "react-hook-form";
 import { paintColors, PaintColors } from "../Textures/paints";
 import { PickguardTexture } from "../Textures/guards";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 import Selector, { Option } from "../components/Selector";
 import { PickupType, PickupTypeMap } from "./pickups";
@@ -25,6 +25,8 @@ import { PickupType, PickupTypeMap } from "./pickups";
 import { useSpring, animated } from "@react-spring/web";
 import { classes, classIf } from "~/utils/utils";
 import { PricingLabel, usePricingContext } from "../components/Pricing";
+import Cost, { formatter } from "./cost";
+import { toPng } from "html-to-image";
 
 export enum NQType {
   "ROCKET" = "rocket",
@@ -641,6 +643,114 @@ const zoom = {
   headstock: [9, 10],
 };
 
+function rotateBase64Image(base64data: string, canvas: HTMLCanvasElement) {
+  var image = new Image();
+  image.src = base64data;
+  image.onload = function () {
+    canvas.setAttribute("width", `${image.height}px`);
+    canvas.setAttribute("height", `${image.width}px`);
+    var ctx = canvas.getContext("2d");
+    if (!ctx) {
+      return;
+    }
+    ctx.translate(image.height, 0);
+    ctx.rotate((90 * Math.PI) / 180);
+    ctx.drawImage(image, 0, 0);
+  };
+}
+
+function CostReview() {
+  const modal = useRef<HTMLDialogElement>(null);
+  const { pricing, total } = usePricingContext();
+  const [open, setOpen] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    if (open) {
+      modal.current?.showModal();
+    } else {
+      modal.current?.close();
+    }
+    const guitar = document.getElementById("guitar-svg");
+    console.log(guitar);
+    if (guitar === null || canvasRef.current == null) {
+      return;
+    }
+    toPng(guitar, {
+      cacheBust: true,
+      width: parseInt(guitar.getAttribute("width") || "0"),
+      height: parseInt(guitar.getAttribute("height") || "0"),
+    })
+      .then((dataUrl) => {
+        if (!canvasRef.current) {
+          return;
+        }
+        rotateBase64Image(dataUrl, canvasRef.current);
+      })
+      .catch((err) => {
+        console.error("oops, something went wrong!", err);
+      });
+  }, [open]);
+
+  useEffect(() => {
+    modal.current?.addEventListener("close", handleClose);
+    return () => modal.current?.removeEventListener("close", handleClose);
+  }, [handleClose]);
+
+  const base = pricing["type"];
+  const upgrades = total - base;
+  return (
+    <>
+      <div className="border-t border-neutral-300 mt-2 pt-3">
+        <div className="max-w-md md:max-w-full px-4 w-full mx-auto flex justify-center md:justify-end">
+          <a
+            className="btn btn-primary w-full md:w-auto md:px-8 flex gap-3 btn-lg"
+            onClick={handleOpen}
+          >
+            <Cost />
+            <span>|</span>
+            <span>Review</span>
+          </a>
+        </div>
+      </div>
+      <dialog ref={modal} className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Review Your Spec</h3>
+          <canvas className="max-w-full" ref={canvasRef} />
+          <div className="grid grid-cols-4 pt-4 gap-y-2">
+            <div className="col-span-3">Base Price</div>
+            <div className="col-span-1 flex justify-end">
+              {formatter.format(base)}
+            </div>
+            <div className="col-span-3">Upgrades</div>
+            <div className="col-span-1 flex justify-end">
+              {formatter.format(upgrades)}
+            </div>
+            <div className="col-span-3 font-black">Total</div>
+            <div className="col-span-1 font-black flex justify-end">
+              {formatter.format(total)}
+            </div>
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <a className="btn" onClick={handleClose}>
+                Close
+              </a>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </>
+  );
+}
+
 export function Tabs() {
   const [currentTab, setCurrentTab] = useState(0);
   const debouncedTab = useDebounce(currentTab, 300);
@@ -760,6 +870,7 @@ export function Tabs() {
         <Pickguard active={currentTab === 13} />
         <Bridge active={currentTab === 14} />
       </div>
+      <CostReview />
     </div>
   );
 }

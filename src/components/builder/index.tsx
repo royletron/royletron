@@ -13,7 +13,6 @@ import Controls from "./Controls";
 import bg from "~/assets/images/guitar/bg.avif";
 import { createContext, useContext, useRef, useState } from "react";
 import { PricingProvider } from "./components/Pricing";
-import Cost from "./NQ/cost";
 
 const context = createContext<{
   rotation: number;
@@ -61,10 +60,9 @@ export default function Builder() {
                 }}
               >
                 <div className="w-full h-full">
-                  <Raw />
+                  <Raw og />
                 </div>
               </TransformComponent>
-              <Cost />
               <context.Provider value={{ rotation, setRotation }}>
                 <Controls />
               </context.Provider>

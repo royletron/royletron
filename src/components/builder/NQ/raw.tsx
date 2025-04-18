@@ -47,7 +47,7 @@ export const defaultValues: NQProps = {
   neckLength: NeckLength["25_5"],
 };
 
-export default function Raw() {
+export default function Raw({ og = false }, { og: boolean }) {
   const { rotation, setRotation } = useRotation();
   const [scaleX, setScaleX] = useState(1);
   const [styles, api] = useSpring(() => ({
@@ -157,7 +157,7 @@ export default function Raw() {
       height="1473"
       fill="none"
       viewBox="0 0 547 1473"
-      id="guitar"
+      id={og ? "guitar-svg" : ""}
       className={"w-full h-full"}
       style={{ ...styles, ...additions }}
     >
