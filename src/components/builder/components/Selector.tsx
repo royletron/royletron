@@ -147,10 +147,11 @@ const Selector = ({
               )}
               ref={scroller}
             >
-              {Children.map(children, (child) => {
+              {Children.map(children, (child, idx) => {
                 if (!React.isValidElement(child)) return child;
                 return cloneElement(child as React.ReactElement<OptionProps>, {
                   onClick: () => field.onChange(child.props.value),
+                  key: `${name}-${idx}`,
                   active: child.props.value == field.value && !disabled,
                   ...child.props,
                 });

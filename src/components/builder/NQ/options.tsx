@@ -228,6 +228,7 @@ const BodyPaint = ({ active }: { active: boolean }) => {
         </Option>
         {Object.keys(paintColors).map((key) => (
           <Option
+            key={key}
             value={key}
             className="!rounded-full !h-6 !w-6"
             style={{ backgroundColor: paintColors[key].fill }}
