@@ -29,11 +29,11 @@ export const PickupTypeMap: Record<
   },
   [PickupType.WIDERANGEHUMBUCKER]: {
     name: "Wide Range Humbucker",
-    price: 0,
+    price: 75,
   },
   [PickupType.FILTERTRON]: {
     name: "Filtertron",
-    price: 0,
+    price: 50,
   },
   [PickupType.STAPLEP90]: {
     name: "Staple P90",
@@ -41,7 +41,7 @@ export const PickupTypeMap: Record<
   },
   [PickupType.STRAT]: {
     name: "Strat",
-    price: 0,
+    price: 50,
   },
   [PickupType.P90HUMBUCKER]: {
     name: "P90 Humbucker",
@@ -53,7 +53,7 @@ export const PickupTypeMap: Record<
   },
   [PickupType.MINIHUMBUCKER]: {
     name: "Mini Humbucker",
-    price: 0,
+    price: 50,
   },
   [PickupType.P90]: {
     name: "P90",
