@@ -381,12 +381,13 @@ const Tuners = ({ active }: { active: boolean }) => {
 const Headstock = ({ active }: { active: boolean }) => {
   const { watch } = useFormContext();
   const bodyPaint = watch("bodyPaint");
+  const headstockPaint = watch("headstockPaint");
   const bodyPainted =
     bodyPaint !== undefined && bodyPaint !== null && bodyPaint !== "Natural";
 
   const { setPrice } = usePricingContext();
   useEffect(() => {
-    switch (bodyPainted) {
+    switch (headstockPaint) {
       case true:
         setPrice("headstockPaint", 200);
         break;
@@ -394,7 +395,7 @@ const Headstock = ({ active }: { active: boolean }) => {
         setPrice("headstockPaint", 0);
         break;
     }
-  }, [bodyPainted]);
+  }, [headstockPaint]);
   return (
     <OptionGroup active={active}>
       <Selector
