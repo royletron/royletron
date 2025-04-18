@@ -15,19 +15,58 @@ export enum PickupType {
   "HCOVER" = "h-cover",
 }
 
-export const PickupTypeMap: Record<PickupType, string> = {
-  [PickupType.SINGLEA]: "Single A",
-  [PickupType.DOUBLEA]: "Double A",
-  [PickupType.WIDERANGEHUMBUCKER]: "Wide Range Humbucker",
-  [PickupType.FILTERTRON]: "Filtertron",
-  [PickupType.STAPLEP90]: "Staple P90",
-  [PickupType.STRAT]: "Strat",
-  [PickupType.P90HUMBUCKER]: "P90 Humbucker",
-  [PickupType.GOLDFOIL]: "Gold Foil Humbucker",
-  [PickupType.MINIHUMBUCKER]: "Mini Humbucker",
-  [PickupType.P90]: "P90",
-  [PickupType.HUMBUCKER]: "Humbucker",
-  [PickupType.HCOVER]: "H Cover",
+export const PickupTypeMap: Record<
+  PickupType,
+  { name: string; price: number }
+> = {
+  [PickupType.SINGLEA]: {
+    name: "Single A",
+    price: 0,
+  },
+  [PickupType.DOUBLEA]: {
+    name: "Double A",
+    price: 0,
+  },
+  [PickupType.WIDERANGEHUMBUCKER]: {
+    name: "Wide Range Humbucker",
+    price: 0,
+  },
+  [PickupType.FILTERTRON]: {
+    name: "Filtertron",
+    price: 0,
+  },
+  [PickupType.STAPLEP90]: {
+    name: "Staple P90",
+    price: 0,
+  },
+  [PickupType.STRAT]: {
+    name: "Strat",
+    price: 0,
+  },
+  [PickupType.P90HUMBUCKER]: {
+    name: "P90 Humbucker",
+    price: 0,
+  },
+  [PickupType.GOLDFOIL]: {
+    name: "Gold Foil Humbucker",
+    price: 0,
+  },
+  [PickupType.MINIHUMBUCKER]: {
+    name: "Mini Humbucker",
+    price: 0,
+  },
+  [PickupType.P90]: {
+    name: "P90",
+    price: 0,
+  },
+  [PickupType.HUMBUCKER]: {
+    name: "Humbucker",
+    price: 0,
+  },
+  [PickupType.HCOVER]: {
+    name: "H Cover",
+    price: 0,
+  },
 };
 
 const DoubleAPickup = () => (

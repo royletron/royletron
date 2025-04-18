@@ -264,7 +264,6 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
                   ref={ref}
                   className="absolute inset-0 overflow-hidden bg-white"
                 >
-                  <Background aspectRatio={aspectRatio} />
                   <TransformComponent
                     wrapperStyle={{
                       width: "100%",

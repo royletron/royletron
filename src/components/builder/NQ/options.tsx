@@ -245,6 +245,7 @@ const BodyWood = ({ active }: { active: boolean }) => {
   const { watch } = useFormContext();
   const { setPrice } = usePricingContext();
   const bodyWood = watch("bodyWood");
+  const hollowBody = watch("hollowBody");
   useEffect(
     () =>
       setPrice("bodyWood", bodyWood === BodyWoodTextures.SWAMP_ASH ? 200 : 0),
@@ -252,7 +253,11 @@ const BodyWood = ({ active }: { active: boolean }) => {
   );
   return (
     <OptionGroup active={active}>
-      <Selector name="bodyWood" label="Wood">
+      <Selector
+        name="bodyWood"
+        label="Wood"
+        disabled={hollowBody ? "Hollow body is selected" : undefined}
+      >
         <Option
           value={BodyWoodTextures.KORINA}
           className="w-32 text-center justify-center"
@@ -279,13 +284,13 @@ const BodyType = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (type) {
       case NQType.STAGE:
-        setPrice("type", 800);
+        setPrice("type", 899);
         break;
       case NQType.ROCKET:
-        setPrice("type", 1200);
+        setPrice("type", 1049);
         break;
       case NQType.STANDARD:
-        setPrice("type", 2000);
+        setPrice("type", 1049);
         break;
     }
   }, [type]);
@@ -297,21 +302,21 @@ const BodyType = ({ active }: { active: boolean }) => {
           className="w-32 text-center justify-center"
         >
           Stage
-          <PricingLabel pricingKey="type" value={800} />
+          <PricingLabel pricingKey="type" value={899} />
         </Option>
         <Option
           value={NQType.ROCKET}
           className="w-32 text-center justify-center"
         >
           Rocket
-          <PricingLabel pricingKey="type" value={1200} />
+          <PricingLabel pricingKey="type" value={1049} />
         </Option>
         <Option
           value={NQType.STANDARD}
           className="w-32 text-center justify-center"
         >
           Standard
-          <PricingLabel pricingKey="type" value={2000} />
+          <PricingLabel pricingKey="type" value={1049} />
         </Option>
       </Selector>
     </OptionGroup>
@@ -349,7 +354,7 @@ const Tuners = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (tuners) {
       case TunerType.LOCKING:
-        setPrice("tuners", 200);
+        setPrice("tuners", 50);
         break;
       case TunerType.STANDARD:
         setPrice("tuners", 0);
@@ -417,6 +422,12 @@ const Headstock = ({ active }: { active: boolean }) => {
 };
 
 const NeckPickup = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const pickupA = watch("pickupA");
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    setPrice("pickupA", PickupTypeMap[pickupA].price);
+  }, [pickupA]);
   return (
     <OptionGroup active={active}>
       <Selector name="pickupA" label="Neck Pickup">
@@ -426,7 +437,11 @@ const NeckPickup = ({ active }: { active: boolean }) => {
             value={key}
             className="w-32 text-center justify-center"
           >
-            {PickupTypeMap[key]}
+            {PickupTypeMap[key].name}
+            <PricingLabel
+              pricingKey="pickupA"
+              value={PickupTypeMap[key].price}
+            />
           </Option>
         ))}
       </Selector>
@@ -435,6 +450,12 @@ const NeckPickup = ({ active }: { active: boolean }) => {
 };
 
 const BridgePickup = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const pickupC = watch("pickupC");
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    setPrice("pickupC", PickupTypeMap[pickupC].price);
+  }, [pickupC]);
   return (
     <OptionGroup active={active}>
       <Selector name="pickupC" label="Bridge Pickup">
@@ -444,7 +465,11 @@ const BridgePickup = ({ active }: { active: boolean }) => {
             value={key}
             className="w-32 text-center justify-center"
           >
-            {PickupTypeMap[key]}
+            {PickupTypeMap[key].name}
+            <PricingLabel
+              pricingKey="pickupC"
+              value={PickupTypeMap[key].price}
+            />
           </Option>
         ))}
       </Selector>
@@ -541,7 +566,7 @@ const Bridge = ({ active }: { active: boolean }) => {
 };
 
 const HollowBody = ({ active }: { active: boolean }) => {
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const hollowBody = watch("hollowBody");
   const germanCarve = watch("germanCarve");
   const orientation = watch("orientation");
@@ -550,6 +575,7 @@ const HollowBody = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (hollowBody) {
       case true:
+        setValue("bodyWood", BodyWoodTextures.KORINA);
         setPrice("hollow", 200);
         break;
       case false:
@@ -557,6 +583,7 @@ const HollowBody = ({ active }: { active: boolean }) => {
         break;
     }
   }, [hollowBody]);
+
   return (
     <OptionGroup active={active}>
       <Selector
