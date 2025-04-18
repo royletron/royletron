@@ -7,17 +7,14 @@ import {
   useTransformEffect,
 } from "react-zoom-pan-pinch";
 import Raw from "../NQ/raw";
-import Controls from "../Controls";
 import useSize from "@react-hook/size";
 
 import { toPng } from "html-to-image";
 import download from "downloadjs";
 
-import bg from "~/assets/images/guitar/ep_naturalwhite.webp";
 import { useRotation } from "..";
-import Selector, { Option } from "./Selector";
 import { classes, classIf } from "~/utils/utils";
-import PhotoboothOverlay from "./PhotobootOverlay";
+import PhotoboothOverlay, { Background, Foreground } from "./PhotoOverlay";
 
 interface PhotoBoothProps {
   open: boolean;
@@ -219,7 +216,7 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
           positionX={instance.transformState.positionX}
           positionY={instance.transformState.positionY}
         /> */}
-        <div className="inset-0 absolute bg-white z-10 p-4 flex flex-col">
+        <div className="inset-0 absolute bg-neutral-100 z-10 p-4 flex flex-col">
           <a
             className="absolute btn btn-square top-4 right-4 z-20"
             onClick={onClose}
@@ -265,9 +262,9 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
               >
                 <div
                   ref={ref}
-                  className="absolute inset-0 overflow-hidden"
-                  style={{ backgroundImage: `url(${bg.src})` }}
+                  className="absolute inset-0 overflow-hidden bg-white"
                 >
+                  <Background aspectRatio={aspectRatio} />
                   <TransformComponent
                     wrapperStyle={{
                       width: "100%",
@@ -280,7 +277,7 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
                   >
                     <Raw />
                   </TransformComponent>
-                  <PhotoboothOverlay aspectRatio={aspectRatio} />
+                  <Foreground aspectRatio={aspectRatio} />
                 </div>
               </div>
             </div>
