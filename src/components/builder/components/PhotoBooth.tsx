@@ -9,12 +9,13 @@ import {
 import Raw from "../NQ/raw";
 import useSize from "@react-hook/size";
 
-import { toPng } from "html-to-image";
-import download from "downloadjs";
+import { toBlob, toPng } from "html-to-image";
 
 import { useRotation } from "..";
 import { classes, classIf } from "~/utils/utils";
 import { Foreground } from "./PhotoOverlay";
+
+import FileSaver from "file-saver";
 
 interface PhotoBoothProps {
   open: boolean;
@@ -37,7 +38,7 @@ function PhotoControls({
   aspectRatio,
   setAspectRatio,
 }: PhotoControlsProps) {
-  const { instance, setTransform, zoomIn, zoomOut } = useControls();
+  const { zoomIn, zoomOut } = useControls();
   const { rotation, setRotation } = useRotation();
 
   const [scale, setScale] = useState(0.7);
@@ -157,17 +158,6 @@ interface PassthruProps {
   open: boolean;
 }
 
-const Passthru = (props: PassthruProps) => {
-  const { setTransform } = useControls();
-
-  useEffect(() => {
-    if (!props.open) return;
-    setTransform(props.positionX, props.positionY, props.scale, 0);
-  }, [props.open, props.positionX, props.positionY, props.scale]);
-
-  return null;
-};
-
 export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
   const [styles, api] = useSpring(() => ({
     from: { transform: "translate(0, -100%)", opacity: 0 },
@@ -194,12 +184,14 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
   const takeScreenshot = () => {
     if (!ref.current) return;
     setScreen(Date.now());
-    toPng(ref.current, {
+    toBlob(ref.current, {
       cacheBust: true,
       canvasHeight: aspectRatio == AspectRatio.Portrait ? 1024 / (2 / 3) : 1024,
       canvasWidth: 1024,
     })
-      .then((dataUrl) => download(dataUrl, "my-node.png"))
+      .then((blob) => {
+        FileSaver.saveAs(blob, "my-node.png");
+      })
       .catch((err) => {
         console.error("oops, something went wrong!", err);
       });
