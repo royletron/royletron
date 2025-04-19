@@ -190,7 +190,19 @@ export default function PhotoBooth({ open, onClose }: PhotoBoothProps) {
       canvasWidth: 1024,
     })
       .then((blob) => {
-        FileSaver.saveAs(blob, "my-node.png");
+        if (navigator.canShare() && blob) {
+          navigator
+            .share({
+              files: [
+                new File([blob], "ancoats-guitar.png", { type: "image/png" }),
+              ],
+              title: "Ancoats NQ",
+              text: "Check out this custom guitar!",
+            })
+            .then(() => console.log("Share successful"))
+            .catch((error) => console.error("Error sharing:", error));
+        }
+        FileSaver.saveAs(blob, "ancoats-guitar.png");
       })
       .catch((err) => {
         console.error("oops, something went wrong!", err);
