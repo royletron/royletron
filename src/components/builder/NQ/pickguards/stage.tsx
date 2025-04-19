@@ -1,6 +1,4 @@
 import { useFormContext } from "react-hook-form";
-import { AnimatedMountedTexture, AnimatedTexture } from "../../Textures";
-import { PickguardTexture } from "../../Textures/guards";
 import Toggle from "../../components/Toggle";
 import AnimatedTextureContainer from "../../Textures/animated";
 

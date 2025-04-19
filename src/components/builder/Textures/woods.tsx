@@ -1,12 +1,11 @@
-import { useSpring, animated, useSpringValue } from "@react-spring/web";
-import React, { useEffect } from "react";
+import React from "react";
 
-import korina from "./imgs/korina_texture.jpg";
-import swamp from "./imgs/swamp_texture.jpg";
-import maple from "./imgs/maple.jpg";
-import roastedMaple from "./imgs/roasted_maple_texture.jpg";
-import flameRoastedMaple from "./imgs/flame_roasted_maple_texture.jpg";
-import roseWood from "./imgs/rosewood_texture.jpg";
+import korina from "./imgs/korina";
+import swamp from "./imgs/swamp";
+import maple from "./imgs/maple";
+import roastedMaple from "./imgs/roasted";
+import flameRoastedMaple from "./imgs/flame_roasted";
+import roseWood from "./imgs/rosewood";
 
 export enum BodyWoodTextures {
   KORINA = "korina",
@@ -174,52 +173,3 @@ export const WoodsDef = () => {
     </>
   );
 };
-
-// export type WoodsProps = {
-//   texture: WoodTextures;
-//   id: string;
-//   color?: string;
-// };
-
-// function WoodColor({ color }: { color?: string }) {
-//   const floodColor = useSpringValue("rgba(130, 130, 130, 100)");
-
-//   useEffect(() => {
-//     floodColor.start(color || "rgba(130, 130, 130, 100)");
-//   }, [color, floodColor]);
-
-//   if (!color) {
-//     return null;
-//   }
-
-//   console.log(floodColor);
-
-//   return (
-//     <>
-//       <animated.feFlood result="color" style={{ floodColor }} />
-//       <feColorMatrix
-//         type="luminanceToAlpha"
-//         values="0"
-//         in="grainColor"
-//         result="grainBW"
-//       ></feColorMatrix>
-//       <feBlend in2="grainBW" in="color" mode="soft-light" />
-//     </>
-//   );
-// }
-
-// export default function Wood({ texture, id, color }: WoodsProps) {
-//   const wood = woods[texture];
-
-//   return (
-//     <filter id={id}>
-//       <feTurbulence
-//         type="fractalNoise"
-//         result="grain"
-//         baseFrequency={wood.baseFrequency}
-//       />
-//       <feColorMatrix in="grain" result="grainColor" values={wood.colorMatrix} />
-//       <WoodColor color={color} />
-//     </filter>
-//   );
-// }

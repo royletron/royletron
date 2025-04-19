@@ -1,7 +1,7 @@
 import { WoodPattern } from "./woods";
 
-import tort from "./imgs/red_tort.jpg";
-import pearl from "./imgs/pearl_texture.jpg";
+import tort from "./imgs/tort";
+import pearl from "./imgs/pearl";
 
 export enum PickguardTexture {
   RED_TORTOISESHELL = "Red_TortoiseShell",
