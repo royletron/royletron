@@ -16,7 +16,7 @@ import {
 import { useDebounce } from "@uidotdev/usehooks";
 import { useFormContext } from "react-hook-form";
 import { paintColors, PaintColors } from "../Textures/paints";
-import { PickguardTexture } from "../Textures/guards";
+import { PickguardMap, PickguardTexture } from "../Textures/guards";
 import { useEffect, useRef, useState } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 import Selector, { Option } from "../components/Selector";
@@ -27,6 +27,7 @@ import { classes, classIf } from "~/utils/utils";
 import { PricingLabel, usePricingContext } from "../components/Pricing";
 import Cost, { formatter } from "./cost";
 import { toPng } from "html-to-image";
+import CostReview from "../components/CostReview";
 
 export enum NQType {
   "ROCKET" = "rocket",
@@ -377,7 +378,7 @@ const Tuners = ({ active }: { active: boolean }) => {
           className="w-32 text-center justify-center"
         >
           Locking
-          <PricingLabel pricingKey="tuners" value={200} />
+          <PricingLabel pricingKey="tuners" value={50} />
         </Option>
       </Selector>
     </OptionGroup>
@@ -482,48 +483,21 @@ const Pickguard = ({ active }: { active: boolean }) => {
   return (
     <OptionGroup active={active}>
       <Selector name="pickguard" label="Pickguard" className="overflow-x-auto">
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.BWB}
-        >
-          BWB
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.BLACK_SINGLEPLY}
-        >
-          Black single ply
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.RED_TORTOISESHELL}
-        >
-          Red Tortoiseshell
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.PEARL}
-        >
-          Pearl
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.CREAM_SINGLEPLY}
-        >
-          Cream single ply
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.VINTAGE_WHITE_SINGLEPLY}
-        >
-          Vintage white
-        </Option>
-        <Option
-          className="w-32 text-center justify-center"
-          value={PickguardTexture.WHITE_SINGLEPLY}
-        >
-          White single ply
-        </Option>
+        {Object.keys(PickguardMap).map((key) => {
+          return (
+            <Option
+              key={key}
+              value={key}
+              className="w-32 text-center justify-center"
+            >
+              {PickguardMap[key].name}
+              <PricingLabel
+                pricingKey="pickguard"
+                value={PickguardMap[key].price}
+              />
+            </Option>
+          );
+        })}
       </Selector>
     </OptionGroup>
   );
@@ -577,10 +551,10 @@ const HollowBody = ({ active }: { active: boolean }) => {
     switch (hollowBody) {
       case true:
         setValue("bodyWood", BodyWoodTextures.KORINA);
-        setPrice("hollow", 200);
+        setPrice("hollowBody", 200);
         break;
       case false:
-        setPrice("hollow", 0);
+        setPrice("hollowBody", 0);
         break;
     }
   }, [hollowBody]);
@@ -600,11 +574,11 @@ const HollowBody = ({ active }: { active: boolean }) => {
       >
         <Option value={true} className="w-32 text-center justify-center">
           Yes
-          <PricingLabel pricingKey="hollow" value={200} />
+          <PricingLabel pricingKey="hollowBody" value={200} />
         </Option>
         <Option value={false} className="w-32 text-center justify-center">
           No
-          <PricingLabel pricingKey="hollow" value={0} />
+          <PricingLabel pricingKey="hollowBody" value={0} />
         </Option>
       </Selector>
     </OptionGroup>
@@ -620,10 +594,10 @@ const GermanCarve = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (germanCarve) {
       case true:
-        setPrice("carve", 200);
+        setPrice("germanCarve", 200);
         break;
       case false:
-        setPrice("carve", 0);
+        setPrice("germanCarve", 0);
         break;
     }
   }, [germanCarve]);
@@ -640,7 +614,7 @@ const GermanCarve = ({ active }: { active: boolean }) => {
         </Option>
         <Option value={false} className="w-32 text-center justify-center">
           No
-          <PricingLabel pricingKey="carve" value={0} />
+          <PricingLabel pricingKey="germanCarve" value={0} />
         </Option>
       </Selector>
     </OptionGroup>
@@ -671,114 +645,6 @@ const zoom = {
   neck: [6, 7, 8],
   headstock: [9, 10],
 };
-
-function rotateBase64Image(base64data: string, canvas: HTMLCanvasElement) {
-  var image = new Image();
-  image.src = base64data;
-  image.onload = function () {
-    canvas.setAttribute("width", `${image.height}px`);
-    canvas.setAttribute("height", `${image.width}px`);
-    var ctx = canvas.getContext("2d");
-    if (!ctx) {
-      return;
-    }
-    ctx.translate(image.height, 0);
-    ctx.rotate((90 * Math.PI) / 180);
-    ctx.drawImage(image, 0, 0);
-  };
-}
-
-function CostReview() {
-  const modal = useRef<HTMLDialogElement>(null);
-  const { pricing, total } = usePricingContext();
-  const [open, setOpen] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  useEffect(() => {
-    if (open) {
-      modal.current?.showModal();
-    } else {
-      modal.current?.close();
-    }
-    const guitar = document.getElementById("guitar-svg");
-    console.log(guitar);
-    if (guitar === null || canvasRef.current == null) {
-      return;
-    }
-    toPng(guitar, {
-      cacheBust: true,
-      width: parseInt(guitar.getAttribute("width") || "0"),
-      height: parseInt(guitar.getAttribute("height") || "0"),
-    })
-      .then((dataUrl) => {
-        if (!canvasRef.current) {
-          return;
-        }
-        rotateBase64Image(dataUrl, canvasRef.current);
-      })
-      .catch((err) => {
-        console.error("oops, something went wrong!", err);
-      });
-  }, [open]);
-
-  useEffect(() => {
-    modal.current?.addEventListener("close", handleClose);
-    return () => modal.current?.removeEventListener("close", handleClose);
-  }, [handleClose]);
-
-  const base = pricing["type"];
-  const upgrades = total - base;
-  return (
-    <>
-      <div className="border-t border-neutral-300 mt-2 pt-3">
-        <div className="max-w-md md:max-w-full px-4 w-full mx-auto flex justify-center md:justify-end">
-          <a
-            className="btn btn-primary w-full md:w-auto md:px-8 flex gap-3 btn-lg"
-            onClick={handleOpen}
-          >
-            <Cost />
-            <span>|</span>
-            <span>Review</span>
-          </a>
-        </div>
-      </div>
-      <dialog ref={modal} className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Review Your Spec</h3>
-          <canvas className="max-w-full" ref={canvasRef} />
-          <div className="grid grid-cols-4 pt-4 gap-y-2">
-            <div className="col-span-3">Base Price</div>
-            <div className="col-span-1 flex justify-end">
-              {formatter.format(base)}
-            </div>
-            <div className="col-span-3">Upgrades</div>
-            <div className="col-span-1 flex justify-end">
-              {formatter.format(upgrades)}
-            </div>
-            <div className="col-span-3 font-black">Total</div>
-            <div className="col-span-1 font-black flex justify-end">
-              {formatter.format(total)}
-            </div>
-          </div>
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <a className="btn" onClick={handleClose}>
-                Close
-              </a>
-            </form>
-          </div>
-        </div>
-      </dialog>
-    </>
-  );
-}
 
 export function Tabs() {
   const [currentTab, setCurrentTab] = useState(0);

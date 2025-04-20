@@ -13,6 +13,37 @@ export enum PickguardTexture {
   VINTAGE_WHITE_SINGLEPLY = "Vintage_White_SinglePly",
 }
 
+export const PickguardMap = {
+  [PickguardTexture.RED_TORTOISESHELL]: {
+    name: "Red Tortoiseshell",
+    price: 0,
+  },
+  [PickguardTexture.PEARL]: {
+    name: "Pearl",
+    price: 0,
+  },
+  [PickguardTexture.BWB]: {
+    name: "BWB",
+    price: 0,
+  },
+  [PickguardTexture.BLACK_SINGLEPLY]: {
+    name: "Black Single Ply",
+    price: 0,
+  },
+  [PickguardTexture.WHITE_SINGLEPLY]: {
+    name: "White Single Ply",
+    price: 0,
+  },
+  [PickguardTexture.CREAM_SINGLEPLY]: {
+    name: "Cream Single Ply",
+    price: 0,
+  },
+  [PickguardTexture.VINTAGE_WHITE_SINGLEPLY]: {
+    name: "Vintage White Single Ply",
+    price: 0,
+  },
+};
+
 export function OthersDef() {
   return (
     <>
