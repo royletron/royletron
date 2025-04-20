@@ -646,6 +646,36 @@ const zoom = {
   headstock: [9, 10],
 };
 
+function Watcher() {
+  const { watch, getValues } = useFormContext();
+
+  const obj = Object.keys(getValues()).reduce((acc, key) => {
+    const value = watch(key);
+    if (value !== undefined && value !== null) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+
+  console.log(obj);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlParams.entries());
+    Object.keys(obj).forEach((key) => {
+      if (typeof obj[key] === "boolean") {
+        urlParams.set(key, obj[key] ? "true" : "false");
+      } else {
+        urlParams.set(key, obj[key]);
+      }
+    });
+    const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+    window.history.replaceState({}, "", newUrl);
+  }, [obj]);
+
+  return null;
+}
+
 export function Tabs() {
   const [currentTab, setCurrentTab] = useState(0);
   const debouncedTab = useDebounce(currentTab, 300);
@@ -686,6 +716,7 @@ export function Tabs() {
 
   return (
     <div className="py-4">
+      <Watcher />
       <div className="flex items-center w-full justify-center gap-4 px-4">
         <a
           className={"btn btn-square btn-ghost"}

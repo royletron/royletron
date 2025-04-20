@@ -11,7 +11,7 @@ import Raw, { defaultValues } from "./NQ/raw";
 import Controls from "./Controls";
 
 import bg from "~/assets/images/guitar/bg.avif";
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { PricingProvider } from "./components/Pricing";
 
 const context = createContext<{
@@ -24,12 +24,31 @@ export const useRotation = () => {
   return { rotation, setRotation };
 };
 
-export default function Builder() {
+function BuilderForm({ initialValues }: { initialValues: NQProps }) {
   const [rotation, setRotation] = useState(0);
   const methods = useForm<NQProps>({
     resolver: zodResolver(NQFormSchema),
-    defaultValues,
+    defaultValues: initialValues,
   });
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlParams.entries());
+    Object.keys(params).forEach((key) => {
+      if (key in defaultValues) {
+        if (typeof defaultValues[key] === "boolean") {
+          methods.setValue(key as keyof NQProps, params[key] === "true", {
+            shouldDirty: false,
+          });
+        } else {
+          //@ts-ignore
+          methods.setValue(key as keyof NQProps, params[key], {
+            shouldDirty: false,
+          });
+        }
+      }
+    });
+  }, []);
 
   const onSubmit = (data: NQProps) => {
     console.log(data);
@@ -74,5 +93,40 @@ export default function Builder() {
         </TransformWrapper>
       </PricingProvider>
     </FormProvider>
+  );
+}
+
+export default function Builder() {
+  const [initialValue, setIntialValue] = useState<NQProps | null>();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlParams.entries());
+    setIntialValue(() => {
+      const initialValue: NQProps = {
+        ...defaultValues,
+      };
+      Object.keys(params).forEach((key) => {
+        if (key in defaultValues) {
+          if (typeof defaultValues[key] === "boolean") {
+            //@ts-ignore
+            initialValue[key as keyof NQProps] = params[key] === "true";
+          } else {
+            //@ts-ignore
+            initialValue[key as keyof NQProps] = params[key];
+          }
+        }
+      });
+      return initialValue;
+    });
+  }, []);
+
+  const onSubmit = (data: NQProps) => {
+    console.log(data);
+  };
+  return (
+    <div className="w-full h-full flex flex-col">
+      {initialValue && <BuilderForm initialValues={initialValue} />}
+    </div>
   );
 }
