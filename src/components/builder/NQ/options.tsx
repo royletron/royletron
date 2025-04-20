@@ -657,11 +657,8 @@ function Watcher() {
     return acc;
   }, {});
 
-  console.log(obj);
-
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlParams.entries());
     Object.keys(obj).forEach((key) => {
       if (typeof obj[key] === "boolean") {
         urlParams.set(key, obj[key] ? "true" : "false");

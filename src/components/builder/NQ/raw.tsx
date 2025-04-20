@@ -45,6 +45,7 @@ export const defaultValues: NQProps = {
   tremolo: false,
   tuners: TunerType.STANDARD,
   neckLength: NeckLength["25_5"],
+  bodyPaint: undefined,
 };
 
 export default function Raw({ og = false }, { og: boolean }) {
