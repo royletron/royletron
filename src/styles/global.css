@@ -206,3 +206,10 @@ body {
   right: 5px;
   top: 0.8rem;
 }
+
+.shutter {
+  @apply bg-red-600;
+  &:hover{ 
+    @apply bg-red-700;
+  }
+}
