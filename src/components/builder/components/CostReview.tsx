@@ -104,7 +104,7 @@ export default function CostReview() {
         </div>
       </div>
       <dialog ref={modal} className="modal">
-        <div className="modal-box" style={{ maxHeight: "calc(100vh - 30px)" }}>
+        <div className="modal-box" style={{ maxHeight: "calc(100dvh - 30px)" }}>
           <h3 className="font-bold text-lg">Review Your Spec</h3>
           <canvas className="max-w-full" ref={canvasRef} />
           <div className="bg-base-100 border-base-300 collapse border-b !outline-0 collapse-arrow rounded-none">
