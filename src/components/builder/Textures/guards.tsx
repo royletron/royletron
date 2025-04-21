@@ -11,6 +11,8 @@ export enum PickguardTexture {
   WHITE_SINGLEPLY = "White_SinglePly",
   CREAM_SINGLEPLY = "Cream_SinglePly",
   VINTAGE_WHITE_SINGLEPLY = "Vintage_White_SinglePly",
+  GREEN_PERSPEX = "Green_Perspex",
+  ORANGE_PERSPEX = "Orange_Perspex",
 }
 
 export const PickguardMap = {
@@ -41,6 +43,14 @@ export const PickguardMap = {
   [PickguardTexture.VINTAGE_WHITE_SINGLEPLY]: {
     name: "Vintage White Single Ply",
     price: 0,
+  },
+  [PickguardTexture.GREEN_PERSPEX]: {
+    name: "Green Perspex",
+    price: 50,
+  },
+  [PickguardTexture.ORANGE_PERSPEX]: {
+    name: "Orange Perspex",
+    price: 50,
   },
 };
 
@@ -73,13 +83,18 @@ export function OthersDef() {
       <pattern id={PickguardTexture.CREAM_SINGLEPLY} width="100%" height="100%">
         <rect width="100%" height="100%" fill="#d2c8a6" />
       </pattern>
-
       <pattern
         id={PickguardTexture.VINTAGE_WHITE_SINGLEPLY}
         width="100%"
         height="100%"
       >
         <rect width="100%" height="100%" fill="#e9e3dd" />
+      </pattern>
+      <pattern id={PickguardTexture.GREEN_PERSPEX} width="100%" height="100%">
+        <rect width="100%" height="100%" fill="#25a305" fillOpacity={0.6} />
+      </pattern>
+      <pattern id={PickguardTexture.ORANGE_PERSPEX} width="100%" height="100%">
+        <rect width="100%" height="100%" fill="#ff5c1c" fillOpacity={0.6} />
       </pattern>
     </>
   );

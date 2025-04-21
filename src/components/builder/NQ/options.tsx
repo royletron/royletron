@@ -50,6 +50,12 @@ export enum NeckLength {
   "25_5" = "25.5",
 }
 
+export enum GermanCarve {
+  NONE = "none",
+  SMALL = "small",
+  LARGE = "large",
+}
+
 export type NQProps = {
   type: NQType;
   orientation: OrientationType;
@@ -62,7 +68,7 @@ export type NQProps = {
   pickupB?: PickupType;
   pickupC: PickupType;
   hollowBody: boolean;
-  germanCarve: boolean;
+  germanCarve: GermanCarve;
   pickguard: PickguardTexture;
   tremolo: boolean;
   tuners: TunerType;
@@ -79,6 +85,7 @@ const PaintColorEnum = nativeEnum(PaintColors);
 const PickguardEnum = nativeEnum(PickguardTexture);
 const TunerTypeEnum = nativeEnum(TunerType);
 const NeckLengthEnum = nativeEnum(NeckLength);
+const GermanCarveEnum = nativeEnum(GermanCarve);
 
 export const NQFormSchema = object({
   type: NQTypeEnum.default(NQType.STAGE),
@@ -92,7 +99,7 @@ export const NQFormSchema = object({
   pickupB: PickupTypeEnum.optional(),
   pickupC: PickupTypeEnum.default(PickupType.SINGLEA),
   hollowBody: boolean().default(false),
-  germanCarve: boolean().default(false),
+  germanCarve: GermanCarveEnum.default(GermanCarve.NONE),
   pickguard: PickguardEnum.default(PickguardTexture.RED_TORTOISESHELL),
   tremolo: boolean().default(false),
   tuners: TunerTypeEnum.default(TunerType.STANDARD),
@@ -133,20 +140,18 @@ const OptionGroup = ({
 const Neck = ({ active }: { active: boolean }) => {
   return (
     <OptionGroup active={active}>
-      <Selector name="neckLength" label="Neck Length">
+      <Selector name="neckLength" label="Scale Length">
         <Option
           value={NeckLength["24_75"]}
           className="w-32 text-center justify-center"
         >
-          24.75
-          <PricingLabel pricingKey="neckLength" value={0} />
+          24.75"
         </Option>
         <Option
           value={NeckLength["25_5"]}
           className="w-32 text-center justify-center"
         >
-          25.5
-          <PricingLabel pricingKey="neckLength" value={0} />
+          25.5"
         </Option>
       </Selector>
     </OptionGroup>
@@ -154,6 +159,25 @@ const Neck = ({ active }: { active: boolean }) => {
 };
 
 const NeckWood = ({ active }: { active: boolean }) => {
+  const { watch, setValue } = useFormContext();
+  const neckWood = watch("neckWood");
+  const { setPrice } = usePricingContext();
+  useEffect(() => {
+    switch (neckWood) {
+      case NeckWoodTextures.MAPLE:
+        setPrice("neckWood", 0);
+        setValue("fretboardWood", FretboardWoodTextures.MAPLE);
+        break;
+      case NeckWoodTextures.ROAST_MAPLE:
+        setPrice("neckWood", 0);
+        setValue("fretboardWood", FretboardWoodTextures.ROSEWOOD);
+        break;
+      case NeckWoodTextures.FLAME_ROAST_MAPLE:
+        setPrice("neckWood", 50);
+        setValue("fretboardWood", FretboardWoodTextures.ROSEWOOD);
+        break;
+    }
+  }, [neckWood]);
   return (
     <OptionGroup active={active}>
       <Selector name="neckWood" label="Wood">
@@ -162,18 +186,21 @@ const NeckWood = ({ active }: { active: boolean }) => {
           className="w-32 text-center justify-center"
         >
           Maple
+          <PricingLabel pricingKey="neckWood" value={0} />
         </Option>
         <Option
           value={NeckWoodTextures.ROAST_MAPLE}
           className="w-32 text-center justify-center"
         >
           Roast Maple
+          <PricingLabel pricingKey="neckWood" value={0} />
         </Option>
         <Option
           value={NeckWoodTextures.FLAME_ROAST_MAPLE}
           className="w-32 text-center justify-center"
         >
           Flamed Roast Maple
+          <PricingLabel pricingKey="neckWood" value={50} />
         </Option>
       </Selector>
     </OptionGroup>
@@ -181,33 +208,68 @@ const NeckWood = ({ active }: { active: boolean }) => {
 };
 
 const Fingerboard = ({ active }: { active: boolean }) => {
+  const { watch } = useFormContext();
+  const { setPrice } = usePricingContext();
+  const neckWood = watch("neckWood");
+  const fretboardWood = watch("fretboardWood");
+  useEffect(() => {
+    switch (fretboardWood) {
+      case FretboardWoodTextures.MAPLE:
+        setPrice("fretboardWood", 0);
+        break;
+      case FretboardWoodTextures.ROAST_MAPLE:
+        setPrice("fretboardWood", 50);
+        break;
+      case FretboardWoodTextures.FLAME_ROAST_MAPLE:
+        setPrice("fretboardWood", 50);
+        break;
+      case FretboardWoodTextures.ROSEWOOD:
+        setPrice("fretboardWood", 0);
+        break;
+    }
+  }, [fretboardWood]);
   return (
     <OptionGroup active={active}>
-      <Selector name="fretboardWood" label="Wood">
-        <Option
-          value={FretboardWoodTextures.MAPLE}
-          className="w-32 text-center justify-center"
-        >
-          Maple
-        </Option>
-        <Option
-          value={FretboardWoodTextures.ROAST_MAPLE}
-          className="w-32 text-center justify-center"
-        >
-          Roasted Maple
-        </Option>
-        <Option
-          value={FretboardWoodTextures.FLAME_ROAST_MAPLE}
-          className="w-32 text-center justify-center"
-        >
-          Flame Roasted Maple
-        </Option>
-        <Option
-          value={FretboardWoodTextures.ROSEWOOD}
-          className="w-32 text-center justify-center"
-        >
-          Rosewood
-        </Option>
+      <Selector
+        name="fretboardWood"
+        label="Wood"
+        disabled={neckWood === "maple" ? "Maple neck is selected" : undefined}
+      >
+        {neckWood === NeckWoodTextures.MAPLE && (
+          <Option
+            value={FretboardWoodTextures.MAPLE}
+            className="w-32 text-center justify-center"
+          >
+            Maple
+          </Option>
+        )}
+        {neckWood === NeckWoodTextures.ROAST_MAPLE && (
+          <Option
+            value={FretboardWoodTextures.ROAST_MAPLE}
+            className="w-32 text-center justify-center"
+          >
+            Roasted Maple
+            <PricingLabel pricingKey="fretboardWood" value={50} />
+          </Option>
+        )}
+        {neckWood === NeckWoodTextures.FLAME_ROAST_MAPLE && (
+          <Option
+            value={FretboardWoodTextures.FLAME_ROAST_MAPLE}
+            className="w-32 text-center justify-center"
+          >
+            Flame Roasted Maple
+            <PricingLabel pricingKey="fretboardWood" value={50} />
+          </Option>
+        )}
+        {neckWood !== NeckWoodTextures.MAPLE && (
+          <Option
+            value={FretboardWoodTextures.ROSEWOOD}
+            className="w-32 text-center justify-center"
+          >
+            Rosewood
+            <PricingLabel pricingKey="fretboardWood" value={0} />
+          </Option>
+        )}
       </Selector>
     </OptionGroup>
   );
@@ -286,7 +348,7 @@ const BodyType = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (type) {
       case NQType.STAGE:
-        setPrice("type", 899);
+        setPrice("type", 999);
         break;
       case NQType.ROCKET:
         setPrice("type", 1049);
@@ -304,7 +366,7 @@ const BodyType = ({ active }: { active: boolean }) => {
           className="w-32 text-center justify-center"
         >
           Stage
-          <PricingLabel pricingKey="type" value={899} />
+          <PricingLabel pricingKey="type" value={999} />
         </Option>
         <Option
           value={NQType.ROCKET}
@@ -334,14 +396,12 @@ const Orientation = ({ active }: { active: boolean }) => {
           className="w-32 text-center justify-center"
         >
           Right
-          <PricingLabel pricingKey="orientation" value={0} />
         </Option>
         <Option
           value={OrientationType.LEFT}
           className="w-32 text-center justify-center"
         >
           Left
-          <PricingLabel pricingKey="orientation" value={0} />
         </Option>
       </Selector>
     </OptionGroup>
@@ -396,7 +456,7 @@ const Headstock = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (headstockPaint) {
       case true:
-        setPrice("headstockPaint", 200);
+        setPrice("headstockPaint", 75);
         break;
       case false:
         setPrice("headstockPaint", 0);
@@ -412,7 +472,7 @@ const Headstock = ({ active }: { active: boolean }) => {
       >
         <Option value={true} className="w-32 text-center justify-center">
           Yes
-          <PricingLabel pricingKey="headstockPaint" value={200} />
+          <PricingLabel pricingKey="headstockPaint" value={75} />
         </Option>
         <Option value={false} className="w-32 text-center justify-center">
           No
@@ -511,7 +571,7 @@ const Bridge = ({ active }: { active: boolean }) => {
   useEffect(() => {
     switch (tremolo) {
       case true:
-        setPrice("tremolo", 200);
+        setPrice("tremolo", 250);
         break;
       case false:
         setPrice("tremolo", 0);
@@ -529,7 +589,7 @@ const Bridge = ({ active }: { active: boolean }) => {
       >
         <Option value={true} className="w-32 text-center justify-center">
           Yes
-          <PricingLabel pricingKey="tremolo" value={200} />
+          <PricingLabel pricingKey="tremolo" value={250} />
         </Option>
         <Option value={false} className="w-32 text-center justify-center">
           No
@@ -551,7 +611,7 @@ const HollowBody = ({ active }: { active: boolean }) => {
     switch (hollowBody) {
       case true:
         setValue("bodyWood", BodyWoodTextures.KORINA);
-        setPrice("hollowBody", 200);
+        setPrice("hollowBody", 300);
         break;
       case false:
         setPrice("hollowBody", 0);
@@ -567,14 +627,14 @@ const HollowBody = ({ active }: { active: boolean }) => {
         disabled={
           orientation === "left"
             ? "Left orientation is selected"
-            : germanCarve
+            : germanCarve != GermanCarve.NONE
             ? "German carve is selected"
             : undefined
         }
       >
         <Option value={true} className="w-32 text-center justify-center">
           Yes
-          <PricingLabel pricingKey="hollowBody" value={200} />
+          <PricingLabel pricingKey="hollowBody" value={300} />
         </Option>
         <Option value={false} className="w-32 text-center justify-center">
           No
@@ -585,16 +645,17 @@ const HollowBody = ({ active }: { active: boolean }) => {
   );
 };
 
-const GermanCarve = ({ active }: { active: boolean }) => {
-  const { watch } = useFormContext();
+const Carve = ({ active }: { active: boolean }) => {
+  const { watch, setValue } = useFormContext();
   const hollowBody = watch("hollowBody");
   const germanCarve = watch("germanCarve");
+  const type = watch("type");
 
   const { setPrice } = usePricingContext();
   useEffect(() => {
     switch (germanCarve) {
       case true:
-        setPrice("germanCarve", 200);
+        setPrice("germanCarve", 100);
         break;
       case false:
         setPrice("germanCarve", 0);
@@ -608,12 +669,27 @@ const GermanCarve = ({ active }: { active: boolean }) => {
         label="German Carve"
         disabled={hollowBody ? "Hollow body is selected" : undefined}
       >
-        <Option value={true} className="w-32 text-center justify-center">
-          Yes
-          <PricingLabel pricingKey="carve" value={200} />
+        <Option
+          value={GermanCarve.SMALL}
+          className="w-32 text-center justify-center"
+        >
+          Small carve with arm rest
+          <PricingLabel pricingKey="carve" value={100} />
         </Option>
-        <Option value={false} className="w-32 text-center justify-center">
-          No
+        {type === NQType.ROCKET && (
+          <Option
+            value={GermanCarve.LARGE}
+            className="w-32 text-center justify-center"
+          >
+            Large carve
+            <PricingLabel pricingKey="carve" value={100} />
+          </Option>
+        )}
+        <Option
+          value={GermanCarve.NONE}
+          className="w-32 text-center justify-center"
+        >
+          None
           <PricingLabel pricingKey="germanCarve" value={0} />
         </Option>
       </Selector>
@@ -628,7 +704,7 @@ const TabList = [
   "German Carve",
   "Body Wood",
   "Body Paint",
-  "Neck Length",
+  "Scale Length",
   "Neck Wood",
   "Fingerboard",
   "Headstock",
@@ -780,7 +856,7 @@ export function Tabs() {
         <Orientation active={currentTab === 0} />
         <BodyType active={currentTab === 1} />
         <HollowBody active={currentTab === 2} />
-        <GermanCarve active={currentTab === 3} />
+        <Carve active={currentTab === 3} />
         <BodyWood active={currentTab === 4} />
         <BodyPaint active={currentTab === 5} />
         <Neck active={currentTab === 6} />

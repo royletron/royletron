@@ -166,9 +166,9 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Neck Length</div>
+                <div className="flex-3">Scale Length</div>
                 <div className="flex-1 flex justify-end">
-                  <span>{watch("neckLength")}cm</span>
+                  <span>{watch("neckLength")}"</span>
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">

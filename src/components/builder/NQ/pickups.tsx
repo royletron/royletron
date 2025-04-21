@@ -37,7 +37,7 @@ export const PickupTypeMap: Record<
   },
   [PickupType.STAPLEP90]: {
     name: "Staple P90",
-    price: 0,
+    price: 50,
   },
   [PickupType.STRAT]: {
     name: "Strat",
@@ -45,27 +45,27 @@ export const PickupTypeMap: Record<
   },
   [PickupType.P90HUMBUCKER]: {
     name: "P90 Humbucker",
-    price: 0,
+    price: 50,
   },
   [PickupType.GOLDFOIL]: {
     name: "Gold Foil Humbucker",
-    price: 0,
+    price: 60,
   },
   [PickupType.MINIHUMBUCKER]: {
     name: "Mini Humbucker",
     price: 50,
   },
   [PickupType.P90]: {
-    name: "P90",
+    name: "A90",
     price: 0,
   },
   [PickupType.HUMBUCKER]: {
     name: "Humbucker",
-    price: 0,
+    price: 50,
   },
   [PickupType.HCOVER]: {
-    name: "H Cover",
-    price: 0,
+    name: "A line double with H cover",
+    price: 25,
   },
 };
 

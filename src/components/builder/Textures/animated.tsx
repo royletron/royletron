@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { animated, useSpring } from "@react-spring/web";
+import { PickguardTexture } from "./guards";
 
 export default function AnimatedTextureContainer({
   children,
@@ -22,9 +23,19 @@ export default function AnimatedTextureContainer({
     },
   }));
 
+  const perspex =
+    texture === PickguardTexture.GREEN_PERSPEX ||
+    texture === PickguardTexture.ORANGE_PERSPEX;
+
+  if (perspex) {
+    textureOpacity = 0.8;
+    fillOpacity = 0;
+  }
+
   useEffect(() => {
     api.start({ fill, fillOpacity });
   }, [fill, fillOpacity]);
+
   return (
     <>
       <g fill={`url(#${texture})`} fillOpacity={textureOpacity}>

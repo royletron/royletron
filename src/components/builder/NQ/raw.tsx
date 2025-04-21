@@ -12,6 +12,7 @@ import useAnimatedStyle from "~/components/hooks/useAnimatedStyle";
 import { animated, useSpring } from "@react-spring/web";
 import { OthersDef, PickguardTexture } from "../Textures/guards";
 import {
+  GermanCarve,
   NeckLength,
   NQType,
   OrientationType,
@@ -40,7 +41,7 @@ export const defaultValues: NQProps = {
   pickupA: PickupType.DOUBLEA,
   pickupC: PickupType.DOUBLEA,
   hollowBody: false,
-  germanCarve: false,
+  germanCarve: GermanCarve.NONE,
   pickguard: PickguardTexture.RED_TORTOISESHELL,
   tremolo: false,
   tuners: TunerType.STANDARD,
@@ -205,7 +206,7 @@ export default function Raw({ og = false }, { og: boolean }) {
             ></path>
           </g>
         </g>
-        <Toggle on={germanCarve === true}>
+        <Toggle on={germanCarve != GermanCarve.NONE}>
           <g id="GERMAN CARVE">
             <g id="BODY CUT" filter="url(#filter0_d_9_7)">
               <mask
@@ -235,32 +236,34 @@ export default function Raw({ og = false }, { og: boolean }) {
                 </AnimatedTextureContainer>
               </g>
             </g>
-            <g id="ARM">
-              <mask
-                id="mask2_9_7"
-                width="166"
-                height="280"
-                x="60"
-                y="1113"
-                maskUnits="userSpaceOnUse"
-                style={{ maskType: "alpha" }}
-              >
-                <path
-                  id="BODY_4"
-                  fill="url(#paint0_linear_9_7)"
-                  d="m77.32 1163.19 12.89-24.84 13.29-24.85L226 1392.2l-27.899-11.09-12.96-5.92-12.8-6.4-12.48-6.88-12.48-7.2-6.08-4-6.08-4-6.08-4.32-5.76-4.32-5.76-4.64-5.76-4.8-5.44-4.96-5.28-5.28-5.12-5.44-4.96-5.6-4.64-6.08-4.48-6.24-4.16-6.4-3.68-6.88-3.36-7.04-3.04-7.2-2.4-7.36-2.08-7.52-1.44-7.84-.96-7.84-.32-8 .16-7.84.8-7.84 1.12-7.52 1.6-7.52 2.08-7.36 2.44-7.2 2.56-7.04 3.08-6.78z"
-                ></path>
-              </mask>
-              <g mask="url(#mask2_9_7)">
-                <AnimatedTextureContainer
-                  texture={bodyTexture}
-                  textureOpacity={bodyOpacity}
-                  fill={bodyPaintColor}
+            <Toggle on={germanCarve === GermanCarve.SMALL}>
+              <g id="ARM">
+                <mask
+                  id="mask2_9_7"
+                  width="166"
+                  height="280"
+                  x="60"
+                  y="1113"
+                  maskUnits="userSpaceOnUse"
+                  style={{ maskType: "alpha" }}
                 >
-                  <rect x="40" y="400" width="2000" height="2000" />
-                </AnimatedTextureContainer>
+                  <path
+                    id="BODY_4"
+                    fill="url(#paint0_linear_9_7)"
+                    d="m77.32 1163.19 12.89-24.84 13.29-24.85L226 1392.2l-27.899-11.09-12.96-5.92-12.8-6.4-12.48-6.88-12.48-7.2-6.08-4-6.08-4-6.08-4.32-5.76-4.32-5.76-4.64-5.76-4.8-5.44-4.96-5.28-5.28-5.12-5.44-4.96-5.6-4.64-6.08-4.48-6.24-4.16-6.4-3.68-6.88-3.36-7.04-3.04-7.2-2.4-7.36-2.08-7.52-1.44-7.84-.96-7.84-.32-8 .16-7.84.8-7.84 1.12-7.52 1.6-7.52 2.08-7.36 2.44-7.2 2.56-7.04 3.08-6.78z"
+                  ></path>
+                </mask>
+                <g mask="url(#mask2_9_7)">
+                  <AnimatedTextureContainer
+                    texture={bodyTexture}
+                    textureOpacity={bodyOpacity}
+                    fill={bodyPaintColor}
+                  >
+                    <rect x="40" y="400" width="2000" height="2000" />
+                  </AnimatedTextureContainer>
+                </g>
               </g>
-            </g>
+            </Toggle>
           </g>
         </Toggle>
         <Toggle on={hollowBody === true}>
