@@ -351,10 +351,10 @@ const BodyType = ({ active }: { active: boolean }) => {
         setPrice("type", 999);
         break;
       case NQType.ROCKET:
-        setPrice("type", 1049);
+        setPrice("type", 1199);
         break;
       case NQType.STANDARD:
-        setPrice("type", 1049);
+        setPrice("type", 1199);
         break;
     }
   }, [type]);
@@ -373,14 +373,14 @@ const BodyType = ({ active }: { active: boolean }) => {
           className="w-32 text-center justify-center"
         >
           Rocket
-          <PricingLabel pricingKey="type" value={1049} />
+          <PricingLabel pricingKey="type" value={1199} />
         </Option>
         <Option
           value={NQType.STANDARD}
           className="w-32 text-center justify-center"
         >
           Standard
-          <PricingLabel pricingKey="type" value={1049} />
+          <PricingLabel pricingKey="type" value={1199} />
         </Option>
       </Selector>
     </OptionGroup>
