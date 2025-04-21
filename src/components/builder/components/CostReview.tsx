@@ -114,13 +114,13 @@ export default function CostReview() {
             </div>
             <div className="collapse-content mt-2 px-0 bg-neutral-100 flex flex-col gap-1 !py-0">
               <div className="flex px-2 py-2 text-sm">
-                <div className="flex-3">Orientation</div>
+                <div>Orientation</div>
                 <div className="flex-1 flex justify-end">
                   {watch("orientation") === "left" ? "Left" : "Right"}
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Type</div>
+                <div>Type</div>
                 <div className="flex-1 flex justify-end">
                   <span>
                     {watch("type") === NQType.STAGE
@@ -133,21 +133,21 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Hollow Body</div>
+                <div>Hollow Body</div>
                 <div className="flex-1 flex justify-end">
                   <span>{watch("hollowBody") === true ? "Yes" : "No"}</span>
                   <CostLabel priceKey="hollowBody" />
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">German Carve</div>
+                <div>German Carve</div>
                 <div className="flex-1 flex justify-end">
                   <span>{watch("germanCarve") === true ? "Yes" : "No"}</span>
                   <CostLabel priceKey="germanCarve" />
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Body Wood</div>
+                <div>Body Wood</div>
                 <div className="flex-1 flex justify-end">
                   <span>
                     {watch("bodyWood") === BodyWoodTextures.KORINA
@@ -158,7 +158,7 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Body Paint</div>
+                <div>Body Paint</div>
                 <div className="flex-1 flex justify-end">
                   <span>
                     {paintColors[watch("bodyPaint")]?.name || "Natural"}
@@ -166,13 +166,13 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Scale Length</div>
+                <div>Scale Length</div>
                 <div className="flex-1 flex justify-end">
                   <span>{watch("neckLength")}"</span>
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Neck Wood</div>
+                <div>Neck Wood</div>
                 <div className="flex-1 flex justify-end">
                   <span>
                     {watch("neckWood") === NeckWoodTextures.FLAME_ROAST_MAPLE
@@ -184,7 +184,7 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Fretboard</div>
+                <div>Fretboard</div>
                 <div className="flex-1 flex justify-end">
                   <span>
                     {watch("fretboardWood") ===
@@ -200,14 +200,14 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Painted Headstock</div>
+                <div>Painted Headstock</div>
                 <div className="flex-1 flex justify-end">
                   <span>{watch("headstockPaint") === true ? "Yes" : "No"}</span>
                   <CostLabel priceKey="headstockPaint" />
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Tuners</div>
+                <div>Tuners</div>
                 <div className="flex-1 flex justify-end">
                   <span>
                     {watch("tuners") === TunerType.LOCKING
@@ -239,7 +239,7 @@ export default function CostReview() {
                 </div>
               </div>
               <div className="flex px-2 py-2 text-sm border-t border-neutral-300">
-                <div className="flex-3">Tremolo</div>
+                <div>Tremolo</div>
                 <div className="flex-1 flex justify-end">
                   <span>{watch("tremolo") === true ? "Yes" : "No"}</span>
                   <CostLabel priceKey="tremolo" />
