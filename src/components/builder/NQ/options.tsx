@@ -336,7 +336,7 @@ const BodyWood = ({ active }: { active: boolean }) => {
 };
 
 const BodyType = ({ active }: { active: boolean }) => {
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const { setPrice } = usePricingContext();
   const type = watch("type");
   useEffect(() => {
@@ -346,6 +346,7 @@ const BodyType = ({ active }: { active: boolean }) => {
         break;
       case NQType.ROCKET:
         setPrice("type", 1199);
+        setValue("hollowBody", false);
         break;
       case NQType.STANDARD:
         setPrice("type", 1199);
@@ -382,6 +383,13 @@ const BodyType = ({ active }: { active: boolean }) => {
 };
 
 const Orientation = ({ active }: { active: boolean }) => {
+  const { setValue, watch } = useFormContext();
+  const orientation = watch("orientation");
+  useEffect(() => {
+    if (orientation === OrientationType.LEFT) {
+      setValue("tremolo", false);
+    }
+  }, [orientation]);
   return (
     <OptionGroup active={active}>
       <Selector name="orientation" label="Orientation">
@@ -599,6 +607,7 @@ const HollowBody = ({ active }: { active: boolean }) => {
   const hollowBody = watch("hollowBody");
   const germanCarve = watch("germanCarve");
   const orientation = watch("orientation");
+  const type = watch("type");
 
   const { setPrice } = usePricingContext();
   useEffect(() => {
@@ -613,6 +622,12 @@ const HollowBody = ({ active }: { active: boolean }) => {
     }
   }, [hollowBody]);
 
+  useEffect(() => {
+    if (type === NQType.ROCKET) {
+      setValue("hollwBody", false);
+    }
+  }, [type]);
+
   return (
     <OptionGroup active={active}>
       <Selector
@@ -623,6 +638,8 @@ const HollowBody = ({ active }: { active: boolean }) => {
             ? "Left orientation is selected"
             : germanCarve != GermanCarve.NONE
             ? "German carve is selected"
+            : type === NQType.ROCKET
+            ? "Rocket type is selected"
             : undefined
         }
       >

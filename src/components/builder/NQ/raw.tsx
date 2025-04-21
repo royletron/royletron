@@ -82,8 +82,6 @@ export default function Raw({ og = false }, { og: boolean }) {
   const lhs = watch("orientation") === OrientationType.LEFT;
 
   const bodyOpacity = bodyPaint ? 0.7 : 1;
-  const hollowBodyStyle = useAnimatedStyle({ opacity: hollowBody ? 1 : 0 });
-  const germanCarveStyle = useAnimatedStyle({ opacity: germanCarve ? 1 : 0 });
 
   const [state, setState] = useState({
     positionX: 0,
@@ -364,6 +362,7 @@ export default function Raw({ og = false }, { og: boolean }) {
               <AnimatedTextureContainer
                 texture={neckWood}
                 fill={headstockPaintColor}
+                textureOpacity={headstockPaint ? 0 : 1}
               >
                 <rect x="40" y="20" width="300" height="1200" />
               </AnimatedTextureContainer>

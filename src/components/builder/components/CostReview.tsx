@@ -13,7 +13,11 @@ import { paintColors } from "../Textures/paints";
 import { PickupTypeMap } from "../NQ/pickups";
 import { PickguardMap } from "../Textures/guards";
 
-function rotateBase64Image(base64data: string, canvas: HTMLCanvasElement) {
+function rotateBase64Image(
+  base64data: string,
+  canvas: HTMLCanvasElement,
+  left = false
+) {
   var image = new Image();
   image.src = base64data;
   image.onload = function () {
@@ -23,8 +27,8 @@ function rotateBase64Image(base64data: string, canvas: HTMLCanvasElement) {
     if (!ctx) {
       return;
     }
-    ctx.translate(image.height, 0);
-    ctx.rotate((90 * Math.PI) / 180);
+    ctx.translate(left ? 0 : image.height, left ? image.width : 0);
+    ctx.rotate(((left ? 270 : 90) * Math.PI) / 180);
     ctx.drawImage(image, 0, 0);
   };
 }
@@ -46,6 +50,7 @@ export default function CostReview() {
   const modal = useRef<HTMLDialogElement>(null);
   const { pricing, total } = usePricingContext();
   const { watch } = useFormContext();
+  const orientation = watch("orientation");
   const [open, setOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const handleOpen = () => {
@@ -62,7 +67,6 @@ export default function CostReview() {
       modal.current?.close();
     }
     const guitar = document.getElementById("guitar-svg");
-    console.log(guitar);
     if (guitar === null || canvasRef.current == null) {
       return;
     }
@@ -70,17 +74,21 @@ export default function CostReview() {
       cacheBust: true,
       width: parseInt(guitar.getAttribute("width") || "0"),
       height: parseInt(guitar.getAttribute("height") || "0"),
+      style: {
+        transform: orientation === "left" ? "scale(-1, 1)" : "scale(1, 1)",
+        transformOrigin: "center",
+      },
     })
       .then((dataUrl) => {
         if (!canvasRef.current) {
           return;
         }
-        rotateBase64Image(dataUrl, canvasRef.current);
+        rotateBase64Image(dataUrl, canvasRef.current, orientation === "left");
       })
       .catch((err) => {
         console.error("oops, something went wrong!", err);
       });
-  }, [open]);
+  }, [open, orientation]);
 
   useEffect(() => {
     modal.current?.addEventListener("close", handleClose);
