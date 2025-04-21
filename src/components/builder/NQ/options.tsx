@@ -161,21 +161,25 @@ const Neck = ({ active }: { active: boolean }) => {
 const NeckWood = ({ active }: { active: boolean }) => {
   const { watch, setValue } = useFormContext();
   const neckWood = watch("neckWood");
+  const fretboardWood = watch("fretboardWood");
   const { setPrice } = usePricingContext();
   useEffect(() => {
     switch (neckWood) {
       case NeckWoodTextures.MAPLE:
         setPrice("neckWood", 0);
-        setValue("fretboardWood", FretboardWoodTextures.MAPLE);
         break;
       case NeckWoodTextures.ROAST_MAPLE:
         setPrice("neckWood", 0);
-        setValue("fretboardWood", FretboardWoodTextures.ROSEWOOD);
         break;
       case NeckWoodTextures.FLAME_ROAST_MAPLE:
         setPrice("neckWood", 50);
-        setValue("fretboardWood", FretboardWoodTextures.ROSEWOOD);
         break;
+    }
+    if (
+      neckWood !== NeckWoodTextures.MAPLE &&
+      fretboardWood === FretboardWoodTextures.MAPLE
+    ) {
+      setValue("fretboardWood", FretboardWoodTextures.ROSEWOOD);
     }
   }, [neckWood]);
   return (
@@ -218,7 +222,7 @@ const Fingerboard = ({ active }: { active: boolean }) => {
         setPrice("fretboardWood", 0);
         break;
       case FretboardWoodTextures.ROAST_MAPLE:
-        setPrice("fretboardWood", 50);
+        setPrice("fretboardWood", 25);
         break;
       case FretboardWoodTextures.FLAME_ROAST_MAPLE:
         setPrice("fretboardWood", 50);
@@ -230,11 +234,7 @@ const Fingerboard = ({ active }: { active: boolean }) => {
   }, [fretboardWood]);
   return (
     <OptionGroup active={active}>
-      <Selector
-        name="fretboardWood"
-        label="Wood"
-        disabled={neckWood === "maple" ? "Maple neck is selected" : undefined}
-      >
+      <Selector name="fretboardWood" label="Wood">
         {neckWood === NeckWoodTextures.MAPLE && (
           <Option
             value={FretboardWoodTextures.MAPLE}
@@ -243,33 +243,27 @@ const Fingerboard = ({ active }: { active: boolean }) => {
             Maple
           </Option>
         )}
-        {neckWood === NeckWoodTextures.ROAST_MAPLE && (
-          <Option
-            value={FretboardWoodTextures.ROAST_MAPLE}
-            className="w-32 text-center justify-center"
-          >
-            Roasted Maple
-            <PricingLabel pricingKey="fretboardWood" value={50} />
-          </Option>
-        )}
-        {neckWood === NeckWoodTextures.FLAME_ROAST_MAPLE && (
-          <Option
-            value={FretboardWoodTextures.FLAME_ROAST_MAPLE}
-            className="w-32 text-center justify-center"
-          >
-            Flame Roasted Maple
-            <PricingLabel pricingKey="fretboardWood" value={50} />
-          </Option>
-        )}
-        {neckWood !== NeckWoodTextures.MAPLE && (
-          <Option
-            value={FretboardWoodTextures.ROSEWOOD}
-            className="w-32 text-center justify-center"
-          >
-            Rosewood
-            <PricingLabel pricingKey="fretboardWood" value={0} />
-          </Option>
-        )}
+        <Option
+          value={FretboardWoodTextures.ROAST_MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Roasted Maple
+          <PricingLabel pricingKey="fretboardWood" value={25} />
+        </Option>
+        <Option
+          value={FretboardWoodTextures.FLAME_ROAST_MAPLE}
+          className="w-32 text-center justify-center"
+        >
+          Flame Roasted Maple
+          <PricingLabel pricingKey="fretboardWood" value={50} />
+        </Option>
+        <Option
+          value={FretboardWoodTextures.ROSEWOOD}
+          className="w-32 text-center justify-center"
+        >
+          Rosewood
+          <PricingLabel pricingKey="fretboardWood" value={0} />
+        </Option>
       </Selector>
     </OptionGroup>
   );
